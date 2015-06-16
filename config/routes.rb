@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root "contacts#index"
+  root "home#index"
 
 end
