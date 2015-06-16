@@ -11,6 +11,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'faker'
 
 group :production do
   gem 'pg'
@@ -27,17 +28,21 @@ group :development do
   gem "pry-rails"
   gem 'gemsurance'
   gem 'guard'
-  gem 'guard-rspec', require: false
   gem 'meta_request'
   gem 'quiet_assets'
   gem 'rails_best_practices'
 end
 
 group :test do
+  gem 'selenium-webdriver'
+  gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'database_cleaner'
 end
 
 group :development, :test do
+  gem 'rspec-its'
+  gem 'guard-rspec', require: false
   gem 'awesome_print', require: 'ap'
   gem 'byebug'
   gem 'rspec-rails'
