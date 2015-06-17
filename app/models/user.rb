@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
   validates_uniqueness_of :email
   has_many :contacts
+  has_many :notes
 
 
 end

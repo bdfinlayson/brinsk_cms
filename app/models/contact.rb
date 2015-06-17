@@ -7,5 +7,6 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_of :email
   before_save { email.downcase! }
   before_save { self.email = email.downcase }
+  has_many :notes
 
 end
