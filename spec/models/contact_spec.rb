@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Contact, type: :model do
+describe Contact do
   before do
     @user = FactoryGirl.create(:user)
     @contact = FactoryGirl.create(:contact)
@@ -18,9 +18,30 @@ RSpec.describe Contact, type: :model do
   it { should respond_to(:title) }
   it { should respond_to(:background) }
   it { should respond_to(:first_met) }
+  it { should respond_to(:street1) }
+  it { should respond_to(:street2) }
+  it { should respond_to(:city) }
+  it { should respond_to(:state) }
+  it { should respond_to(:zipcode) }
+  it { should respond_to(:full_address) }
+
 
   it { should be_valid }
 
+  it 'should create a new instance given valid attributes' do
+    Contact.create!(first_name: 'Billy', last_name: 'Bones', email: 'billy@bones.com')
+  end
+
+  describe 'Update existing contact' do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      @contact = FactoryGirl.create(:contact, user: @user)
+    end
+
+    it 'should belong to a user' do
+      expect(@contact.user_id).to eq(@user.id)
+    end
+  end
 
   describe 'when first name is not present' do
     before { @contact.first_name = ' ' }

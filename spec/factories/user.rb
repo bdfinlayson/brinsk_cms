@@ -8,4 +8,12 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
   end
+
+  factory :user_contact do
+    user
+    contact
+    deleted_at nil
+    updated_at { FactoryGirl.generate(:time) }
+    created_at { FactoryGirl.generate(:time) }
+  end
 end

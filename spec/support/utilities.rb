@@ -10,5 +10,5 @@ require 'pry'
     fill_in 'Password', with: user.password
     fill_in 'Confirm Password', with: user.password
     click_button 'Create my account'
-    binding.pry
   end
+

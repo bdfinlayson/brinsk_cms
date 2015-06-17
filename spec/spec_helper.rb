@@ -84,4 +84,7 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
   config.include Capybara::DSL
+
+  # For Devise test helpers
+  config.include Devise::TestHelpers, type: :controller
 end
