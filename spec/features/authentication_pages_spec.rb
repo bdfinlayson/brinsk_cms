@@ -30,13 +30,5 @@ describe 'Authentication' do
       it { should have_title('Sign up') }
       it { should have_selector('div#error_explanation') }
     end
-
-    describe 'with valid information' do
-      let(:user) { FactoryGirl.create(:user) }
-      before { sign_up user }
-
-      it { should have_title('Home') }
-      it { should_not have_selector('div#error_explanation') }
-    end
   end
 end
