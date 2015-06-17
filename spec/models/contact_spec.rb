@@ -21,6 +21,7 @@ RSpec.describe Contact, type: :model do
 
   it { should be_valid }
 
+
   describe 'when first name is not present' do
     before { @contact.first_name = ' ' }
     it { should_not be_valid }
@@ -41,4 +42,13 @@ RSpec.describe Contact, type: :model do
     it { should_not be_valid }
   end
 
+  describe 'when email format is invalid' do
+    it 'should be invalid' do
+      addresses = %w[contact2foo,com contact_at_foo.org example,contact@foo. foo@bar_baz.com foo@bar+bax.com]
+      addresses.each do |invalid_address|
+        @contact.email = invalid_address
+        expect(@contact).not_to be_valid
+      end
+    end
+  end
 end
