@@ -9,5 +9,5 @@ class Contact < ActiveRecord::Base
   before_save { self.email = email.downcase }
   has_many :notes
   has_many :projects
-
+  has_many :tasks, :as => :taskable
 end
