@@ -10,4 +10,5 @@ class Contact < ActiveRecord::Base
   has_many :notes
   has_many :projects
   has_many :tasks, :as => :taskable
+  has_many :appointments, :as => :appointable
 end
