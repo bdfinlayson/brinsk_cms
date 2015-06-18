@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  attr_accessor :name, :description, :due, :completed, :tag_list
   belongs_to :user
   belongs_to :taskable, polymorphic:true
   validates :taskable_id, presence: true
@@ -7,7 +8,7 @@ class Task < ActiveRecord::Base
   validates :description, length: { maximum: 250 }
   validates :due, presence: true
   validate :due_date_cannot_be_in_the_past
-
+  acts_as_taggable
 
   def due_date_cannot_be_in_the_past
     if due.present? && due < Date.today

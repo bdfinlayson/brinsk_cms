@@ -72,4 +72,29 @@ describe Contact do
       end
     end
   end
+
+  describe 'when all info is entered' do
+    before { @contact = Contact.create!(user_id: 1,
+                                        first_name: 'Bryan',
+                                        last_name: 'Finlayson',
+                                        company_name: 'Centresource',
+                                        email: 'example@example.com',
+                                        background: 'Lorem ipsum',
+                                        street1: '93 Chuckanutt Drive',
+                                        street2: 'Apt 101',
+                                        city: 'Oakland',
+                                        state: 'TN',
+                                        zipcode: '07430',
+                                        first_met: Time.now,
+                                         ) }
+
+    it 'should generate the correct full address' do
+      expect(@contact.address).to eq("93 Chuckanutt Drive, Apt 101, Oakland, TN 07430")
+    end
+
+    it 'should generate the correct full name' do
+      expect(@contact.full_name).to eq('Bryan Finlayson')
+    end
+  end
+
 end

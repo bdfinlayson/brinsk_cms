@@ -1,4 +1,19 @@
 class Contact < ActiveRecord::Base
+  attr_accessor :first_name,
+    :last_name,
+    :company_name,
+    :email,
+    :alt_email,
+    :phone,
+    :title,
+    :background,
+    :first_met,
+    :street1,
+    :street2,
+    :city,
+    :state,
+    :zipcode,
+    :tag_list
   belongs_to :user
   validates :first_name, presence: true, length: { maximum: 15 }
   validates :last_name, presence: true, length: { maximum: 25 }
@@ -11,4 +26,15 @@ class Contact < ActiveRecord::Base
   has_many :projects
   has_many :tasks, :as => :taskable
   has_many :appointments, :as => :appointable
+  acts_as_taggable
+
+
+  def full_address
+    "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"
+  end
+  alias_method :address, :full_address
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

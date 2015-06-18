@@ -84,7 +84,7 @@ describe Appointment do
 
 
   describe 'when all address info is entered' do
-    before { Appointment.create!(user_id: 1,
+    before { @appointment = Appointment.create!(user_id: 1,
                           date: Time.now,
                           description: 'Lorem ipsum',
                           street1: '93 Chuckanutt Drive',
@@ -94,10 +94,9 @@ describe Appointment do
                           zipcode: '07430',
                           full_address: '93 Chuckanutt Drive, Apt 101, Oakland, TN 07430',
                           appointable_id: 20 ) }
-    let(:sample_appointment) { Appointment.first }
 
     it 'should generate the correct full address' do
-      expect(sample_appointment.full_address).to eq("93 Chuckanutt Drive, Apt 101, Oakland, TN 07430")
+      expect(@appointment.address).to eq("93 Chuckanutt Drive, Apt 101, Oakland, TN 07430")
     end
   end
 end

@@ -1,4 +1,5 @@
 class Project < ActiveRecord::Base
+  attr_accessor :name, :description, :start_date, :end_date, :completed, :tag_list
   belongs_to :user
   belongs_to :contact
   has_many :notes
@@ -10,5 +11,6 @@ class Project < ActiveRecord::Base
   validates :start_date, presence: true
   validates :end_date, presence: true
   has_many :appointments, :as => :appointable
+  acts_as_taggable
 
 end
