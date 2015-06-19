@@ -2,6 +2,7 @@ ENV['RAILS_ENV'] = 'test'
 require 'capybara'
 require 'database_cleaner'
 require 'rails_helper'
+require_relative 'support/utilities'
 
 
 RSpec.configure do |config|

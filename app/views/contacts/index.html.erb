@@ -1,2 +1,13 @@
-<h1>Contacts#index</h1>
+
+<% provide(:title, 'Contacts') %>
+<h1>Contacts</h1>
 <p>Find me in app/views/contacts/index.html.erb</p>
+<button>Add Contact</button>
+
+<p>The number of contacts is: <%= @contacts.count %></p>
+<p>The user id is: <%=  @user.id %></p>
+<% @contacts.each do |contact| %>
+  <p><%= contact.first_name %> <%= contact.last_name %></p>
+<% end %>
+
+<%= link_to 'New Contact', new_contact_path  %>

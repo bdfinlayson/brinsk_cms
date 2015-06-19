@@ -41,4 +41,8 @@ Rails.application.configure do
 
   # Needed for Devise support
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # ActionMailer configurations
+  # config.action_mailer.default.delivery_method = :smtp
+  # config.action_mailer.perform_deliveries = true
 end

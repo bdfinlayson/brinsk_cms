@@ -1,0 +1,7 @@
+<%= simple_form_for(@contact) do |f| %>
+  <%# <%= render 'shared/error_messages', object: f.object %1> %>
+  <%= f.input :first_name, placeholder: "First Name" %>
+  <%= f.input :last_name, placeholder: "Last Name" %>
+  <%= f.input :email, placeholder: "Email" %>
+  <%= f.button :submit %>
+<% end %>

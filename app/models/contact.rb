@@ -1,19 +1,4 @@
 class Contact < ActiveRecord::Base
-  attr_accessor :first_name,
-    :last_name,
-    :company_name,
-    :email,
-    :alt_email,
-    :phone,
-    :title,
-    :background,
-    :first_met,
-    :street1,
-    :street2,
-    :city,
-    :state,
-    :zipcode,
-    :tag_list
   belongs_to :user
   validates :first_name, presence: true, length: { maximum: 15 }
   validates :last_name, presence: true, length: { maximum: 25 }
@@ -22,8 +7,8 @@ class Contact < ActiveRecord::Base
   validates_uniqueness_of :email
   before_save { email.downcase! }
   before_save { self.email = email.downcase }
-  has_many :notes
-  has_many :projects
+  has_many :notes, dependent: :destroy
+  has_many :projects, dependent: :destroy
   has_many :tasks, :as => :taskable
   has_many :appointments, :as => :appointable
   acts_as_taggable
