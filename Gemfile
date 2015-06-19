@@ -13,6 +13,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'faker'
 gem 'acts-as-taggable-on'
+gem 'simple_form'
 
 group :production do
   gem 'pg'
