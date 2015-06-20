@@ -14,8 +14,18 @@
   <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
+<% @tasks.each do |task| %>
+  <%# <%= render 'shared/task_item' %1> %>
+  <% if task.completed_at %>
+    <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% else %>
+    <p><%= task.name %><%= task.description %> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+<% end %>
+
 <%= render 'shared/note_form' %>
 
+<%= render 'shared/task_form' %>
+
 <%= link_to 'Home', root_path %>
-<%= link_to 'Add note', new_contact_note_path(@contact) %>
 

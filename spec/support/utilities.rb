@@ -50,3 +50,15 @@ require 'pry'
     fill_in 'Content', with: note.content
     click_button 'Update Note'
   end
+
+  def create_task(task)
+    fill_in 'Name', with: task.name
+    fill_in 'Description', with: task.description
+    click_button 'Create Task'
+  end
+
+  def edit_task(task)
+    fill_in 'Name', with: task.name
+    fill_in 'Description', with: task.description
+    click_button 'Update Task'
+  end

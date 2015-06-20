@@ -9,6 +9,7 @@ class ContactsController < ApplicationController
   def show
     @contact = Contact.find(params[:id])
     @notes = @contact.notes.all
+    @tasks = @contact.tasks.all
   end
 
   def new

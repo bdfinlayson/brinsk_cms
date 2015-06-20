@@ -13,6 +13,7 @@ describe "Contacts page" do
     it { should have_content('Contacts') }
     it { should have_title('Contacts') }
     it { should have_content('Add') }
+    it { should have_content('New Contact') }
 
     describe 'with invalid information' do
 
@@ -27,8 +28,25 @@ describe "Contacts page" do
       expect(page).to have_content('Add')
     end
 
-  let(:contact) { FactoryGirl.build(:contact) }
-  let(:other_contact) { FactoryGirl.build(:contact) }
+    let(:contact) { FactoryGirl.build(:contact) }
+    let(:other_contact) { FactoryGirl.build(:contact) }
+
+    scenario 'should be able to cancel a transation' do
+      visit root_path
+      click_link 'New Contact'
+      expect(page).to have_link('Cancel')
+      click_link 'Cancel'
+      expect(page).to_not have_link('Cancel')
+      click_link 'New Contact'
+      create_contact(contact)
+      click_link 'Home'
+      expect(page).to have_link('Edit')
+      click_link 'Edit'
+      expect(page).to have_link('Cancel')
+      click_link 'Cancel'
+      expect(page).to_not have_link('Cancel')
+      expect(page).to have_content(contact.first_name)
+    end
 
     scenario 'should add contacts and view a list of contacts' do
       visit root_path
@@ -44,6 +62,7 @@ describe "Contacts page" do
       expect(page).to have_content('Phone')
       expect(page).to have_content('Title')
       expect(page).to have_content('First met')
+      expect(page).to have_link('Cancel')
       create_contact(contact)
       expect(page).to have_content(contact.first_name)
       expect(page).to have_content(contact.last_name)
@@ -78,6 +97,7 @@ describe "Contacts page" do
       expect(page).to have_content(contact.first_name)
       expect(page).to have_content(contact.last_name)
       click_link 'Edit'
+      expect(page).to have_link('Cancel')
       edit_contact(other_contact)
       expect(page).to have_content('1')
       expect(page).to have_content(other_contact.first_name)

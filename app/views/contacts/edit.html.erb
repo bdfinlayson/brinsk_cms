@@ -1,3 +1,4 @@
 <%= render 'shared/contact_form' %>
 
 <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
+<%= link_to 'Cancel', contact_path(@contact) %>

@@ -36,6 +36,19 @@ describe "Notes" do
 
     let(:other_note) { FactoryGirl.build(:note) }
 
+    scenario 'should cancel a transaction' do
+      click_link 'Show'
+      create_note(note)
+      expect(page).to have_content(note.subject)
+      expect(page).to have_content(note.content)
+      click_link 'Edit'
+      expect(page).to have_link('Cancel')
+      click_link 'Cancel'
+      expect(page).to have_content(note.subject)
+      expect(page).to have_content(note.content)
+      expect(page).to_not have_link('Cancel')
+    end
+
     scenario 'should edit a note' do
       click_link 'Show'
       create_note(note)
