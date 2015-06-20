@@ -24,6 +24,25 @@ class ContactsController < ApplicationController
     end
   end
 
+  def edit
+    @contact = current_user.contacts.find(params[:id])
+  end
+
+  def update
+    @contact = current_user.contacts.find(params[:id])
+
+    if @contact.update(contact_params)
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @contact = current_user.contacts.find(params[:id])
+    @contact.destroy
+    redirect_to root_path
+  end
 
   private
 

@@ -6,7 +6,6 @@ describe "Contacts page" do
 
   let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
-  let!(:contact) { FactoryGirl.create(:contact, user_id: user.id) }
 
   describe 'contact creation' do
     before { visit root_path }
@@ -28,10 +27,76 @@ describe "Contacts page" do
       expect(page).to have_content('Add')
     end
 
-    scenario 'should view a list of contacts' do
+  let(:contact) { FactoryGirl.build(:contact) }
+  let(:other_contact) { FactoryGirl.build(:contact) }
+
+    scenario 'should add contacts and view a list of contacts' do
       visit root_path
+      expect(page).to have_content('0')
+      expect(page).to_not have_content(contact.first_name)
+      expect(page).to_not have_content(other_contact.first_name)
+      click_link 'New Contact'
+      expect(page).to have_content('First name')
+      expect(page).to have_content('Last name')
+      expect(page).to have_content('Email')
+      expect(page).to have_content('Company')
+      expect(page).to have_content('Alt email')
+      expect(page).to have_content('Phone')
+      expect(page).to have_content('Title')
+      expect(page).to have_content('First met')
+      create_contact(contact)
+      expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      expect(page).to have_content(contact.email)
+      expect(page).to have_content(contact.company_name)
+      expect(page).to have_content(contact.alt_email)
+      expect(page).to have_content(contact.phone)
+      expect(page).to have_content(contact.title)
+      click_link 'Home'
       expect(page).to have_content('1')
       expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      click_link 'New Contact'
+      expect(page).to have_content('First met')
+      create_contact(other_contact)
+      click_link 'Home'
+      expect(page).to have_content('2')
+      expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      expect(page).to have_content(other_contact.first_name)
+      expect(page).to have_content(other_contact.last_name)
+    end
+
+    scenario 'should edit a contact' do
+      visit root_path
+      expect(page).to have_content('0')
+      click_link 'New Contact'
+      create_contact(contact)
+      expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      click_link 'Home'
+      expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      click_link 'Edit'
+      edit_contact(other_contact)
+      expect(page).to have_content('1')
+      expect(page).to have_content(other_contact.first_name)
+      expect(page).to have_content(other_contact.last_name)
+    end
+
+    scenario 'should destroy a contact' do
+      visit root_path
+      expect(page).to have_content('0')
+      click_link 'New Contact'
+      create_contact(contact)
+      expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      click_link 'Home'
+      expect(page).to have_content(contact.first_name)
+      expect(page).to have_content(contact.last_name)
+      click_link 'Edit'
+      click_link 'Delete'
+      expect(page).to have_content('0')
     end
   end
 end

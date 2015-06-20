@@ -1,1 +1,9 @@
-<p><%= @contact.first_name %></p>
+<h2><%= "#{@contact.first_name} #{@contact.last_name}" %></h2>
+<%= @contact.email %>
+<%= @contact.title %>
+<%= @contact.company_name %>
+<%= @contact.alt_email %>
+<%= @contact.phone %>
+
+<%= link_to 'Home', root_path %>
+

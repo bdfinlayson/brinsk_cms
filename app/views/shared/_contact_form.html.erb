@@ -2,6 +2,12 @@
   <%# <%= render 'shared/error_messages', object: f.object %1> %>
   <%= f.input :first_name, placeholder: "First Name" %>
   <%= f.input :last_name, placeholder: "Last Name" %>
+  <%= f.input :title, placeholder: "Title" %>
+  <%= f.input :company_name, placeholder: "Company" %>
   <%= f.input :email, placeholder: "Email" %>
+  <%= f.input :alt_email, placeholder: "Alternate email" %>
+  <%= f.input :phone, placeholder: "Phone" %>
+  <%= f.text_area :background, placeholder: "Background" %>
+  <%= f.input :first_met, placeholder: "Date first met" %>
   <%= f.button :submit %>
 <% end %>
