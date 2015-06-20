@@ -8,7 +8,6 @@ describe Note do
 
   subject { @note }
 
-  it { should respond_to(:user_id) }
   it { should respond_to(:contact_id) }
   it { should respond_to(:subject) }
   it { should respond_to(:content) }
@@ -19,11 +18,6 @@ describe Note do
                  contact_id: 1,
                  subject: 'Hello world!',
                  content: 'This is some content for the note!')
-  end
-
-  describe 'when user id is not present' do
-    before { @note.user_id = '' }
-    it { should_not be_valid }
   end
 
   describe 'when contact id is not present' do

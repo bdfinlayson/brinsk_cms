@@ -38,3 +38,15 @@ require 'pry'
     fill_in 'Last name', with: contact.last_name
     click_button 'Update Contact'
   end
+
+  def create_note(note)
+    fill_in 'Subject', with: note.subject
+    fill_in 'Content', with: note.content
+    click_button 'Create Note'
+  end
+
+  def edit_note(note)
+    fill_in 'Subject', with: note.subject
+    fill_in 'Content', with: note.content
+    click_button 'Update Note'
+  end

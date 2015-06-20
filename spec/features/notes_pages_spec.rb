@@ -24,6 +24,38 @@ describe "Notes" do
       click_link 'Show'
       expect(page).to have_button('Create Note')
     end
+
+    let(:note) { FactoryGirl.build(:note) }
+
+    scenario 'should create a note' do
+      click_link 'Show'
+      create_note(note)
+      expect(page).to have_content(note.subject)
+      expect(page).to have_content(note.content)
+    end
+
+    let(:other_note) { FactoryGirl.build(:note) }
+
+    scenario 'should edit a note' do
+      click_link 'Show'
+      create_note(note)
+      expect(page).to have_content(note.subject)
+      expect(page).to have_content(note.content)
+      click_link 'Edit'
+      edit_note(other_note)
+      expect(page).to have_content(other_note.subject)
+      expect(page).to have_content(other_note.content)
+    end
+
+    scenario 'should delete a note' do
+      click_link 'Show'
+      create_note(note)
+      expect(page).to have_content(note.subject)
+      expect(page).to have_content(note.content)
+      click_link 'Delete'
+      expect(page).to_not have_content(other_note.subject)
+      expect(page).to_not have_content(other_note.content)
+    end
   end
 end
 
