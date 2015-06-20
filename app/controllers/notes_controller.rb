@@ -10,7 +10,7 @@ class NotesController < ApplicationController
     @contact = Contact.find(params[:contact_id])
     @note = @contact.notes.create(note_params)
     if @note.save
-      redirect_to @contact
+      redirect_to @contact, notice: 'Note created!'
     else
       redirect_to root_path
     end
@@ -23,7 +23,7 @@ class NotesController < ApplicationController
   def update
     @note = Note.find(params[:id])
     if @note.update(note_params)
-      redirect_to contact_path(@note.contact_id)
+      redirect_to contact_path(@note.contact_id), notice: 'Note updated!'
     else
       render 'edit'
     end
@@ -32,7 +32,7 @@ class NotesController < ApplicationController
   def destroy
     @note = Note.find(params[:id])
     @note.destroy
-    redirect_to contact_path(@note.contact_id)
+    redirect_to contact_path(@note.contact_id), notice: 'Note deleted!'
   end
 
   private

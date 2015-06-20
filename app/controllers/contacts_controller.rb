@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
     @user = current_user
     @contact = @user.contacts.create(contact_params)
     if @contact.save
-      redirect_to @contact
+      redirect_to @contact, notice: 'Contact created!'
     else
       render 'new'
     end
@@ -34,7 +34,7 @@ class ContactsController < ApplicationController
     @contact = current_user.contacts.find(params[:id])
 
     if @contact.update(contact_params)
-      redirect_to root_path
+      redirect_to root_path, notice: 'Contact updated!'
     else
       render 'edit'
     end
@@ -43,7 +43,7 @@ class ContactsController < ApplicationController
   def destroy
     @contact = current_user.contacts.find(params[:id])
     @contact.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: 'Contact deleted!'
   end
 
   private

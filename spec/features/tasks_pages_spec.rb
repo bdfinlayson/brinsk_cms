@@ -18,6 +18,7 @@ describe 'Tasks' do
 
     it 'should have contacts to add tasks to' do
       expect(page).to have_content('1')
+      expect(page).to have_content(contact.first_name)
     end
 
     scenario 'should see a button to add a task' do
@@ -29,9 +30,20 @@ describe 'Tasks' do
 
     scenario 'should create a task' do
       click_link 'Show'
+      expect(page).to have_button('Create Task')
       create_task(task)
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
+    end
+
+    scenario 'should not be able to edit a completed task' do
+      click_link 'Show'
+      expect(page).to have_button('Create Task')
+      create_task(task)
+      expect(page).to have_content(task.name)
+      expect(page).to have_content(task.description)
+      click_link 'Mark as Complete'
+      expect(page).to_not have_link('Edit Task')
     end
 
     let(:other_task) { FactoryGirl.build(:task) }

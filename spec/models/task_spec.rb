@@ -14,7 +14,7 @@ describe Task do
   it { should respond_to(:name) }
   it { should respond_to(:description) }
   it { should respond_to(:due) }
-  it { should respond_to(:completed) }
+  it { should respond_to(:completed_at) }
 
 
   it 'should create a new instance given valid attributes' do
@@ -23,13 +23,7 @@ describe Task do
                     name: 'My Awesome Task',
                     description: 'This is a description of my task',
                     due: Time.now,
-                    completed: false
                    )
-  end
-
-  describe 'when user id is not present' do
-    before { task.user_id = '' }
-    it { should_not be_valid }
   end
 
   describe 'when taskable id is not present' do
@@ -47,13 +41,13 @@ describe Task do
     it { should_not be_valid }
   end
 
-  describe 'when due is not present' do
-    before { task.due = '' }
-    it { should_not be_valid }
-  end
+#   describe 'when due is not present' do
+#     before { task.due = '' }
+#     it { should_not be_valid }
+#   end
 
-  describe 'when due date is in the past' do
-    before { task.due = 2.days.ago }
-    it { should_not be_valid }
-  end
+#   describe 'when due date is in the past' do
+#     before { task.due = 2.days.ago }
+#     it { should_not be_valid }
+#   end
 end

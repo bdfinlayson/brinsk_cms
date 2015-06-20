@@ -11,7 +11,7 @@ class TasksController < ApplicationController
     @contact = Contact.find(params[:contact_id])
     @task = @contact.tasks.create(task_params)
     if @task.save
-      redirect_to @contact
+      redirect_to @contact, notice: 'Task created!'
     else
       redirect_to root_path
     end
@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to contact_path(@task.contact_id)
+      redirect_to contact_path(@task.taskable_id), notice: 'Task updated!'
     else
       render 'edit'
     end
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to contact_path(@task.taskable_id)
+    redirect_to contact_path(@task.taskable_id), notice: 'Task deleted!'
   end
 
   def complete
