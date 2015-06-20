@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :contacts do
     resources :notes
   end
 
-  root "contacts#index"
+  resources :notes, except: [:show]
 
+  root "contacts#index"
 
 end

@@ -7,7 +7,8 @@
 <p>The number of contacts is: <%= @contacts.count %></p>
 <p>The user id is: <%=  @user.id %></p>
 <% @contacts.each do |contact| %>
-  <p><%= contact.first_name %> <%= contact.last_name %><%= link_to 'Edit', edit_contact_path(contact) %></p>
+  <p><%= contact.first_name %> <%= contact.last_name %><%= link_to 'Edit', edit_contact_path(contact) %><%= link_to 'Show', contact_path(contact) %></p>
 <% end %>
+
 
 <%= link_to 'New Contact', new_contact_path  %>

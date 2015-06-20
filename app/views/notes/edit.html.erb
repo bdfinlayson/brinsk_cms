@@ -1,0 +1,6 @@
+<%= simple_form_for (@note) do |f| %>
+  <%# <%= render 'shared/error_messages', object: f.object %1> %>
+  <%= f.input :subject, placeholder: "Subject" %>
+  <%= f.text_area :content, placeholder: "Note content..." %>
+  <%= f.button :submit %>
+<% end %>

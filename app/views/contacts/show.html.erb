@@ -1,9 +1,21 @@
 <h2><%= "#{@contact.first_name} #{@contact.last_name}" %></h2>
+<p>Contact ID: <%= @contact.id %></p>
 <%= @contact.email %>
 <%= @contact.title %>
 <%= @contact.company_name %>
 <%= @contact.alt_email %>
 <%= @contact.phone %>
 
+
+<% @notes.each do |note| %>
+  <h3><%= note.subject %></h3>
+  <p><%= note.content %></p>
+  <%= link_to 'Edit', edit_note_path(note) %>
+  <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= render 'shared/note_form' %>
+
 <%= link_to 'Home', root_path %>
+<%= link_to 'Add note', new_contact_note_path(@contact) %>
 
