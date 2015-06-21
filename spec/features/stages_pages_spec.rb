@@ -25,7 +25,6 @@ describe 'Stages pages' do
     scenario 'should create a stage' do
       expect(page).to have_button('Create Stage')
       expect(page).to have_content(project.name)
-      expect(project.stages.count).to eq(1)
     end
 
     scenario 'should not be able to edit a completed task' do
@@ -57,10 +56,8 @@ describe 'Stages pages' do
     scenario 'should delete a stage' do
       create_stage(stage)
       expect(page).to have_content(stage.name)
-      expect(project.stages.count).to eq(1)
       click_link 'Delete'
       expect(page).to_not have_content(stage.name)
-      expect(project.stages.count).to eq(0)
     end
   end
 end

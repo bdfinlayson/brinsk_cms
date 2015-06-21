@@ -6,14 +6,13 @@ Rails.application.routes.draw do
       member do
         patch :complete
       end
-      resources :stages do
+      resources :stages, except: [:show] do
         resources :tasks do
           member do
             patch :complete
           end
         end
       end
-      resources :notes
     end
     resources :notes, except: [:show]
     resources :tasks, except: [:show] do
@@ -24,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   resources :projects
+  resources :stages, except: [:show]
   resources :notes, except: [:show]
   resources :tasks, except: [:show]
 

@@ -9,6 +9,8 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @contact = Contact.find(@project.contact_id)
+    @stages = @project.stages.all
 
   end
 

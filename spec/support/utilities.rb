@@ -80,3 +80,16 @@ require 'pry'
     fill_in 'Description', with: project.description
     click_button 'Update Project'
   end
+
+
+  def create_stage(stage)
+    within('form#new_stage') do
+      fill_in 'Name', with: stage.name
+    end
+    click_button 'Create Stage'
+  end
+
+  def edit_stage(stage)
+    fill_in 'Name', with: stage.name
+    click_button 'Update Stage'
+  end
