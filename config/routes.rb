@@ -6,6 +6,13 @@ Rails.application.routes.draw do
       member do
         patch :complete
       end
+      resources :stages do
+        resources :tasks do
+          member do
+            patch :complete
+          end
+        end
+      end
       resources :notes
     end
     resources :notes, except: [:show]
