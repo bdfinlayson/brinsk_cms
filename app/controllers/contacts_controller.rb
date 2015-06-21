@@ -1,9 +1,12 @@
+require 'pry'
+
 class ContactsController < ApplicationController
   before_action :authenticate_user!
 
   def index
     @user = current_user
     @contacts = current_user.contacts.all
+    @appointments = Appointment.where('user_id = ?', current_user.id)
   end
 
   def show
@@ -11,6 +14,7 @@ class ContactsController < ApplicationController
     @notes = @contact.notes.all
     @tasks = @contact.tasks.all
     @projects = @contact.projects.all
+    @appointments = @contact.appointments.all
   end
 
   def new

@@ -12,21 +12,7 @@ describe "Contacts page" do
 
     it { should have_content('Contacts') }
     it { should have_title('Contacts') }
-    it { should have_content('Add') }
-    it { should have_content('New Contact') }
-
-    describe 'with invalid information' do
-
-      it 'should not create a contact' do
-        expect(page).to have_content('Contacts')
-        expect { click_button 'Add'}.not_to change(Contact, :count)
-      end
-    end
-
-    scenario 'should see a button to add a contact' do
-      visit root_path
-      expect(page).to have_content('Add')
-    end
+    it { should have_link('New Contact') }
 
     let(:contact) { FactoryGirl.build(:contact) }
     let(:other_contact) { FactoryGirl.build(:contact) }

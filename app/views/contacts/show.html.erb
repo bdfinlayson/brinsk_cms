@@ -6,6 +6,15 @@
 <%= @contact.alt_email %>
 <%= @contact.phone %>
 
+<%= month_calendar events: @appointments do |date, meetings| %>
+  <%= date %>
+
+  <% meetings.each do |meeting| %>
+    <div>
+      <%= meeting.name %>
+    </div>
+  <% end %>
+<% end %>
 
 <% @notes.each do |note| %>
   <h3><%= note.subject %></h3>
@@ -32,11 +41,17 @@
   <% end %>
 <% end %>
 
+<% @appointments.each do |appointment| %>
+  <p><%= appointment.name %> <%= link_to "Calendar", contact_appointments_path(@contact) %></p>
+<% end %>
+
 <%= render 'shared/note_form' %>
 
 <%= render 'shared/task_form' %>
 
 <%= render 'shared/project_form' %>
+
+<%= render 'shared/appointment_form' %>
 
 <%= link_to 'Home', root_path %>
 

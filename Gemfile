@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'faker'
 gem 'acts-as-taggable-on'
 gem 'simple_form'
+gem "simple_calendar"
 
 group :production do
   gem 'pg'

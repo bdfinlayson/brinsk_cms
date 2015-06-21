@@ -1,8 +1,17 @@
 
 <% provide(:title, 'Contacts') %>
 <h1>Contacts</h1>
-<p>Find me in app/views/contacts/index.html.erb</p>
-<button>Add Contact</button>
+
+<%= month_calendar events: @appointments do |date, meetings| %>
+  <%= date %>
+
+  <% meetings.each do |meeting| %>
+    <div>
+      <%= meeting.name %>
+    </div>
+  <% end %>
+<% end %>
+
 
 <p>The number of contacts is: <%= @contacts.count %></p>
 <p>The user id is: <%=  @user.id %></p>

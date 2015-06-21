@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620225734) do
+ActiveRecord::Schema.define(version: 20150621194441) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "date"
     t.text     "description"
     t.string   "street1"
     t.string   "street2"
@@ -27,6 +26,8 @@ ActiveRecord::Schema.define(version: 20150620225734) do
     t.string   "appointable_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.datetime "starts_at"
+    t.string   "name"
   end
 
   add_index "appointments", ["appointable_type", "appointable_id"], name: "index_appointments_on_appointable_type_and_appointable_id"
