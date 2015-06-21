@@ -39,11 +39,7 @@ class TasksController < ApplicationController
       @available_stages.each do |stage|
         @stages_ids << stage.id
       end
-      @current_stage = @task.taskable_id
-      @index_location = @stages_ids.index(@current_stage)
-      @new_stage_location = @stages_ids[@index_location.next]
-      params[:task] = { taskable_id: @new_stage_location  } unless @new_stage_location.nil?
-      params[:task] = { taskable_id: @stages_ids.first  } unless @new_stage_location
+      params[:task] = { taskable_id: params[:stage_id]  }
       if @task.update(task_params)
         redirect_to project_path(params[:project_id]), notice: 'Task promoted!'
       end
