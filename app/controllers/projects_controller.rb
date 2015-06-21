@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @contact = Contact.find(@project.contact_id)
     @stages = @project.stages.all
-
   end
 
   def create

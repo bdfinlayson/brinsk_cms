@@ -5,9 +5,31 @@
 <%= render 'shared/stage_form' %>
 
 <% @stages.each do |stage| %>
-  <h3><%= stage.name %></h3>
-  <%= link_to 'Edit stage', edit_stage_path(stage) %>
-  <%= link_to 'Delete stage', stage_path(stage), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <div id="<%=stage.name%>">
+    <h3><%= stage.name %></h3>
+    <%= link_to 'Edit stage', edit_stage_path(stage) %>
+    <%= link_to 'Delete stage', stage_path(stage), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+    <% stage.tasks.each do |task| %>
+      <% if task.completed_at %>
+        <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <% else %>
+        <p><%= task.name %><%= task.description %> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <% end %>
+    <% end %>
+
+
+    <% @task = Stage.find(stage.id).tasks.build %>
+    <% @stage = Stage.find(stage.id) %>
+    <%= simple_form_for ([@contact, @project, stage, @task]) do |f| %>
+      <%# <%= render 'shared/error_messages', object: f.object %1> %>
+      <%= f.input :name, placeholder: "Name" %>
+      <%= f.label :description %>
+      <%= f.text_area :description, placeholder: "Describe your task..." %>
+      <%= f.button :submit %>
+    <% end %>
+    <%# <%= render 'shared/stage_task_form' %1> %>
+  </div>
 <% end %>
 
 <br/>

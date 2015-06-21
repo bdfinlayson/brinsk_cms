@@ -21,18 +21,11 @@ describe 'Stages pages' do
       click_link 'Manage Project'
     end
 
-
     scenario 'should create a stage' do
       expect(page).to have_button('Create Stage')
       expect(page).to have_content(project.name)
-    end
-
-    scenario 'should not be able to edit a completed task' do
-      expect(page).to have_button('Create Task')
-      create_stage_task(task)
-      expect(page).to have_content(task.name)
-      click_link 'Mark as Complete'
-      expect(page).to_not have_link('Edit task')
+      create_stage(stage)
+      expect(page).to have_content(stage.name)
     end
 
     scenario 'should cancel a transaction' do
@@ -58,6 +51,38 @@ describe 'Stages pages' do
       expect(page).to have_content(stage.name)
       click_link 'Delete'
       expect(page).to_not have_content(stage.name)
+    end
+  end
+
+  describe 'task creation for stages' do
+    before do
+      visit root_path
+      click_link 'Show'
+      create_project(project)
+      click_link 'Manage Project'
+      create_stage(stage)
+      create_stage(other_stage)
+    end
+
+    scenario 'should have two stages to add tasks to' do
+      expect(page).to have_button('Create Task')
+      expect(page).to have_content(stage.name)
+      expect(page).to have_content(other_stage.name)
+    end
+
+    scenario 'should add a task to the first stage' do
+      create_stage_task(task, stage)
+      within("div##{stage.name}") do
+        expect(page).to have_content(task.name)
+      end
+    end
+
+    scenario 'should not be able to edit a completed task' do
+      expect(page).to have_button('Create Task')
+      create_stage_task(task, stage)
+      expect(page).to have_content(task.name)
+      click_link 'Mark as Complete'
+      expect(page).to_not have_link('Edit task')
     end
   end
 end

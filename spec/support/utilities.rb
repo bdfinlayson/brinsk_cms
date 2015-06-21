@@ -93,3 +93,13 @@ require 'pry'
     fill_in 'Name', with: stage.name
     click_button 'Update Stage'
   end
+
+  def create_stage_task(task, stage)
+    within("div##{stage.name}") do
+      within('form#new_task') do
+        fill_in 'Name', with: task.name
+        fill_in 'Description', with: task.description
+        click_button 'Create Task'
+      end
+    end
+  end

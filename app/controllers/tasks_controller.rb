@@ -8,10 +8,19 @@ class TasksController < ApplicationController
   end
 
   def create
-    @contact = Contact.find(params[:contact_id])
-    @task = @contact.tasks.create(task_params)
+    @object = Contact.find(params[:contact_id]) unless params[:contact_id].nil?
+    # @object = Project.find(params[:project_id]) unless params[:project_id].nil?
+    @object = Stage.find(params[:stage_id]) unless params[:stage_id].nil?
+    @task = @object.tasks.create(task_params)
     if @task.save
-      redirect_to @contact, notice: 'Task created!'
+      if params[:contact_id] && params[:stage_id].nil?
+        redirect_to contact_path(params[:contact_id]), notice: 'Task created!'
+      elsif params[:stage_id]
+        redirect_to project_path(params[:project_id]), notice: 'Task created!'
+      else
+        redirect_to root_path
+        # redirect_to @object, notice: 'Unable to create task!'
+      end
     else
       redirect_to root_path
     end
@@ -24,16 +33,29 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to contact_path(@task.taskable_id), notice: 'Task updated!'
+      if @task.taskable_type == 'Contact'
+        redirect_to contact_path(@task.taskable_id), notice: 'Task updated!'
+      elsif @task.taskable_type == 'Stage'
+        redirect_to project_path(@task.taskable_id), notice: 'Task updated!'
+      else
+        render 'edit', notice: 'Unable to update task!'
+      end
     else
-      render 'edit'
+      render 'edit', notice: 'Unable to update task!'
     end
   end
 
   def destroy
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to contact_path(@task.taskable_id), notice: 'Task deleted!'
+    if @task.taskable_type == 'Contact'
+      redirect_to contact_path(@task.taskable_id), notice: 'Task deleted!'
+    elsif @task.taskable_type == 'Stage'
+      redirect_to project_path(@task.taskable_id), notice: 'Task deleted!'
+    else
+      redirect_to root_path
+      # redirect_to @object, notice: 'Unable to create task!'
+    end
   end
 
   def complete
