@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @note = Task.new
+    @task = Task.new
   end
 
   def create

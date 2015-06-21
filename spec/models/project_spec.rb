@@ -16,7 +16,7 @@ describe Project do
   it { should respond_to(:description) }
   it { should respond_to(:start_date) }
   it { should respond_to(:end_date) }
-  it { should respond_to(:completed) }
+  it { should respond_to(:completed_at) }
 
 
   it 'should create a new instance given valid attributes' do
@@ -26,13 +26,7 @@ describe Project do
                     description: 'This is a description of my project',
                     start_date: Time.now,
                     end_date: Time.now,
-                    completed: false
                    )
-  end
-
-  describe 'when user id is not present' do
-    before { project.user_id = '' }
-    it { should_not be_valid }
   end
 
   describe 'when contact id is not present' do
@@ -52,16 +46,16 @@ describe Project do
 
   describe 'when description is not present' do
     before { project.description = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe 'when start date is not present' do
     before { project.start_date = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe 'when end date is not present' do
     before { project.end_date = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 end

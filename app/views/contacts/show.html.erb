@@ -23,9 +23,20 @@
   <% end %>
 <% end %>
 
+<% @projects.each do |project| %>
+  <%# <%= render 'shared/task_item' %1> %>
+  <% if project.completed_at %>
+    <strike style='opacity: 0.4;'><p> <%= project.name %></strike> <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% else %>
+    <p><%= project.name %><%= project.description %> <%= link_to 'Mark as Complete', complete_contact_project_path(@contact, project), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Manage Project', project_path(project) %> <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
+<% end %>
+
 <%= render 'shared/note_form' %>
 
 <%= render 'shared/task_form' %>
+
+<%= render 'shared/project_form' %>
 
 <%= link_to 'Home', root_path %>
 

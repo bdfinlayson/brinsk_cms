@@ -2,6 +2,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :contacts do
+    resources :projects do
+      member do
+        patch :complete
+      end
+      resources :notes
+    end
     resources :notes, except: [:show]
     resources :tasks, except: [:show] do
       member do
@@ -10,6 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :projects
   resources :notes, except: [:show]
   resources :tasks, except: [:show]
 

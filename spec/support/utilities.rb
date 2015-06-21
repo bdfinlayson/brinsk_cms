@@ -40,8 +40,10 @@ require 'pry'
   end
 
   def create_note(note)
-    fill_in 'Subject', with: note.subject
-    fill_in 'Content', with: note.content
+    within('form#new_note') do
+      fill_in 'Subject', with: note.subject
+      fill_in 'Content', with: note.content
+    end
     click_button 'Create Note'
   end
 
@@ -52,8 +54,10 @@ require 'pry'
   end
 
   def create_task(task)
-    fill_in 'Name', with: task.name
-    fill_in 'Description', with: task.description
+    within('form#new_task') do
+      fill_in 'Name', with: task.name
+      fill_in 'Description', with: task.description
+    end
     click_button 'Create Task'
   end
 
@@ -61,4 +65,18 @@ require 'pry'
     fill_in 'Name', with: task.name
     fill_in 'Description', with: task.description
     click_button 'Update Task'
+  end
+
+  def create_project(project)
+    within('form#new_project') do
+      fill_in 'Name', with: project.name
+      fill_in 'Description', with: project.description
+    end
+    click_button 'Create Project'
+  end
+
+  def edit_project(project)
+    fill_in 'Name', with: project.name
+    fill_in 'Description', with: project.description
+    click_button 'Update Project'
   end

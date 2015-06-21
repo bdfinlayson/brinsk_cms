@@ -1,0 +1,7 @@
+<%= simple_form_for ([@contact, @contact.projects.build]) do |f| %>
+  <%# <%= render 'shared/error_messages', object: f.object %1> %>
+  <%= f.input :name, placeholder: "Name of project", my_wrapper_html: { id: 'project_name' }%>
+  <%= f.label :description, 'Project Description' %>
+  <%= f.text_area :description, placeholder: "Describe your project..." %>
+  <%= f.button :submit %>
+<% end %>

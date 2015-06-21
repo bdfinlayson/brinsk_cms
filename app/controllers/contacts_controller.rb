@@ -10,6 +10,7 @@ class ContactsController < ApplicationController
     @contact = Contact.find(params[:id])
     @notes = @contact.notes.all
     @tasks = @contact.tasks.all
+    @projects = @contact.projects.all
   end
 
   def new
