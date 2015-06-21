@@ -32,16 +32,34 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    if @task.update(task_params)
-      if @task.taskable_type == 'Contact'
-        redirect_to contact_path(@task.taskable_id), notice: 'Task updated!'
-      elsif @task.taskable_type == 'Stage'
-        redirect_to project_path(@task.taskable_id), notice: 'Task updated!'
+    if params[:task].nil?
+      @stage = Stage.find(@task.taskable_id)
+      @available_stages = Stage.where('project_id = ?', @stage.project_id)
+      @stages_ids = Array.new
+      @available_stages.each do |stage|
+        @stages_ids << stage.id
+      end
+      @current_stage = @task.taskable_id
+      @index_location = @stages_ids.index(@current_stage)
+      @new_stage_location = @stages_ids[@index_location.next]
+      params[:task] = { taskable_id: @new_stage_location  } unless @new_stage_location.nil?
+      params[:task] = { taskable_id: @stages_ids.first  } unless @new_stage_location
+      if @task.update(task_params)
+        redirect_to project_path(params[:project_id]), notice: 'Task promoted!'
+      end
+    else
+      if @task.update(task_params)
+        if @task.taskable_type == 'Contact'
+          redirect_to contact_path(@task.taskable_id), notice: 'Task updated!'
+        elsif @task.taskable_type == 'Stage'
+          @stage = Stage.find(@task.taskable_id)
+          redirect_to project_path(@stage.project_id), notice: 'Task updated!'
+        else
+          render 'edit', notice: 'Unable to update task!'
+        end
       else
         render 'edit', notice: 'Unable to update task!'
       end
-    else
-      render 'edit', notice: 'Unable to update task!'
     end
   end
 
@@ -51,7 +69,8 @@ class TasksController < ApplicationController
     if @task.taskable_type == 'Contact'
       redirect_to contact_path(@task.taskable_id), notice: 'Task deleted!'
     elsif @task.taskable_type == 'Stage'
-      redirect_to project_path(@task.taskable_id), notice: 'Task deleted!'
+      @stage = Stage.find(@task.taskable_id)
+      redirect_to project_path(@stage.project_id), notice: 'Task deleted!'
     else
       redirect_to root_path
       # redirect_to @object, notice: 'Unable to create task!'
@@ -67,7 +86,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :completed_at)
+    params.require(:task).permit(:name, :description, :completed_at, :taskable_id)
   end
 
 end

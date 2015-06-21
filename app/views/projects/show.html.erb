@@ -14,7 +14,7 @@
       <% if task.completed_at %>
         <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
       <% else %>
-        <p><%= task.name %><%= task.description %> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <p><%= task.name %> <%= task.id %><%= task.description %> <%= link_to 'Promote', contact_project_stage_task_path(@contact.id,@project.id,stage,task), method: :patch, data: { confirm: 'Move task to next stage?' } %> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
       <% end %>
     <% end %>
 

@@ -77,6 +77,40 @@ describe 'Stages pages' do
       end
     end
 
+    scenario 'should move a task to the next stage' do
+      create_stage_task(task, stage)
+      within("div##{stage.name}") do
+        expect(page).to have_content(task.name)
+      end
+      within("div##{stage.name}") do
+        click_link 'Promote'
+      end
+      within("div##{other_stage.name}") do
+        expect(page).to have_content(task.name)
+      end
+      within("div##{stage.name}") do
+        expect(page).to_not have_content(task.name)
+      end
+    end
+
+
+    scenario 'should move a task back to the original stage' do
+      create_stage_task(task, stage)
+      within("div##{stage.name}") do
+        expect(page).to have_content(task.name)
+      end
+      within("div##{stage.name}") do
+        click_link 'Promote'
+      end
+      within("div##{other_stage.name}") do
+        expect(page).to have_content(task.name)
+        click_link 'Promote'
+      end
+      within("div##{stage.name}") do
+        expect(page).to have_content(task.name)
+      end
+    end
+
     scenario 'should not be able to edit a completed task' do
       expect(page).to have_button('Create Task')
       create_stage_task(task, stage)
