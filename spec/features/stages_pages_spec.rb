@@ -83,7 +83,7 @@ describe 'Stages pages' do
         expect(page).to have_content(task.name)
       end
       within("div##{stage.name}") do
-        click_link 'Promote'
+        click_link 'Next'
       end
       within("div##{other_stage.name}") do
         expect(page).to have_content(task.name)
@@ -100,11 +100,11 @@ describe 'Stages pages' do
         expect(page).to have_content(task.name)
       end
       within("div##{stage.name}") do
-        click_link 'Promote'
+        click_link 'Next'
       end
       within("div##{other_stage.name}") do
         expect(page).to have_content(task.name)
-        click_link 'Promote'
+        click_link 'Back'
       end
       within("div##{stage.name}") do
         expect(page).to have_content(task.name)
