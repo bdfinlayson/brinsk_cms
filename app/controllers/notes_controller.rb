@@ -1,4 +1,3 @@
-require 'pry'
 class NotesController < ApplicationController
   before_action :authenticate_user!
 

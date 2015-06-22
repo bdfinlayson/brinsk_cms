@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
 

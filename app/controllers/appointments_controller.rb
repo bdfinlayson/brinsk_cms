@@ -18,7 +18,6 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    binding.pry
     params.require(:appointment).permit(:name, :starts_at, :user_id)
   end
 
