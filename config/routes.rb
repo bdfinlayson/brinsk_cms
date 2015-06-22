@@ -46,6 +46,7 @@ Rails.application.routes.draw do
       end
     end
     resources :notes
+    resources :appointments
   end
 
 #   resources :projects do
@@ -66,6 +67,7 @@ Rails.application.routes.draw do
 #     end
 #   end
 
+  resources :appointments
   resources :projects
   resources :stages, except: [:show]
   resources :notes, except: [:show]

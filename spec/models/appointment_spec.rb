@@ -14,7 +14,7 @@ describe Appointment do
     subject { appointment }
 
     it { should respond_to(:user_id) }
-    it { should respond_to(:date) }
+    it { should respond_to(:starts_at) }
     it { should respond_to(:description) }
     it { should respond_to(:street1) }
     it { should respond_to(:street2) }
@@ -29,7 +29,7 @@ describe Appointment do
 
     it 'should create a new instance given valid attributes' do
       Appointment.create!(user_id: 1,
-                          date: Time.now,
+                          starts_at: Time.now,
                           description: 'Lorem ipsum',
                           street1: '93 Chuckanutt Drive',
                           street2: 'Apt 101',
@@ -47,8 +47,8 @@ describe Appointment do
     it { should_not be_valid }
   end
 
-  describe 'when date is not present' do
-    before { appointment.date = '' }
+  describe 'when starts_at is not present' do
+    before { appointment.starts_at = '' }
     it { should_not be_valid }
   end
 
@@ -59,7 +59,7 @@ describe Appointment do
 
   describe 'when street1 is not present' do
     before { appointment.street1 = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe 'when street2 is not present' do
@@ -69,23 +69,23 @@ describe Appointment do
 
   describe 'when city is not present' do
     before { appointment.city = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe 'when state is not present' do
     before { appointment.state = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
   describe 'when zipcode is not present' do
     before { appointment.zipcode = '' }
-    it { should_not be_valid }
+    it { should be_valid }
   end
 
 
   describe 'when all address info is entered' do
     before { @appointment = Appointment.create!(user_id: 1,
-                          date: Time.now,
+                          starts_at: Time.now,
                           description: 'Lorem ipsum',
                           street1: '93 Chuckanutt Drive',
                           street2: 'Apt 101',

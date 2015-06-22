@@ -4,17 +4,22 @@
 
 <%= render 'shared/stage_form' %>
 
-<% @stages.each do |stage| %>
+<% @stages.each_with_index do |stage, index| %>
   <div id="<%=stage.name%>">
     <h3><%= stage.name %></h3>
     <%= link_to 'Edit stage', edit_stage_path(stage) %>
     <%= link_to 'Delete stage', stage_path(stage), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <h1><%= index%></h1>
 
     <% stage.tasks.each do |task| %>
       <% if task.completed_at %>
         <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
       <% else %>
-        <p><%= task.name %> <%= task.id %><%= task.description %> <%= link_to 'Promote', contact_project_stage_task_path(@contact.id,@project.id,stage,task), method: :patch, data: { confirm: 'Move task to next stage?' } %> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <p><%= task.name %> <%= task.id %><%= task.description %>
+      <%= link_to 'Back', contact_project_stage_task_path(@contact.id,@project.id,@stages[index-1].id,task), method: :patch, data: {params: {task: {new_stage: @stages[index-1].id }}.to_param, confirm: 'Move task to next stage?' }  unless index == 0 %>
+          <%= link_to 'Next', contact_project_stage_task_path(@contact.id,@project.id,@stages[index+1].id,task), method: :patch, data: {params: { task: {new_stage: @stages[index+1].id} }.to_param, confirm: 'Move task to next stage?' } unless @stages[index+1].nil? %>
+          <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
       <% end %>
     <% end %>
 
