@@ -4,6 +4,21 @@
 
 <%= render 'shared/stage_form' %>
 
+<%= simple_form_for ([@contact, @project, @note]) do |f| %>
+  <%# <%= render 'shared/error_messages', object: f.object %1> %>
+  <%= f.input :subject, placeholder: "Subject" %>
+  <%= f.label :content %>
+  <%= f.text_area :content, placeholder: "Note content..." %>
+  <%= f.button :submit %>
+<% end %>
+
+<% @notes.each do |note| %>
+  <h3><%= note.subject %></h3>
+  <p><%= note.content %></p>
+  <%= link_to 'Edit', edit_note_path(note) %>
+  <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
 <% @stages.each_with_index do |stage, index| %>
   <div id="<%=stage.name%>">
     <h3><%= stage.name %></h3>
@@ -22,7 +37,6 @@
           <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
       <% end %>
     <% end %>
-
 
     <% @task = Stage.find(stage.id).tasks.build %>
     <% @stage = Stage.find(stage.id) %>

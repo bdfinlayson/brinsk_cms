@@ -20,11 +20,6 @@ describe Note do
                  content: 'This is some content for the note!')
   end
 
-  describe 'when contact id is not present' do
-    before { @note.contact_id = '' }
-    it { should_not be_valid }
-  end
-
   describe 'when subject is not present' do
     before { @note.subject = '' }
     it { should_not be_valid }

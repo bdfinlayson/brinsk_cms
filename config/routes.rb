@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   #
   resources :contacts do
     resources :projects do
+      resources :notes, except: [:show]
       resources :stages do
         resources :tasks do
           member do

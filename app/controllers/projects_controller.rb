@@ -9,6 +9,8 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @contact = Contact.find(@project.contact_id)
     @stages = @project.stages.all
+    @note = Note.new
+    @notes = Note.where('project_id = ?', @project.id)
   end
 
   def create
