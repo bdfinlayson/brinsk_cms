@@ -1,5 +1,3 @@
-require 'pry'
-
 class AppointmentsController < ApplicationController
 
   def create
