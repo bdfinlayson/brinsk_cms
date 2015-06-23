@@ -11,7 +11,7 @@ feature "Signing in" do
 
   scenario "Signing in with correct credentials" do
     visit '/users/sign_in'
-    within("form") do
+    within("form#new_user") do
       fill_in 'Email', :with => 'user@example.com'
       fill_in 'Password', :with => 'caplin1234'
     end
@@ -23,7 +23,7 @@ feature "Signing in" do
 
   scenario "Signing in as another user" do
     visit 'users/sign_in'
-    within("form") do
+    within("form#new_user") do
       fill_in 'Email', :with => other_user.email
       fill_in 'Password', :with => other_user.password
     end
