@@ -1,3 +1,5 @@
+require 'pry'
+
 class AppointmentsController < ApplicationController
 
   def create
@@ -20,6 +22,9 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.find(params[:id])
     @project = Project.find(@appointment.appointable_id) if @appointment.appointable_type == 'Project'
     @contact = Contact.find(@appointment.appointable_id) if @appointment.appointable_type == 'Contact'
+    if @contact.nil?
+      @contact = Contact.find(@project.contact_id)
+    end
   end
 
   def edit

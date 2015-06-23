@@ -11,6 +11,8 @@
   <%= f.submit %>
 <% end %>
 
+<%= render 'email/email_project_contact' %>
+
 <%= render 'shared/stage_form' %>
 
 <%= simple_form_for ([@contact, @project, @note]) do |f| %>

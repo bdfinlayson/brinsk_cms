@@ -1,0 +1,13 @@
+<%= form_tag(email_contact_contact_path(@contact), :id => 'email_contact_form') do %>
+  <div class='field'>
+    <%= label_tag :name, 'Subject' %><br />
+    <%= text_field_tag :name %>
+  </div>
+  <div class='field'>
+    <%= label_tag :email, 'Message' %><br />
+    <%= text_field_tag :email %>
+  </div>
+  <div class='actions'>
+    <%= submit_tag 'Send' %> or
+  </div>
+<% end %>

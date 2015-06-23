@@ -15,6 +15,12 @@ class ContactsController < ApplicationController
     @appointments = Appointment.where('contact_id = ?', @contact.id)
   end
 
+  def email_contact
+    @contact = Contact.find(params[:id])
+    Email.email_contact(@contact, params[:name], params[:email]).deliver
+    redirect_to @contact, :notice => 'Successfully sent a message!'
+  end
+
   def new
     @contact = Contact.new
   end

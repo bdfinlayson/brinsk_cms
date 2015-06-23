@@ -8,6 +8,8 @@
 
 <%= render 'shared/calendars' %>
 
+<%= render 'email/email_contact' %>
+
 <% @notes.each do |note| %>
   <h3><%= note.subject %></h3>
   <p><%= note.content %></p>

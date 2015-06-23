@@ -9,6 +9,7 @@
 <p><%= @appointment.full_address unless @appointment.street1.nil? || @appointment.city.nil? || @appointment.state.nil? %></p>
 <p><%= @appointment.city if @appointment.street1.nil? %> <%= ", #{@appointment.state}" unless @appointment.state.nil? %> <%= @appointment.zipcode unless @appointment.zipcode.nil? %></p>
 
+
 <%= link_to 'Back', :back %>
 <%= link_to 'Edit', edit_appointment_path(@appointment) %>
 <%= link_to 'Delete', appointment_path(@appointment), method: :delete, data: { confirm: 'Are you sure?' } %>

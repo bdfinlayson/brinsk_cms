@@ -5,6 +5,12 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def email_contact
+    @contact = Contact.find(params[:id])
+    Email.email_contact(@contact, params[:name], params[:email]).deliver
+    redirect_to @contact, :notice => 'Successfully sent a message!'
+  end
+
   def show
     @project = Project.find(params[:id])
     @contact = Contact.find(@project.contact_id)

@@ -16,6 +16,16 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
+  # Gmail SMTP server setup
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :enable_starttls_auto => true,
+    :port => 587,
+    :authentication => :plain,
+    :user_name => "brinskcms@gmail.com",
+    :password => "brinskcms2015"
+  }
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -42,7 +52,4 @@ Rails.application.configure do
   # Needed for Devise support
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  # ActionMailer configurations
-  # config.action_mailer.default.delivery_method = :smtp
-  # config.action_mailer.perform_deliveries = true
 end

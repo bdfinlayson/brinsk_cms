@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   # end
   #
   resources :contacts do
+    member do
+      post :email_contact
+    end
     resources :projects do
       resources :notes, except: [:show]
       resources :stages do
@@ -70,6 +73,9 @@ Rails.application.routes.draw do
 
   resources :appointments
   resources :projects do
+    member do
+      post :email_contact
+    end
     resources :appointments
   end
   resources :stages, except: [:show]
@@ -77,5 +83,4 @@ Rails.application.routes.draw do
   resources :tasks, except: [:show]
 
   root "contacts#index"
-
 end
