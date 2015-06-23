@@ -13,6 +13,7 @@ describe Appointment do
 
     subject { appointment }
 
+    it { should respond_to(:name) }
     it { should respond_to(:user_id) }
     it { should respond_to(:starts_at) }
     it { should respond_to(:description) }
@@ -28,7 +29,8 @@ describe Appointment do
     it { should be_valid }
 
     it 'should create a new instance given valid attributes' do
-      Appointment.create!(user_id: 1,
+      Appointment.create!(name: 'Lunch with Casey',
+                          user_id: 1,
                           starts_at: Time.now,
                           description: 'Lorem ipsum',
                           street1: '93 Chuckanutt Drive',
@@ -41,6 +43,10 @@ describe Appointment do
     end
 
 
+  describe 'when name is not present' do
+    before { appointment.name = '' }
+    it { should_not be_valid }
+  end
 
   describe 'when user id is not present' do
     before { appointment.user_id = '' }
@@ -84,16 +90,17 @@ describe Appointment do
 
 
   describe 'when all address info is entered' do
-    before { @appointment = Appointment.create!(user_id: 1,
-                          starts_at: Time.now,
-                          description: 'Lorem ipsum',
-                          street1: '93 Chuckanutt Drive',
-                          street2: 'Apt 101',
-                          city: 'Oakland',
-                          state: 'TN',
-                          zipcode: '07430',
-                          full_address: '93 Chuckanutt Drive, Apt 101, Oakland, TN 07430',
-                          appointable_id: 20 ) }
+    before { @appointment = Appointment.create!(name: 'Lunch with Joe',
+                                                user_id: 1,
+                                                starts_at: Time.now,
+                                                description: 'Lorem ipsum',
+                                                street1: '93 Chuckanutt Drive',
+                                                street2: 'Apt 101',
+                                                city: 'Oakland',
+                                                state: 'TN',
+                                                zipcode: '07430',
+                                                full_address: '93 Chuckanutt Drive, Apt 101, Oakland, TN 07430',
+                                                appointable_id: 20 ) }
 
     it 'should generate the correct full address' do
       expect(@appointment.address).to eq("93 Chuckanutt Drive, Apt 101, Oakland, TN 07430")

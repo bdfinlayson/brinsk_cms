@@ -12,7 +12,7 @@ class ContactsController < ApplicationController
     @notes = @contact.notes.all
     @tasks = @contact.tasks.all
     @projects = @contact.projects.all
-    @appointments = @contact.appointments.all
+    @appointments = Appointment.where('contact_id = ?', @contact.id)
   end
 
   def new

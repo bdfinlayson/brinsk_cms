@@ -2,6 +2,7 @@ require 'faker'
 
 FactoryGirl.define do
   factory :appointment do
+    name { Faker::Company.catch_phrase }
     starts_at { Time.now }
     description { Faker::Lorem.paragraph(2) }
     street1 { Faker::Address.street_address }

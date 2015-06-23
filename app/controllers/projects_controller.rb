@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
     @stages = @project.stages.all
     @note = Note.new
     @notes = Note.where('project_id = ?', @project.id)
+    @appointments = Appointment.where('appointable_id = ?', @project)
   end
 
   def create

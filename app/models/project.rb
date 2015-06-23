@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   # validates :description, presence: true, length: { maximum: 300 }
   # validates :start_date, presence: true
   # validates :end_date, presence: true
-  has_many :appointments, :as => :appointable
+  has_many :appointments, :as => :appointable, dependent: :destroy
   acts_as_taggable
 
 end

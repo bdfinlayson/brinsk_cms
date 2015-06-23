@@ -67,7 +67,6 @@ class TasksController < ApplicationController
       redirect_to project_path(@stage.project_id), notice: 'Task deleted!'
     else
       redirect_to root_path
-      # redirect_to @object, notice: 'Unable to create task!'
     end
   end
 

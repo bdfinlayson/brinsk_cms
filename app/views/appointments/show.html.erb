@@ -1,0 +1,14 @@
+<h1>
+  <%= link_to "#{@contact.first_name if @appointment.appointable_type == 'Contact'}
+    #{@contact.last_name if @appointment.appointable_type == 'Contact'}", contact_path(@contact) if @appointment.appointable_type == 'Contact' %>
+  <%= link_to "#{@project.name if @appointment.appointable_type == 'Project'}", project_path(@project) if @appointment.appointable_type == 'Project' %>
+  <%= " | #{@appointment.name.capitalize}" %>
+</h1>
+<p><%= @appointment.starts_at %></p>
+<p><%= @appointment.description %></p>
+<p><%= @appointment.full_address unless @appointment.street1.nil? || @appointment.city.nil? || @appointment.state.nil? %></p>
+<p><%= @appointment.city if @appointment.street1.nil? %> <%= ", #{@appointment.state}" unless @appointment.state.nil? %> <%= @appointment.zipcode unless @appointment.zipcode.nil? %></p>
+
+<%= link_to 'Back', :back %>
+<%= link_to 'Edit', edit_appointment_path(@appointment) %>
+<%= link_to 'Delete', appointment_path(@appointment), method: :delete, data: { confirm: 'Are you sure?' } %>

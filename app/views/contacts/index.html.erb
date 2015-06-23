@@ -2,15 +2,9 @@
 <% provide(:title, 'Contacts') %>
 <h1>Contacts</h1>
 
-<%= month_calendar events: @appointments do |date, meetings| %>
-  <%= date %>
 
-  <% meetings.each do |meeting| %>
-    <div>
-      <%= meeting.name %>
-    </div>
-  <% end %>
-<% end %>
+<%= render 'shared/calendars' %>
+
 
 
 <p>The number of contacts is: <%= @contacts.count %></p>

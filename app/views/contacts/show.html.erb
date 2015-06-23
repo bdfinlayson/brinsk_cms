@@ -6,15 +6,7 @@
 <%= @contact.alt_email %>
 <%= @contact.phone %>
 
-<%= month_calendar events: @appointments do |date, meetings| %>
-  <%= date %>
-
-  <% meetings.each do |meeting| %>
-    <div>
-      <%= meeting.name %>
-    </div>
-  <% end %>
-<% end %>
+<%= render 'shared/calendars' %>
 
 <% @notes.each do |note| %>
   <h3><%= note.subject %></h3>
@@ -42,7 +34,7 @@
 <% end %>
 
 <% @appointments.each do |appointment| %>
-  <p><%= appointment.name %> <%= link_to "Calendar", contact_appointments_path(@contact) %></p>
+  <p><%= appointment.name %> <%= link_to "Delete", appointment_path(appointment.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 <% end %>
 
 <%= render 'shared/note_form' %>

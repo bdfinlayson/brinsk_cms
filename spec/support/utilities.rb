@@ -103,3 +103,16 @@ require 'pry'
       end
     end
   end
+
+  def create_appointment(appointment)
+    within("form#new_appointment") do
+      fill_in 'Name', with: appointment.name
+      click_button 'Create Appointment'
+    end
+  end
+
+
+  def edit_appointment(appointment)
+    fill_in 'Name', with: appointment.name
+    click_button 'Update Appointment'
+  end

@@ -3,6 +3,11 @@ class Appointment < ActiveRecord::Base
     has_calendar
   belongs_to :appointable, polymorphic: true
   belongs_to :user
+  belongs_to :project
+  belongs_to :contact
+  validates :name, presence: true
+  validates_uniqueness_of :name, scope: :user_id
+  validates_uniqueness_of :starts_at, scope: :user_id
   validates :starts_at, presence: true
   validate :date_cannot_be_in_the_past
   validates :user_id, presence: true

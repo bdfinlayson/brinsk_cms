@@ -1,0 +1,7 @@
+<%= simple_form_for(@appointment) do |f| %>
+  <%= f.input :name, placeholder: "Appointment Name" %>
+  <%= f.datetime_select :starts_at, placeholder: "Starts At" %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to 'Cancel', :back %>

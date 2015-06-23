@@ -69,7 +69,9 @@ Rails.application.routes.draw do
 #   end
 
   resources :appointments
-  resources :projects
+  resources :projects do
+    resources :appointments
+  end
   resources :stages, except: [:show]
   resources :notes, except: [:show]
   resources :tasks, except: [:show]

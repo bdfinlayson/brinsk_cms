@@ -2,6 +2,15 @@
 <p><%= @project.description %></p>
 <%= link_to 'Edit project', edit_project_path(@project) %>
 
+
+<%= render 'shared/calendars' %>
+
+<%= simple_form_for([@project, @project.appointments.build]) do |f| %>
+  <%= f.input :name, placeholder: "Appointment Name" %>
+  <%= f.input :starts_at, placeholder: "Starts At" %>
+  <%= f.submit %>
+<% end %>
+
 <%= render 'shared/stage_form' %>
 
 <%= simple_form_for ([@contact, @project, @note]) do |f| %>
