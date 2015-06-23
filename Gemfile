@@ -16,6 +16,13 @@ gem 'acts-as-taggable-on'
 gem 'simple_form'
 gem "simple_calendar"
 
+gem 'sass'
+
+gem 'bourbon'
+gem 'bitters'
+gem 'neat'
+gem 'refills'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
