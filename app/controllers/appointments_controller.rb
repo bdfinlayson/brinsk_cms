@@ -1,5 +1,3 @@
-require 'pry'
-
 class AppointmentsController < ApplicationController
 
   def create
@@ -7,11 +5,8 @@ class AppointmentsController < ApplicationController
     @object = Project.find(params[:project_id]) if params[:project_id]
     params[:appointment][:user_id] = current_user.id
     params[:appointment][:contact_id] = params[:contact_id] unless params[:contact_id].nil?
-    binding.pry
     params[:appointment][:contact_id] = @object.contact_id if @object.respond_to?(:contact_id)
-    binding.pry
     @appointment = @object.appointments.create(appointment_params)
-    binding.pry
     if @appointment.save
       redirect_to @object, notice: 'Appointment created!' if params[:project_id].nil?
       redirect_to @object, notice: 'Appointment created!' if params[:project_id]
