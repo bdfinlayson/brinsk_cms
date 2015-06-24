@@ -7,12 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'refills/navigation' %>
+  <%= render 'refills/navigation' if user_signed_in? %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
-   <p class="notice"><%= notice %></p>
-   <p class="alert"><%= alert %></p>
+    <%= yield %>
 
-<%= yield %>
-
+  <%= render 'refills/footer' if user_signed_in? %>
 </body>
 </html>

@@ -1,0 +1,44 @@
+
+//
+// Authentication pages
+//
+
+#logo_header {
+  text-align:center;
+  font-size:3em;
+}
+
+.outer-container {
+  @include outer-container;
+  #sign_in_header {
+    @include shift(3);
+    font-size:1.5em;
+  }
+  #new_user { @include span-columns(6);
+    @include shift(3);
+  }
+}
+
+//
+// Index page
+//
+//
+
+#index_wrapper {
+  @include outer-container;
+
+  .calendar_wrapper {
+    @include span-columns(3);
+  }
+
+  #content_wrapper {
+    @include span-columns(9);
+    #main_content {
+      @include span-columns(7 of 9);
+    }
+    #secondary_content {
+      @include span-columns(2 of 9);
+    }
+  }
+}
+

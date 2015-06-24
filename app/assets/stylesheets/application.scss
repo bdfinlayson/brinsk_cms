@@ -1,5 +1,12 @@
+@import "normalize";
 @import "bourbon/bourbon";
 @import "base/grid-settings";
 @import "base/base";
 @import "neat/neat";
-@import "refills/*";
+
+@import "refills/navigation";
+@import 'refills/footer';
+@import 'refills/flashes';
+
+@import 'partials/responsive';
+@import 'partials/layout';

@@ -1,17 +1,21 @@
 
 <% provide(:title, 'Contacts') %>
-<h1>Contacts</h1>
 
+<div id="index_wrapper">
+  <h1 id="title_header">Contacts</h1>
 
-<%= render 'shared/calendars' %>
+  <%= render 'shared/calendars' %>
 
-
-
-<p>The number of contacts is: <%= @contacts.count %></p>
-<p>The user id is: <%=  @user.id %></p>
-<% @contacts.each do |contact| %>
-  <p><%= contact.first_name %> <%= contact.last_name %><%= link_to 'Edit', edit_contact_path(contact) %><%= link_to 'Show', contact_path(contact) %></p>
-<% end %>
-
-
-<%= link_to 'New Contact', new_contact_path  %>
+  <div id="content_wrapper">
+    <div id="main_content">
+      <% @contacts.each do |contact| %>
+        <p><%= contact.first_name %> <%= contact.last_name %><%= link_to 'Edit', edit_contact_path(contact) %><%= link_to 'Show', contact_path(contact) %></p>
+      <% end %>
+    </div>
+    <div id="secondary_content">
+      <p>The number of contacts is: <%= @contacts.count %></p>
+      <p>The user id is: <%=  @user.id %></p>
+      <%= link_to 'New Contact', new_contact_path  %>
+    </div>
+  </div>
+</div>

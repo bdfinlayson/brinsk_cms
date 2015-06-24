@@ -1,37 +1,28 @@
 <% $LOAD_PATH << "controllers" %>
 
-<%= calendar number_of_days:3, events: @appointments do |date, appointments| %>
-  <%= date %>
 
-  <% appointments.each do |appointment| %>
-    <div>
-      <%= link_to "#{appointment.name}", appointment_path(appointment) %>
-    </div>
+<div class='calendar_wrapper'>
+  <%= week_calendar number_of_weeks:1, events: @appointments do |date, appointments| %>
+    <%= date.day %>
+
+    <% appointments.each do |appointment| %>
+      <div>
+        <%= link_to "#{appointment.name}", appointment_path(appointment) %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
 
 
-<%= week_calendar number_of_weeks:1, events: @appointments do |date, appointments| %>
-  <%= date %>
+  <%= month_calendar events: @appointments do |date, appointments| %>
+    <%= date.day %>
 
-  <% appointments.each do |appointment| %>
-    <div>
-      <%= link_to "#{appointment.name}", appointment_path(appointment) %>
-    </div>
+    <% appointments.each do |appointment| %>
+      <div>
+        <%= link_to "#{appointment.name}", appointment_path(appointment) %>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
 
-
-
-<%= month_calendar events: @appointments do |date, appointments| %>
-  <%= date %>
-
-  <% appointments.each do |appointment| %>
-    <div>
-      <%= link_to "#{appointment.name}", appointment_path(appointment) %>
-    </div>
-  <% end %>
-<% end %>
-
+</div>
 
