@@ -8,11 +8,18 @@
 </head>
 <body>
   <%= render 'refills/navigation' if user_signed_in? %>
+  <div class='content-wrapper'>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
     <%= yield %>
 
-  <%= render 'refills/footer' if user_signed_in? %>
+  </div>
+
+    <div class='main-footer'>
+      <div class='footer-wrapper'>
+        <%= render 'refills/footer' if user_signed_in? %>
+      </div>
+    </div>
 </body>
 </html>

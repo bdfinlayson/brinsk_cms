@@ -1,67 +1,171 @@
-<h1><%= @project.name %></h1>
-<p><%= @project.description %></p>
-<%= link_to 'Edit project', edit_project_path(@project) %>
+<div class='project-wrapper'>
+
+  <div class='project-left-column'>
+
+    <h1 id='title_header'><%= link_to "#{@contact.first_name} #{@contact.last_name}", contact_path(@contact) %> / <%= @project.name %>  / <%= link_to 'Edit project', edit_project_path(@project) %></h1>
+    <h3><%= @project.description %></h3>
 
 
-<%= render 'shared/calendars' %>
+    <ul class="accordion-tabs">
+      <li class="tab-header-and-content">
+        <a href="javascript:void(0)" class="tab-link">Add a Note</a>
+        <div class="tab-content">
 
-<%= simple_form_for([@project, @project.appointments.build]) do |f| %>
-  <%= f.input :name, placeholder: "Appointment Name" %>
-  <%= f.input :starts_at, placeholder: "Starts At" %>
-  <%= f.submit %>
-<% end %>
+          <%= simple_form_for ([@contact, @project, @note]) do |f| %>
+            <%# <%= render 'shared/error_messages', object: f.object %1> %>
+            <%= f.input :subject, placeholder: "Subject" %>
+            <%= f.label :content %>
+            <%= f.text_area :content, placeholder: "Note content..." %>
+            <%= f.button :submit %>
+          <% end %>
 
-<%= render 'email/email_project_contact' %>
-
-<%= render 'shared/stage_form' %>
-
-<%= simple_form_for ([@contact, @project, @note]) do |f| %>
-  <%# <%= render 'shared/error_messages', object: f.object %1> %>
-  <%= f.input :subject, placeholder: "Subject" %>
-  <%= f.label :content %>
-  <%= f.text_area :content, placeholder: "Note content..." %>
-  <%= f.button :submit %>
-<% end %>
-
-<% @notes.each do |note| %>
-  <h3><%= note.subject %></h3>
-  <p><%= note.content %></p>
-  <%= link_to 'Edit', edit_note_path(note) %>
-  <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
-
-<% @stages.each_with_index do |stage, index| %>
-  <div id="<%=stage.name%>">
-    <h3><%= stage.name %></h3>
-    <%= link_to 'Edit stage', edit_stage_path(stage) %>
-    <%= link_to 'Delete stage', stage_path(stage), method: :delete, data: { confirm: 'Are you sure?' } %>
-    <h1><%= index%></h1>
-
-    <% stage.tasks.each do |task| %>
-      <% if task.completed_at %>
-        <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-      <% else %>
-        <p><%= task.name %> <%= task.id %><%= task.description %>
-      <%= link_to 'Back', contact_project_stage_task_path(@contact.id,@project.id,@stages[index-1].id,task), method: :patch, data: {params: {task: {new_stage: @stages[index-1].id }}.to_param, confirm: 'Move task to next stage?' }  unless index == 0 %>
-          <%= link_to 'Next', contact_project_stage_task_path(@contact.id,@project.id,@stages[index+1].id,task), method: :patch, data: {params: { task: {new_stage: @stages[index+1].id} }.to_param, confirm: 'Move task to next stage?' } unless @stages[index+1].nil? %>
-          <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %>
-          <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-      <% end %>
-    <% end %>
-
-    <% @task = Stage.find(stage.id).tasks.build %>
-    <% @stage = Stage.find(stage.id) %>
-    <%= simple_form_for ([@contact, @project, stage, @task]) do |f| %>
-      <%# <%= render 'shared/error_messages', object: f.object %1> %>
-      <%= f.input :name, placeholder: "Name" %>
-      <%= f.label :description %>
-      <%= f.text_area :description, placeholder: "Describe your task..." %>
-      <%= f.button :submit %>
-    <% end %>
-    <%# <%= render 'shared/stage_task_form' %1> %>
+          <br />
+          <% @notes.each do |note| %>
+            <div class='note_container'>
+              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
+                <br/>
+                <%= link_to 'Edit', edit_note_path(note) %>
+                <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </span>
+              <p class='note_content'><%= note.content %></p>
+            </div>
+          <% end %>
+        </div>
+      </li>
+      <li class="tab-header-and-content">
+        <a href="javascript:void(0)" class="tab-link">Send An Email</a>
+        <div class="tab-content">
+          <br>
+          <p><strong>To: </strong><%= @contact.email %></p>
+          <%= render 'email/email_project_contact' %>
+        </div>
+      </li>
+    </ul>
   </div>
-<% end %>
 
-<br/>
+
+
+
+
+  <div class='project-right-column'>
+
+    <%= render 'shared/calendars' %>
+
+        <div class='secondary-content'>
+          <div class="modal">
+            <label for="modal-1">
+              <div class="modal-trigger">Add Meeting</div>
+            </label>
+            <input class="modal-state" id="modal-1" type="checkbox" />
+            <div class="modal-window">
+              <div class="modal-inner">
+                <label class="modal-close" for="modal-1"></label>
+                    <%= simple_form_for([@project, @project.appointments.build]) do |f| %>
+                      <%= f.input :name, placeholder: "Appointment Name" %>
+                      <%= f.input :starts_at, placeholder: "Starts At" %>
+                      <%= f.submit %>
+                    <% end %>
+              </div>
+            </div>
+          </div></span>
+        </div>
+
+        <div class='secondary-content'>
+          <div class="modal">
+            <label for="modal-2">
+              <div class="modal-trigger">Add Stage</div>
+            </label>
+            <input class="modal-state" id="modal-2" type="checkbox" />
+            <div class="modal-window">
+              <div class="modal-inner">
+                <label class="modal-close" for="modal-2"></label>
+                  <%= render 'shared/stage_form' %>
+              </div>
+            </div>
+          </div></span>
+        </div>
+
+
+
+
+  </div>
+</div>
+
+
+
+<div class='project-stage-tab-wrapper'>
+
+<ul class="accordion-tabs-minimal">
+<% @stages.each_with_index do |stage, index| %>
+  <li class="tab-header-and-content">
+    <% if @stages.count == 1 %>
+      <a href="#" class="tab-link is-active"><br>
+        <%= stage.name %><br>
+        <%= stage.tasks.count %><br>
+        </a>
+    <% else %>
+      <a href="#" class="tab-link"><br>
+        <%= stage.name %><br>
+        <% num_of_tasks = pluralize(stage.tasks.count, 'task') %>
+        <%= num_of_tasks %>
+        </a>
+    <% end %>
+    <div class="tab-content stage-wrapper">
+
+      <div class='stage-table-wrapper'>
+
+        <div class='stage-left-column'>
+            <div id="<%=stage.name%>">
+              <h1 class='stage-index'><%= index + 1%></h1>
+              <h3><%= stage.name %></h3>
+              <%= link_to 'Edit stage', edit_stage_path(stage) %>
+              <%= link_to 'Delete stage', stage_path(stage), method: :delete, data: { confirm: 'Are you sure?' } %>
+            </div>
+
+                <div class="modal">
+                  <label for="modal-3">
+                    <div class="modal-trigger">Add Task</div>
+                  </label>
+                  <input class="modal-state" id="modal-3" type="checkbox" />
+                  <div class="modal-window">
+                    <div class="modal-inner">
+                      <label class="modal-close" for="modal-3"></label>
+                      <% @task = Stage.find(stage.id).tasks.build %>
+                      <% @stage = Stage.find(stage.id) %>
+                      <%= simple_form_for ([@contact, @project, stage, @task]) do |f| %>
+                        <%# <%= render 'shared/error_messages', object: f.object %1> %>
+                        <%= f.input :name, placeholder: "Name" %>
+                        <%= f.label :description %>
+                        <%= f.text_area :description, placeholder: "Describe your task..." %>
+                        <%= f.button :submit %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div></span>
+        </div>
+
+        <div class='stage-right-column'>
+          <% stage.tasks.each do |task| %>
+            <% if task.completed_at %>
+              <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <% else %>
+              <p><%= task.name %> <%= task.id %><%= task.description %>
+            <%= link_to 'Back', contact_project_stage_task_path(@contact.id,@project.id,@stages[index-1].id,task), method: :patch, data: {params: {task: {new_stage: @stages[index-1].id }}.to_param, confirm: 'Move task to next stage?' }  unless index == 0 %>
+            <%= link_to 'Next', contact_project_stage_task_path(@contact.id,@project.id,@stages[index+1].id,task), method: :patch, data: {params: { task: {new_stage: @stages[index+1].id} }.to_param, confirm: 'Move task to next stage?' } unless @stages[index+1].nil? %>
+            <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</ul>
+</div>
+
+
+
+
+
 
 <%= link_to 'Back', contact_path(@project.contact_id) %>

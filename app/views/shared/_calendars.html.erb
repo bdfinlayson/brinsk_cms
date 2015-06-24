@@ -8,7 +8,21 @@
 
     <% appointments.each do |appointment| %>
       <div>
-        <%= link_to "#{appointment.name}", appointment_path(appointment) %>
+        <div class="modal">
+          <label for="modal-<%=appointment.name%>">
+            <div class="modal-trigger"><%= appointment.name %></div>
+          </label>
+          <input class="modal-state" id="modal-<%=appointment.name%>" type="checkbox" />
+          <div class="modal-window">
+            <div class="modal-inner">
+              <label class="modal-close" for="modal-<%=appointment.name%>"></label>
+              <h1><%= appointment.name %></h1>
+              <p class="modal-intro"><%= appointment.description %></p>
+              <p class="modal-content"><%= link_to "#{appointment.name}", appointment_path(appointment) %></p>
+            </div>
+          </div>
+        </div>
+        <%# <%= link_to "#{appointment.name}", appointment_path(appointment) %1> %>
       </div>
     <% end %>
   <% end %>

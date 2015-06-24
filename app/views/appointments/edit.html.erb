@@ -1,7 +1,11 @@
-<%= simple_form_for(@appointment) do |f| %>
-  <%= f.input :name, placeholder: "Appointment Name" %>
-  <%= f.datetime_select :starts_at, placeholder: "Starts At" %>
-  <%= f.submit %>
-<% end %>
-
-<%= link_to 'Cancel', :back %>
+<div class='outer-container'>
+  <%= simple_form_for(@appointment) do |f| %>
+    <p id='form_header'>Edit Appointment</p>
+    <%= f.input :name, placeholder: "Appointment Name" %>
+    <%= f.datetime_select :starts_at, placeholder: "Starts At" %>
+    <%= f.submit %>
+  <div class='task_buttons'>
+    <%= link_to 'Cancel', :back %>
+  </div>
+  <% end %>
+</div>
