@@ -1,0 +1,21 @@
+
+
+<table class="table-minimal">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+ <% @contacts.each do |contact| %>
+    <tr>
+      <td><%= contact.first_name %></td>
+      <td><%= contact.last_name %></td>
+      <td><%= link_to 'Edit', edit_contact_path(contact) %> | <%= link_to 'Show', contact_path(contact) %> | <%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: "Are you sure?" } %></td>
+    </tr>
+    <tr>
+  <% end %>
+  </tbody>
+</table>

@@ -11,6 +11,10 @@ class ProjectsController < ApplicationController
     redirect_to @contact, :notice => 'Successfully sent a message!'
   end
 
+  def index
+    @projects = Project.find(current_user)
+  end
+
   def show
     @project = Project.find(params[:id])
     @contact = Contact.find(@project.contact_id)

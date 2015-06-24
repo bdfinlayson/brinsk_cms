@@ -1,21 +1,34 @@
 
 <% provide(:title, 'Contacts') %>
 
-<div id="index_wrapper">
-  <h1 id="title_header">Contacts</h1>
-
-  <%= render 'shared/calendars' %>
-
-  <div id="content_wrapper">
-    <div id="main_content">
-      <% @contacts.each do |contact| %>
-        <p><%= contact.first_name %> <%= contact.last_name %><%= link_to 'Edit', edit_contact_path(contact) %><%= link_to 'Show', contact_path(contact) %></p>
-      <% end %>
-    </div>
-    <div id="secondary_content">
-      <p>The number of contacts is: <%= @contacts.count %></p>
-      <p>The user id is: <%=  @user.id %></p>
-      <%= link_to 'New Contact', new_contact_path  %>
-    </div>
+<div class="main-wrapper">
+  <div class="main-content">
+    <h1 id="title_header">Contacts <%= link_to 'New Contact', new_contact_path  %></h1>
+    <% if @contacts.empty? %>
+      <p> You have no contacts yet. </p>
+    <% else %>
+      <table class="table-minimal">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+       <% @contacts.each do |contact| %>
+          <tr>
+            <td><%= contact.first_name %></td>
+            <td><%= contact.last_name %></td>
+            <td><%= link_to 'Edit', edit_contact_path(contact) %> | <%= link_to 'Show', contact_path(contact) %> | <%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: "Are you sure?" } %></td>
+          </tr>
+          <tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+  <div class='secondary-content'>
+    <%= render 'shared/calendars' %>
   </div>
 </div>

@@ -24,21 +24,82 @@
 //
 //
 
-#index_wrapper {
-  @include outer-container;
-
-  .calendar_wrapper {
-    @include span-columns(3);
+.main-wrapper {
+  #title_header {
+    font-size:1.5em;
   }
-
-  #content_wrapper {
-    @include span-columns(9);
-    #main_content {
-      @include span-columns(7 of 9);
+  @include outer-container;
+  $mobile: new-breakpoint(max-width 500px 4);
+  .secondary-content {
+    @include span-columns(5);
+    @include media($mobile) {
+      @include span-columns(5);
     }
-    #secondary_content {
-      @include span-columns(2 of 9);
+  }
+  .main-content {
+    @include span-columns(6);
+    @include shift(1);
+
+    @include media($mobile) {
+      @include span-columns(3);
     }
   }
 }
+
+//
+// Contacts pages
+//
+
+.outer-container {
+  @include outer-container;
+  #form_header {
+    @include shift(1);
+    font-size:1.5em;
+  }
+  #new_contact { @include span-columns(6);
+    @include shift(3);
+  }
+}
+
+.outer-container {
+  @include outer-container;
+  #form_header {
+    @include shift(1);
+    font-size:1.5em;
+  }
+  .edit_contact { @include span-columns(6);
+    @include shift(3);
+  }
+}
+
+//
+// Contact show page
+//
+
+.note_container {
+  @include outer-container;
+  .note_subject {
+    @include span-columns(6);
+  }
+  .note_content {
+    @include span-columns(6);
+  }
+}
+
+.task_list_wrapper {
+  @include outer-container;
+  .task_list_header {
+    font-size:1.5em;
+  }
+  .task_name {
+    @include span-columns(12);
+  }
+  .task_buttons {
+    @include span-columns(12);
+  }
+}
+
+
+
+
 

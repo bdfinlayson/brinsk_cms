@@ -1,13 +1,28 @@
-<%= simple_form_for(@contact) do |f| %>
-  <%# <%= render 'shared/error_messages', object: f.object %1> %>
-  <%= f.input :first_name, placeholder: "First Name" %>
-  <%= f.input :last_name, placeholder: "Last Name" %>
-  <%= f.input :title, placeholder: "Title" %>
-  <%= f.input :company_name, placeholder: "Company" %>
-  <%= f.input :email, placeholder: "Email" %>
-  <%= f.input :alt_email, placeholder: "Alternate email" %>
-  <%= f.input :phone, placeholder: "Phone" %>
-  <%= f.text_area :background, placeholder: "Background" %>
-  <%= f.input :first_met, placeholder: "Date first met" %>
-  <%= f.button :submit %>
-<% end %>
+
+<div class='outer-container'>
+  <%= simple_form_for(@contact) do |f| %>
+    <% if @contact.id == nil %>
+      <p id='form_header'>Add New Contact</p>
+    <% else %>
+      <p id='form_header'>Edit Contact</p>
+    <% end %>
+    <%# <%= render 'shared/error_messages', object: f.object %1> %>
+    <%= f.input :first_name, placeholder: "First Name" %>
+    <%= f.input :last_name, placeholder: "Last Name" %>
+    <%= f.input :title, placeholder: "Title" %>
+    <%= f.input :company_name, placeholder: "Company" %>
+    <%= f.input :email, placeholder: "Email" %>
+    <%= f.input :alt_email, placeholder: "Alternate email" %>
+    <%= f.input :phone, placeholder: "Phone" %>
+    <%= f.text_area :background, placeholder: "Background" %>
+    <%= f.input :first_met, placeholder: "Date first met" %>
+    <%= f.button :submit %>
+    <%# <%= link_to 'Cancel', root_path %1> %>
+    <% if @contact.id == nil %>
+      <%= link_to 'Cancel', root_path %>
+    <% else %>
+      <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
+      <%= link_to 'Cancel', contact_path(@contact) %>
+    <% end %>
+  <% end %>
+</div>

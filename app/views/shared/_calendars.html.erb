@@ -2,17 +2,6 @@
 
 
 <div class='calendar_wrapper'>
-  <%= week_calendar number_of_weeks:1, events: @appointments do |date, appointments| %>
-    <%= date.day %>
-
-    <% appointments.each do |appointment| %>
-      <div>
-        <%= link_to "#{appointment.name}", appointment_path(appointment) %>
-      </div>
-    <% end %>
-  <% end %>
-
-
 
   <%= month_calendar events: @appointments do |date, appointments| %>
     <%= date.day %>

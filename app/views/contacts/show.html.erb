@@ -1,51 +1,130 @@
-<h2><%= "#{@contact.first_name} #{@contact.last_name}" %></h2>
-<p>Contact ID: <%= @contact.id %></p>
-<%= @contact.email %>
-<%= @contact.title %>
-<%= @contact.company_name %>
-<%= @contact.alt_email %>
-<%= @contact.phone %>
 
-<%= render 'shared/calendars' %>
+<div class="main-wrapper">
+  <div class="main-content">
+    <h1 id="title_header"> <%= "#{@contact.title} #{@contact.first_name} #{@contact.last_name}" %> <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %></h1>
+    <ul class="accordion-tabs">
+      <li class="tab-header-and-content">
+        <a href="javascript:void(0)" class="tab-link">Add a Note</a>
+        <div class="tab-content">
+          <%= render 'shared/note_form' %>
+          <br />
+          <% @notes.each do |note| %>
+            <div class='note_container'>
+              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
+                <br/>
+              <%= link_to 'Edit', edit_note_path(note) %>
+              <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </span>
+              <p class='note_content'><%= note.content %></p>
+            </div>
+          <% end %>
+        </div>
+      </li>
+      <li class="tab-header-and-content">
+        <a href="javascript:void(0)" class="tab-link">Send An Email</a>
+        <div class="tab-content">
+          <%= render 'email/email_contact' %>
+        </div>
+      </li>
+      <li class="tab-header-and-content">
+        <a href="javascript:void(0)" class="tab-link">Start A Project</a>
+        <div class="tab-content">
+          <%= render 'shared/project_form' %>
 
-<%= render 'email/email_contact' %>
+          <% @projects.each do |project| %>
+            <div class="project_wrapper">
+              <div class="project_name">
+                <% if project.completed_at %>
+                  <strike style='opacity: 0.4;'><p> <%= project.name %></strike> <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <% else %>
+                  <p><%= project.name %> <%= link_to 'Mark as Complete', complete_contact_project_path(@contact, project), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Manage Project', project_path(project) %> <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <% end %>
+              </div>
+              <div class="project_description">
+                <% if project.description.empty? %>
+                  <p>Please add a description for this projet.</p>
+                <% else %>
+                <%= project.description %>
+              <% end %>
+              </div>
+            </div>
+            <% end %>
+      </li>
+    </ul>
+</div>
 
-<% @notes.each do |note| %>
-  <h3><%= note.subject %></h3>
-  <p><%= note.content %></p>
-  <%= link_to 'Edit', edit_note_path(note) %>
-  <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
 
-<% @tasks.each do |task| %>
-  <%# <%= render 'shared/task_item' %1> %>
-  <% if task.completed_at %>
-    <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-  <% else %>
-    <p><%= task.name %><%= task.description %> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-  <% end %>
-<% end %>
 
-<% @projects.each do |project| %>
-  <%# <%= render 'shared/task_item' %1> %>
-  <% if project.completed_at %>
-    <strike style='opacity: 0.4;'><p> <%= project.name %></strike> <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-  <% else %>
-    <p><%= project.name %><%= project.description %> <%= link_to 'Mark as Complete', complete_contact_project_path(@contact, project), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Manage Project', project_path(project) %> <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-  <% end %>
-<% end %>
 
-<% @appointments.each do |appointment| %>
-  <p><%= appointment.name %> <%= link_to "Delete", appointment_path(appointment.id), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-<% end %>
 
-<%= render 'shared/note_form' %>
+    <%= link_to 'Home', root_path %>
 
-<%= render 'shared/task_form' %>
+  <div class='secondary-content'>
+    <%= render 'shared/calendars' %>
+    <div class="modal">
+      <label for="modal-1">
+        <div class="modal-trigger">Add Meeting</div>
+      </label>
+      <input class="modal-state" id="modal-1" type="checkbox" />
+      <div class="modal-window">
+        <div class="modal-inner">
+          <label class="modal-close" for="modal-1"></label>
+          <h1>Add New Appointment</h1>
+          <%= render 'shared/appointment_form' %>
+        </div>
+      </div>
+    </div></span>
 
-<%= render 'shared/project_form' %>
+    <div class="contact_info_container">
+      <table class="table-minimal">
+        <thead>
+          <tr>
+            <th class='contact_into_header'>Contact Info</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><h3>Email: <%= @contact.email %></h3><br>
+              <h3>Company: <%= @contact.company_name %></h3><br>
+              <h3>Phone: <%= @contact.phone %></h3><br>
+              <h3>Background:</h3> <p><%= @contact.background %></p><br></td>
+            <tr>
+        </tbody>
+      </table>
+    </div>
 
-<%= render 'shared/appointment_form' %>
-
-<%= link_to 'Home', root_path %>
-
+    <div class='task_list_wrapper'>
+      <span><h2 class='task_list_header'>Task List</h2>
+        <div class="modal">
+          <label for="modal-1">
+            <div class="modal-trigger">Add Task</div>
+          </label>
+          <input class="modal-state" id="modal-1" type="checkbox" />
+          <div class="modal-window">
+            <div class="modal-inner">
+              <label class="modal-close" for="modal-1"></label>
+              <h1>Add New Task</h1>
+              <%= render 'shared/task_form' %>
+            </div>
+          </div>
+        </div></span>
+        <% @tasks.each do |task| %>
+          <% if task.completed_at %>
+            <div class='task_name'>
+              <strike style='opacity: 0.4;'><p> <%= task.name %></strike></p> 
+              <div class='task_buttons'>
+                <p> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              </div>
+            </div>
+          <% else %>
+            <div class='task_name'>
+              <p><%= task.name %><%= task.description %> </p>
+              <div class='task_buttons'>
+                <p> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              <% end %>
+            <% end %>
+              </div>
+            </div>
+    </div>
+  </div>
+</div>
