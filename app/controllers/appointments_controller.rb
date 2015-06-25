@@ -1,5 +1,11 @@
 class AppointmentsController < ApplicationController
 
+  def index
+    @appointments = Appointment.where('user_id = ?', current_user)
+    @contacts = Contact.where('user_id = ?', current_user)
+    @projects = Project.where('user_id = ?', current_user)
+  end
+
   def create
     @object = Contact.find(params[:contact_id]) if params[:contact_id]
     @object = Project.find(params[:project_id]) if params[:project_id]

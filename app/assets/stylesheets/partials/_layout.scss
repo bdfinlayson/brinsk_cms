@@ -243,9 +243,18 @@
 // Calendar styling
 //
 
-.calendar-header {
-  font-size:1.5em;
-  text-align:center;
+.calendar_wrapper {
+  .calendar-header {
+    font-size:1.5em;
+    text-align:center;
+  }
+  td {
+    vertical-align: top;
+    padding-bottom: 35px;
+  }
+  label {
+    text-align: center;
+  }
 }
 
 .page-header {
