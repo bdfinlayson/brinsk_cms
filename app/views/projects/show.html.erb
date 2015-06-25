@@ -67,6 +67,7 @@
                       <h1 class='modal-intro'>Add Meeting</h1>
                     <%= simple_form_for([@project, @project.appointments.build]) do |f| %>
                       <%= f.input :name, placeholder: "Appointment Name" %>
+                      <%= f.input :street1, placeholder: "Address" %>
                       <%= f.input :starts_at, placeholder: "Starts At" %>
                       <%= f.submit %>
                     <% end %>
