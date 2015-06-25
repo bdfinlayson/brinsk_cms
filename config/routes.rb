@@ -74,6 +74,7 @@ Rails.application.routes.draw do
   resources :appointments
   resources :projects do
     member do
+      patch :complete
       post :email_contact
     end
     resources :appointments

@@ -8,7 +8,9 @@ class StagesController < ApplicationController
   end
 
   def create
+    params[:stage][:user_id] = current_user.id
     @project = Project.find(params[:project_id])
+    params[:stage][:project_id] = @project.id
     @stage = @project.stages.create(stage_params)
     if @stage.save
       redirect_to @project, notice: 'Stage created!'
@@ -39,7 +41,7 @@ class StagesController < ApplicationController
   private
 
   def stage_params
-    params.require(:stage).permit(:name)
+    params.require(:stage).permit(:name, :user_id, :project_id)
   end
 
 end

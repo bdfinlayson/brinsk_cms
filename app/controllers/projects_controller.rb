@@ -12,7 +12,10 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.find(current_user)
+    @projects = Project.where('user_id = ?', current_user)
+    @stages = Stage.where('user_id = ?', current_user)
+    @tasks = Task.where('user_id = ?', current_user)
+    @appointments = Appointment.where('user_id = ?', current_user)
   end
 
   def show
@@ -25,6 +28,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
+    params[:project][:user_id] = current_user.id
     @contact = Contact.find(params[:contact_id])
     @project = @contact.projects.create(project_params)
     if @project.save
@@ -62,7 +66,7 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :description, :completed_at)
+    params.require(:project).permit(:name, :description, :completed_at, :user_id)
   end
 
 end

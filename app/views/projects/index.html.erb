@@ -1,0 +1,46 @@
+<table class="tables">
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Description</th>
+      <th>Stages & Tasks</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <% if project.completed_at %>
+          <td><strike style='opacity: 0.4;'><p> <%= project.name %></strike></td>
+        <% else %>
+          <td><%= link_to project.name, project_path(project) %></td>
+        <% end %>
+        <td><%= project.description %></td>
+        <td>
+          <table>
+            <thead>
+              <tr>
+                <th>Stage</th>
+                <th>Tasks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @stages.each do |stage| %>
+                <% if stage.project_id == project.id %>
+                  <tr><td><%= stage.name %>:</td><td> <%= pluralize(stage.tasks.count, 'task') %></td></tr>
+                <% end %>
+              <% end %>
+            </tbody>
+            </table>
+        </td>
+        <% if project.completed_at %>
+          <td><h3><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></h3><td>
+        <% else %>
+          <td><p><%= link_to 'Mark as Complete', complete_project_path(project), method: :patch, data: { confirm: 'Are you sure?' } %></p>
+          <p><%= link_to 'Manage Project', project_path(project) %></p>
+          <p><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p></td></tr>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

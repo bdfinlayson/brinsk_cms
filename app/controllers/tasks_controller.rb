@@ -6,9 +6,11 @@ class TasksController < ApplicationController
   end
 
   def create
+    params[:task][:user_id] = current_user.id
     @object = Contact.find(params[:contact_id]) unless params[:contact_id].nil?
     # @object = Project.find(params[:project_id]) unless params[:project_id].nil?
     @object = Stage.find(params[:stage_id]) unless params[:stage_id].nil?
+    params[:task][:project_id] = @object.project_id unless params[:stage_id].nil?
     @task = @object.tasks.create(task_params)
     if @task.save
       if params[:contact_id] && params[:stage_id].nil?
@@ -79,7 +81,7 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :completed_at, :taskable_id)
+    params.require(:task).permit(:name, :description, :project_id, :completed_at, :user_id, :taskable_id)
   end
 
 end
