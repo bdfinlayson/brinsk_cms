@@ -16,6 +16,7 @@ gem 'acts-as-taggable-on'
 gem 'simple_form'
 gem "simple_calendar"
 gem 'geocoder'
+gem 'jquery-turbolinks'
 
 gem 'sass'
 
