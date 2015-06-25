@@ -1,47 +1,86 @@
-<h1>
-  <%= link_to "#{@contact.first_name if @appointment.appointable_type == 'Contact'}
+<div class='appointment-show-wrapper'>
+  <div class='appointment-left-map'>
+    <div id="map_canvas"></div>
+
+  </div>
+  <div class='appointment-right-info'>
+    <h1 class='appointment-header'><%= link_to "#{@contact.first_name if @appointment.appointable_type == 'Contact'}
     #{@contact.last_name if @appointment.appointable_type == 'Contact'}", contact_path(@contact) if @appointment.appointable_type == 'Contact' %>
   <%= link_to "#{@project.name if @appointment.appointable_type == 'Project'}", project_path(@project) if @appointment.appointable_type == 'Project' %>
-  <%= " | #{@appointment.name.capitalize}" %>
-</h1>
-<p><%= @appointment.starts_at %></p>
-<p><%= @appointment.description %></p>
-<p><%= @appointment.full_address unless @appointment.street1.nil? || @appointment.city.nil? || @appointment.state.nil? %></p>
-<p><%= @appointment.city if @appointment.street1.nil? %> <%= ", #{@appointment.state}" unless @appointment.state.nil? %> <%= @appointment.zipcode unless @appointment.zipcode.nil? %></p>
+  <%= " | #{@appointment.name.capitalize}" %></h1>
+  </h1>
+  <p><%= @appointment.starts_at %></p>
+  <p><%= @appointment.description %></p>
+  <p><%= @appointment.full_address unless @appointment.street1.nil? || @appointment.city.nil? || @appointment.state.nil? %></p>
+  <p><%= @appointment.city if @appointment.street1.nil? %> <%= ", #{@appointment.state}" unless @appointment.state.nil? %> <%= @appointment.zipcode unless @appointment.zipcode.nil? %></p>
 
-<div id="map_canvas"></div>
+  <%= link_to 'Back', :back %>
+  <%= link_to 'Edit', edit_appointment_path(@appointment) %>
+  <%= link_to 'Delete', appointment_path(@appointment), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><h1>Starts On:</td><td> <%= @appointment.starts_at.to_date %></td>
+                  </tr>
+                  <tr>
+                    <td><h1>Address:</td><td> <%= @appointment.street1 %></td>
+                  </tr>
+              <% if @appointment.description.nil? %>
+                <tr>
+                  <td>
+                    Description
+                  </td>
+                  <td>
+                <h1>This appointment does not have a description</h1>
+                  </td>
+                </tr>
+              <% else %>
+                <tr>
+                  <td>
+                <h1>Description: <%= @appointment.description %></p>
+                  </td>
+                </tr>
+              <% end %>
+                </tbody>
+              </table>
 
-<%= link_to 'Back', :back %>
-<%= link_to 'Edit', edit_appointment_path(@appointment) %>
-<%= link_to 'Delete', appointment_path(@appointment), method: :delete, data: { confirm: 'Are you sure?' } %>
+
+  </div>
+</div>
 
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js"></script>
-<script>
-  var bittersMap = (function () {
-    var myLatlng = new google.maps.LatLng(<%= @appointment.latitude%>, <%= @appointment.longitude %>),
-        mapCenter = new google.maps.LatLng(<%= @appointment.latitude%>, <%= @appointment.longitude %>),
-        mapCanvas = document.getElementById('map_canvas'),
-        mapOptions = {
-          center: mapCenter,
-          zoom: 10,
-          scrollwheel: true,
-          draggable: true,
-          disableDefaultUI: false,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        },
-        map = new google.maps.Map(mapCanvas, mapOptions),
-        contentString =
-          '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">thoughtbot</h1>'+
-          '<div id="bodyContent"'+
-          '<p>Sveavägen 98</p>'+
-          '</div>'+
-          '</div>',
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script>
+var bittersMap = (function () {
+  var myLatlng = new google.maps.LatLng(<%= @appointment.latitude%>, <%= @appointment.longitude %>),
+  mapCenter = new google.maps.LatLng(<%= @appointment.latitude%>, <%= @appointment.longitude %>),
+  mapCanvas = document.getElementById('map_canvas'),
+    mapOptions = {
+      center: mapCenter,
+      zoom: 10,
+      scrollwheel: true,
+      draggable: true,
+      disableDefaultUI: false,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    },
+    map = new google.maps.Map(mapCanvas, mapOptions),
+      contentString =
+        '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h1 id="firstHeading" class="firstHeading">thoughtbot</h1>'+
+        '<div id="bodyContent"'+
+        '<p>Sveavägen 98</p>'+
+        '</div>'+
+        '</div>',
         infowindow = new google.maps.InfoWindow({
           content: contentString,
           maxWidth: 300
@@ -49,28 +88,28 @@
         marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          title: 'Default Location'
+          title: "<%= @appointment.name %> | <%= @appointment.street1 %>"
         });
 
-    return {
-      init: function () {
-        map.set('styles', [{
-          featureType: 'landscape',
-          elementType: 'geometry',
-          stylers: [
-            { hue: '#ffff00' },
-            { saturation: 30 },
-            { lightness: 10}
-          ]}
-        ]);
+  return {
+    init: function () {
+      map.set('styles', [{
+        featureType: 'landscape',
+        elementType: 'geometry',
+        stylers: [
+        { hue: '#ffff00' },
+        { saturation: 30 },
+        { lightness: 10}
+        ]}
+      ]);
 
-        google.maps.event.addListener(marker, 'click', function () {
-          infowindow.open(map,marker);
-        });
-      }
-    };
-  }());
+      google.maps.event.addListener(marker, 'click', function () {
+        infowindow.open(map,marker);
+      });
+    }
+  };
+}());
 
-  bittersMap.init();
-</script>
+bittersMap.init();
+  </script>
 

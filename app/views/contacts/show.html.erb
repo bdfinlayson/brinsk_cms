@@ -192,7 +192,7 @@
         marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
-          title: 'Default Location'
+          title: "<%= @contact.first_name %> <%= @contact.last_name %> | <%= @contact.street1 %>"
         });
 
     return {

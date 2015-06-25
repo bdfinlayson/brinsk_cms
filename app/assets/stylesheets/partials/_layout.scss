@@ -217,3 +217,36 @@
   }
 }
 
+//
+// Appointment page
+//
+
+.appointment-show-wrapper {
+  @include outer-container;
+  .appointment-left-map {
+    @include span-columns(6);
+  }
+  .appointment-right-info {
+    @include span-columns(6);
+    .appointment-header {
+      font-size:1.5em;
+    }
+  }
+}
+
+.appointment-header {
+      font-size:1.5em;
+}
+
+
+//
+// Calendar styling
+//
+
+.calendar-header {
+  font-size:1.5em;
+  text-align:center;
+}
+
+
+
