@@ -39,7 +39,7 @@ class TasksController < ApplicationController
       end
       params[:task] = { taskable_id: params[:stage_id]  }
       if @task.update(task_params)
-        redirect_to project_path(params[:project_id]), notice: 'Task promoted!'
+        redirect_to project_path(params[:project_id]), notice: "Task moved to stage #{params[:stage_id]}!"
       end
     else
       if @task.update(task_params)

@@ -16,17 +16,40 @@
           <div class="modal-window">
             <div class="modal-inner">
               <label class="modal-close" for="modal-<%=appointment.name%>"></label>
-              <h1><%= link_to appointment.name, appointment_path(appointment) %></h1>
+              <h1><%= link_to appointment.name, appointment_path(appointment) %> </h1>
               <br>
-              <h1>Starts On: <%= appointment.starts_at.to_date %>
-              <br>
-              <h1>Address: <%= appointment.street1 %>
-              <br>
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><h1>Starts On:</td><td> <%= appointment.starts_at.to_date %></td>
+                  </tr>
+                  <tr>
+                    <td><h1>Address:</td><td> <%= appointment.street1 %></td>
+                  </tr>
               <% if appointment.description.nil? %>
+                <tr>
+                  <td>
+                    Description
+                  </td>
+                  <td>
                 <h1>This appointment does not have a description</h1>
+                  </td>
+                </tr>
               <% else %>
+                <tr>
+                  <td>
                 <h1>Description: <%= appointment.description %></p>
+                  </td>
+                </tr>
               <% end %>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

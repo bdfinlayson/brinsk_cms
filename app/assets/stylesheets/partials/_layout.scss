@@ -175,7 +175,6 @@
 
 .project-wrapper {
   @include outer-container;
-  padding: 35px;
   .project-left-column {
     @include span-columns(7);
   }
@@ -196,7 +195,6 @@
   }
 
 .project-stage-tab-wrapper {
-  margin: 20px 0px;
   .tab-content {
     background-color:#f7f7f7;
   }
