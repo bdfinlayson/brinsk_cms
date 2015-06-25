@@ -180,7 +180,9 @@
                 <p> </p>
             <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %>
                 <br>
-            <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+                <%= link_to 'Edit Task', edit_task_path(task) %>
+                <br>
+                <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
                 <br>
                 </td>
               </tr>
