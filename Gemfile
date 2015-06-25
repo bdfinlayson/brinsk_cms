@@ -15,6 +15,7 @@ gem 'faker'
 gem 'acts-as-taggable-on'
 gem 'simple_form'
 gem "simple_calendar"
+gem 'geocoder'
 
 gem 'sass'
 

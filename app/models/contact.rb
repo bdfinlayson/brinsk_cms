@@ -13,6 +13,9 @@ class Contact < ActiveRecord::Base
   has_many :appointments, :as => :appointable, dependent: :destroy
   acts_as_taggable
 
+  geocoded_by :street1
+  after_validation :geocode
+
 
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"

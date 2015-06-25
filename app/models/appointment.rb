@@ -19,6 +19,9 @@ class Appointment < ActiveRecord::Base
   # validates :zipcode, presence: true
   acts_as_taggable
 
+  geocoded_by :street1
+  after_validation :geocode
+
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"
   end

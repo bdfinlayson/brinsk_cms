@@ -106,6 +106,7 @@ GEM
       bundler (~> 1.2)
       gems (~> 0.8)
       git (~> 1.2)
+    geocoder (1.2.9)
     git (1.2.9.1)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
@@ -320,6 +321,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   gemsurance
+  geocoder
   guard
   guard-rspec
   jbuilder (~> 2.0)
