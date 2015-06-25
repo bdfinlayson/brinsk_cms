@@ -133,6 +133,13 @@
   }
 }
 
+.contact-info-wrapper {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  .tab-content {
+    background-color:#f7f7f7;
+  }
+}
 //
 // Calendar
 //
@@ -164,11 +171,22 @@
   }
   .project-right-column {
     @include span-columns(5);
+    .button-wrapper ul li {
+      display: inline-block;
+      padding: 10px;
+    }
   }
 }
 
+  a.tab-link.is-active {
+ background-color:#f7f7f7;
+  }
+
 .project-stage-tab-wrapper {
-  padding: 0 50px;
+  margin: 20px 0px;
+  .tab-content {
+    background-color:#f7f7f7;
+  }
 }
 
 .stage-wrapper {

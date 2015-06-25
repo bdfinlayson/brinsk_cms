@@ -20,16 +20,6 @@
           <% end %>
 
           <br />
-          <% @notes.each do |note| %>
-            <div class='note_container'>
-              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
-                <br/>
-                <%= link_to 'Edit', edit_note_path(note) %>
-                <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </span>
-              <p class='note_content'><%= note.content %></p>
-            </div>
-          <% end %>
         </div>
       </li>
       <li class="tab-header-and-content">
@@ -41,6 +31,17 @@
         </div>
       </li>
     </ul>
+          <% @notes.each do |note| %>
+            <div class='note_container'>
+              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
+                <br/>
+                <%= link_to 'Edit', edit_note_path(note) %>
+                <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </span>
+              <p class='note_content'><%= note.content %></p>
+            </div>
+            <hr>
+          <% end %>
   </div>
 
 
@@ -51,6 +52,9 @@
 
     <%= render 'shared/calendars' %>
 
+    <div class='button-wrapper'>
+      <ul>
+        <li>
         <div class='secondary-content'>
           <div class="modal">
             <label for="modal-1">
@@ -60,6 +64,7 @@
             <div class="modal-window">
               <div class="modal-inner">
                 <label class="modal-close" for="modal-1"></label>
+                      <h1 class='modal-intro'>Add Meeting</h1>
                     <%= simple_form_for([@project, @project.appointments.build]) do |f| %>
                       <%= f.input :name, placeholder: "Appointment Name" %>
                       <%= f.input :starts_at, placeholder: "Starts At" %>
@@ -69,7 +74,9 @@
             </div>
           </div></span>
         </div>
+        </li>
 
+        <li class>
         <div class='secondary-content'>
           <div class="modal">
             <label for="modal-2">
@@ -79,18 +86,15 @@
             <div class="modal-window">
               <div class="modal-inner">
                 <label class="modal-close" for="modal-2"></label>
+                  <h1 class='modal-intro'>Add Stage</h1>
                   <%= render 'shared/stage_form' %>
               </div>
             </div>
           </div></span>
         </div>
-
-
-
-
-  </div>
-</div>
-
+        </li>
+      </ul>
+    </div>
 
 
 <div class='project-stage-tab-wrapper'>
@@ -101,7 +105,8 @@
     <% if @stages.count == 1 %>
       <a href="#" class="tab-link is-active"><br>
         <%= stage.name %><br>
-        <%= stage.tasks.count %><br>
+        <% num_of_tasks = pluralize(stage.tasks.count, 'task') %>
+        <%= num_of_tasks %>
         </a>
     <% else %>
       <a href="#" class="tab-link"><br>
@@ -116,7 +121,6 @@
 
         <div class='stage-left-column'>
             <div id="<%=stage.name%>">
-              <h1 class='stage-index'><%= index + 1%></h1>
               <h3><%= stage.name %></h3>
               <%= link_to 'Edit stage', edit_stage_path(stage) %>
               <%= link_to 'Delete stage', stage_path(stage), method: :delete, data: { confirm: 'Are you sure?' } %>
@@ -132,6 +136,7 @@
                       <label class="modal-close" for="modal-3"></label>
                       <% @task = Stage.find(stage.id).tasks.build %>
                       <% @stage = Stage.find(stage.id) %>
+                      <h1 class='modal-intro'>Add Task</h1>
                       <%= simple_form_for ([@contact, @project, stage, @task]) do |f| %>
                         <%# <%= render 'shared/error_messages', object: f.object %1> %>
                         <%= f.input :name, placeholder: "Name" %>
@@ -147,9 +152,12 @@
         <div class='stage-right-column'>
           <% stage.tasks.each do |task| %>
             <% if task.completed_at %>
-              <strike style='opacity: 0.4;'><p> <%= task.name %></strike> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+              <strike style='opacity: 0.4;'><p> <%= task.name %></strike> 
+              <br>
+            <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
             <% else %>
               <p><%= task.name %> <%= task.id %><%= task.description %>
+            <br>
             <%= link_to 'Back', contact_project_stage_task_path(@contact.id,@project.id,@stages[index-1].id,task), method: :patch, data: {params: {task: {new_stage: @stages[index-1].id }}.to_param, confirm: 'Move task to next stage?' }  unless index == 0 %>
             <%= link_to 'Next', contact_project_stage_task_path(@contact.id,@project.id,@stages[index+1].id,task), method: :patch, data: {params: { task: {new_stage: @stages[index+1].id} }.to_param, confirm: 'Move task to next stage?' } unless @stages[index+1].nil? %>
             <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %>
@@ -165,7 +173,10 @@
 
 
 
+  </div>
 
 
 
-<%= link_to 'Back', contact_path(@project.contact_id) %>
+
+</div>
+

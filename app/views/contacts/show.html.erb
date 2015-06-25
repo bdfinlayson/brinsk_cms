@@ -8,16 +8,6 @@
         <div class="tab-content">
           <%= render 'shared/note_form' %>
           <br />
-          <% @notes.each do |note| %>
-            <div class='note_container'>
-              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
-                <br/>
-                <%= link_to 'Edit', edit_note_path(note) %>
-                <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </span>
-              <p class='note_content'><%= note.content %></p>
-            </div>
-          <% end %>
         </div>
       </li>
       <li class="tab-header-and-content">
@@ -53,6 +43,18 @@
       </li>
     </ul>
 
+          <% @notes.each do |note| %>
+            <div class='note_container'>
+              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
+                <br/>
+                <%= link_to 'Edit', edit_note_path(note) %>
+                <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+              </span>
+              <p class='note_content'><%= note.content %></p>
+            </div>
+            <hr>
+          <% end %>
+
         </div>
 
 
@@ -72,21 +74,19 @@
           </div></span>
 
           <div class="contact_info_container">
-            <table class="table-minimal">
-              <thead>
-                <tr>
-                  <th class='contact_into_header'>Contact Info</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><h3>Email: <%= @contact.email %></h3><br>
+
+          <div class='contact-info-wrapper'>
+            <ul class="accordion-tabs-minimal">
+              <li class="tab-header-and-content">
+                <a href="#" class="tab-link is-active">Contact Info</a>
+                <div class="tab-content">
+                    <h3>Email: <%= @contact.email %></h3><br>
                     <h3>Company: <%= @contact.company_name %></h3><br>
                     <h3>Phone: <%= @contact.phone %></h3><br>
                     <h3>Background:</h3> <p><%= @contact.background %></p><br></td>
-                  <tr>
-              </tbody>
-            </table>
+                </div>
+              </li>
+            </ul>
           </div>
 
           <div class='task_list_wrapper'>
@@ -125,3 +125,9 @@
   </div>
 </div>
 </div>
+
+
+
+
+
+
