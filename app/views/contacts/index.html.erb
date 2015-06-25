@@ -4,36 +4,59 @@
 
 <% provide(:title, 'Contacts') %>
 
-<div class="main-wrapper">
-  <div class="main-content">
     <%# <h1 id="title_header">Contacts <%= link_to 'New Contact', new_contact_path  %1></h1> %>
     <% if @contacts.empty? %>
       <p> You have no contacts yet. </p>
     <% else %>
-      <table class="tables">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-       <% @contacts.each do |contact| %>
-          <tr>
-            <td><%= contact.first_name %></td>
-            <td><%= contact.last_name %></td>
-            <td><%= link_to 'Edit', edit_contact_path(contact) %> | <%= link_to 'Show', contact_path(contact) %> | <%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: "Are you sure?" } %></td>
-          </tr>
-          <tr>
-        <% end %>
-        </tbody>
-      </table>
+
+<table class="tables">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Contact Info</th>
+      <th>Activity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @contacts.each do |contact| %>
+      <tr>
+        <td><%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact) %></td>
+        <td>
+          <table>
+            <thead>
+              <tr>
+                <th>Info</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><%= contact.phone %></td></tr>
+              <tr><td><%= contact.email %></td></tr>
+              <tr><td><%= contact.street1 %></td></tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+          <table>
+            <thead>
+              <tr>
+                <th>Notes</th>
+                <th>Tasks</th>
+                <th>Meetings</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><%= pluralize(contact.notes.count, 'note') %></td><td> <%= pluralize(contact.tasks.count, 'task') %></td><td><%= pluralize(contact.appointments.count, 'meeting') %></td></tr>
+            </tbody>
+          </table>
+        </td>
+        <td>
+        <p><%= link_to 'Edit', edit_contact_path(contact) %></p>
+        <p><%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' } %></p></td>
+      </tr>
     <% end %>
-  </div>
-  <div class='secondary-content'>
-    <%= render 'shared/calendars' %>
-  </div>
-</div>
+  </tbody>
+</table>
+<% end %>
 
 
