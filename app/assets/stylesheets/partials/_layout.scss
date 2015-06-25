@@ -11,6 +11,19 @@
   padding: 0 150px;
 }
 
+.notice-wrapper {
+  @include outer-container;
+  padding: 25px;
+  text-align:center;
+  p.notice {
+    background-color:#e5edf8;
+    border-radius:5%;
+  }
+  p.alert {
+    background-color: #fff6bf;
+  }
+}
+
 
 
 //

@@ -9,8 +9,10 @@
 <body>
   <%= render 'refills/navigation' if user_signed_in? %>
   <div class='content-wrapper'>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class='notice-wrapper'>
+      <strong><p class="notice"><%= notice %></p></strong>
+      <strong><p class="alert"><%= alert %></p></strong>
+    </div>
 
     <%= yield %>
 
