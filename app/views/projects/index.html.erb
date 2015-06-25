@@ -3,7 +3,7 @@
     <tr>
       <th>Project</th>
       <th>Description</th>
-      <th>Stages & Tasks</th>
+      <th>Components</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,12 +22,13 @@
               <tr>
                 <th>Stage</th>
                 <th>Tasks</th>
+                <th>Meetings</th>
               </tr>
             </thead>
             <tbody>
               <% @stages.each do |stage| %>
                 <% if stage.project_id == project.id %>
-                  <tr><td><%= stage.name %>:</td><td> <%= pluralize(stage.tasks.count, 'task') %></td></tr>
+                  <tr><td><%= stage.name %>:</td><td> <%= pluralize(stage.tasks.count, 'task') %></td><td><%= pluralize(project.appointments.count, 'meeting') %></td></tr>
                 <% end %>
               <% end %>
             </tbody>
