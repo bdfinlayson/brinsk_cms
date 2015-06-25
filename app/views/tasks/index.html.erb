@@ -1,0 +1,49 @@
+<div class='page-header'>
+  <h1>Tasks (<%= @tasks.count %>)</h1>
+</div>
+
+<table class="tables">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Description</th>
+      <th>Belongs To</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <% if task.completed_at %>
+          <td><strike style='opacity: 0.4;'><p> <%= task.name %></strike></td>
+        <% else %>
+          <td><%= task.name %></td>
+        <% end %>
+        <td><%= task.description %></td>
+          <% @projects.each do |project| %>
+            <% if task.project_id == project.id && task.taskable_type == 'Stage' %>
+              <td><%= link_to project.name, project_path(project) %>
+              <br>
+              Projects
+              </td>
+            <% end %>
+          <% end %>
+          <% @contacts.each do |contact| %>
+            <% if task.taskable_id == contact.id && task.taskable_type == 'Contact' %>
+              <td><%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact) %>
+              <br>
+                Contacts
+            </td>
+            <% end %>
+          <% end %>
+        <% if task.completed_at %>
+          <td><h3><%= link_to 'Delete Project', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></h3><td>
+        <% else %>
+          <td><p><%= link_to 'Mark as Complete', complete_task_path(task), method: :patch, data: { confirm: 'Are you sure?' } %></p>
+          <p><%= link_to 'Manage Task', task_path(task) %></p>
+          <p><%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p></td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

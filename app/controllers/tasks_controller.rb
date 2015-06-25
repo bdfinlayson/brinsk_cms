@@ -5,6 +5,12 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def index
+    @tasks = Task.where('user_id = ?', current_user.id)
+    @projects = Project.where('user_id = ?', current_user.id)
+    @contacts = Contact.where('user_id = ?',  current_user.id)
+  end
+
   def create
     params[:task][:user_id] = current_user.id
     @object = Contact.find(params[:contact_id]) unless params[:contact_id].nil?

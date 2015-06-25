@@ -1,13 +1,16 @@
+<div class='page-header'>
+<h1>Contacts (<%= @contacts.count %>)</h1>
+</div>
 
 <% provide(:title, 'Contacts') %>
 
 <div class="main-wrapper">
   <div class="main-content">
-    <h1 id="title_header">Contacts <%= link_to 'New Contact', new_contact_path  %></h1>
+    <%# <h1 id="title_header">Contacts <%= link_to 'New Contact', new_contact_path  %1></h1> %>
     <% if @contacts.empty? %>
       <p> You have no contacts yet. </p>
     <% else %>
-      <table class="table-minimal">
+      <table class="tables">
         <thead>
           <tr>
             <th>First Name</th>

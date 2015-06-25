@@ -81,7 +81,11 @@ Rails.application.routes.draw do
   end
   resources :stages, except: [:show]
   resources :notes, except: [:show]
-  resources :tasks, except: [:show]
+  resources :tasks, except: [:show] do
+    member do
+      patch :complete
+    end
+  end
 
   root "contacts#index"
 end
