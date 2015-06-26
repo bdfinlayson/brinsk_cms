@@ -2,6 +2,20 @@
   <h1>Tasks (<%= @tasks.count %>)</h1>
 </div>
 
+
+<div class='search-bar'>
+  <%= form_tag tasks_path, :method => :get do %>
+    <div class='search-field'><%= text_field_tag :search, params[:search] %></div>
+    <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
+  <% end %>
+</div>
+
+    <% if @tasks.empty? %>
+      <p class='notice'> No tasks found. </p>
+    <% else %>
+
+
+
 <table class="tables">
   <thead>
     <tr>
@@ -46,3 +60,5 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>

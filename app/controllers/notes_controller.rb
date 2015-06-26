@@ -5,6 +5,7 @@ class NotesController < ApplicationController
     @note = Note.new
   end
 
+
   def create
     @contact = Contact.find(params[:contact_id])
     @project = Project.find(params[:project_id]) unless params[:project_id].nil?

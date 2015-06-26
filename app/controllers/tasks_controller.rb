@@ -6,7 +6,13 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.where('user_id = ?', current_user.id)
+    @search = Task.search do
+      fulltext params[:search]
+      order_by(:updated_at, :desc)
+    end
+    @tasks = @search.results
+
+    # @tasks = Task.where('user_id = ?', current_user.id)
     @projects = Project.where('user_id = ?', current_user.id)
     @contacts = Contact.where('user_id = ?',  current_user.id)
   end

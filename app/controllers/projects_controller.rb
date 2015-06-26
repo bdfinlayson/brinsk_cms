@@ -12,7 +12,12 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.where('user_id = ?', current_user)
+    @search = Project.search do
+      fulltext params[:search]
+      order_by(:updated_at, :desc)
+    end
+    @projects = @search.results
+    # @projects = Project.where('user_id = ?', current_user)
     @stages = Stage.where('user_id = ?', current_user)
     @tasks = Task.where('user_id = ?', current_user)
     @appointments = Appointment.where('user_id = ?', current_user)

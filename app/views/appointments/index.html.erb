@@ -2,7 +2,9 @@
   <h1>Calendar (<%= pluralize(@appointments.count, 'appointment') %>)</h1>
 </div>
 
-
+    <% if @appointments.empty? %>
+      <p class='notice'> No appointments found. </p>
+    <% end %>
 
 <div class='calendar_wrapper'>
 

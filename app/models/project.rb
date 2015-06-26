@@ -12,4 +12,10 @@ class Project < ActiveRecord::Base
   has_many :appointments, :as => :appointable, dependent: :destroy
   acts_as_taggable
 
+  searchable do
+    text :name, :description
+    time :created_at
+    time :updated_at
+  end
+
 end

@@ -16,6 +16,13 @@ class Contact < ActiveRecord::Base
   geocoded_by :street1
   after_validation :geocode
 
+  searchable do
+    text :first_name, :last_name, :background, :street1, :email
+    time :created_at
+    time :updated_at
+  end
+
+
 
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"

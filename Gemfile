@@ -17,6 +17,7 @@ gem 'simple_form'
 gem "simple_calendar"
 gem 'geocoder'
 gem 'jquery-turbolinks'
+gem 'sunspot_rails'
 
 gem 'sass'
 
@@ -43,6 +44,7 @@ group :development do
   gem 'meta_request'
   gem 'quiet_assets'
   gem 'rails_best_practices'
+  gem 'sunspot_solr'
 end
 
 group :test do

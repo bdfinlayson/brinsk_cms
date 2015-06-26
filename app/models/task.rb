@@ -7,6 +7,13 @@ class Task < ActiveRecord::Base
   # validate :due_date_cannot_be_in_the_past
   acts_as_taggable
 
+  searchable do
+    text :name, :description, :taskable_type
+    time :due
+    time :created_at
+    time :updated_at
+  end
+
   def due_date_cannot_be_in_the_past
     if due.present? && due < Date.today
       errors.add(:due, "can't be in the past")

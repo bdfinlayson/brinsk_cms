@@ -3,7 +3,12 @@ class ContactsController < ApplicationController
 
   def index
     @user = current_user
-    @contacts = current_user.contacts.all
+    @search = Contact.search do
+      fulltext params[:search]
+      order_by(:updated_at, :desc)
+    end
+    @contacts = @search.results
+    # @contacts = current_user.contacts.all
     @appointments = Appointment.where('user_id = ?', current_user.id)
   end
 

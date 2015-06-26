@@ -6,5 +6,11 @@ class Note < ActiveRecord::Base
   belongs_to :contact
   acts_as_taggable
 
+  searchable do
+    text :subject, :content
+    time :created_at
+    time :updated_at
+  end
+
 
 end
