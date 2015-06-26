@@ -30,11 +30,11 @@
 
                   <% if appointment.appointable_type == 'Contact' %>
                     <tr>
-                      <td><h1>Related to:</td><td> <%= link_to "#{ @contact.first_name } #{ @contact.last_name }", contact_path(@contact) %></td></h1>
+                      <td><h1>Related to:</td><td> <%= gravatar_for @contact %> <br><%= link_to "#{ @contact.first_name } #{ @contact.last_name }", contact_path(@contact) %></td></h1>
                     </tr>
                       <% elsif appointment.appointable_type == 'Project' && params[:action].include?("show")%>
                     <tr>
-                      <td><h1>Related to:</td><td> <%= link_to "#{ @contact.first_name } #{ @contact.last_name }", contact_path(@contact) %> <h1></td>
+                      <td><h1>Related to:</td><td> <%= gravatar_for @contact %> <br> <%= link_to "#{ @contact.first_name } #{ @contact.last_name }", contact_path(@contact) %> <h1></td>
                     </tr>
                   <% end %>
                   <tr>

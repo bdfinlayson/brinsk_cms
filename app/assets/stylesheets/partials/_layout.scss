@@ -13,7 +13,7 @@
 
 .notice-wrapper {
   @include outer-container;
-  padding: 25px;
+  padding: 15px;
   text-align:center;
   p.notice {
     background-color:#e5edf8;
@@ -72,7 +72,7 @@
 //
 
 .main-wrapper {
-  padding: 35px;
+  padding: 0px 35px;
   #title_header {
     font-size:1.5em;
   }
@@ -261,4 +261,15 @@
   font-size:1.5em;
 }
 
+.index-gravatar {
+  text-align:center;
+}
+
+.index-actions {
+  text-align:center;
+}
+
+.gravatar {
+  border-radius:50%;
+}
 

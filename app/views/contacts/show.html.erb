@@ -1,7 +1,7 @@
 
 <div class="main-wrapper">
   <div class="main-content">
-    <h1 id="title_header"> <%= "#{@contact.title} #{@contact.first_name} #{@contact.last_name}" %> <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %></h1>
+     <h1 id="title_header"> <%= gravatar_for @contact %>   <%= "#{@contact.title} #{@contact.first_name} #{@contact.last_name}" %> <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %></h1>
     <ul class="accordion-tabs">
       <li class="tab-header-and-content">
         <a href="javascript:void(0)" class="tab-link">Add a Note</a>

@@ -16,9 +16,9 @@
     <% @projects.each do |project| %>
       <tr>
         <% if project.completed_at %>
-          <td><strike style='opacity: 0.4;'><p> <%= project.name %></strike></td>
+          <td class='index-gravatar'><strike style='opacity: 0.4;'><p> <%= project.name %></strike></td>
         <% else %>
-          <td><%= link_to project.name, project_path(project) %></td>
+          <td class='index-gravatar'><%= link_to project.name, project_path(project) %></td>
         <% end %>
         <td><%= project.description %></td>
         <td>
@@ -32,17 +32,17 @@
             <tbody>
               <% @stages.each do |stage| %>
                 <% if stage.project_id == project.id %>
-                  <tr><td><%= stage.name %>:</td><td> <%= pluralize(stage.tasks.count, 'task') %></td></tr>
+                  <tr><td><%= stage.name %></td><td> <%= pluralize(stage.tasks.count, 'task') %></td></tr>
                 <% end %>
               <% end %>
             </tbody>
             </table>
         </td>
-        <td><%= pluralize(project.appointments.count, 'meeting') %></td>
+        <td class='index-actions'><%= pluralize(project.appointments.count, 'meeting') %></td>
         <% if project.completed_at %>
-          <td><h3><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></h3><td>
+          <td class='index-actions'><h3><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></h3><td>
         <% else %>
-          <td><p><%= link_to 'Mark as Complete', complete_project_path(project), method: :patch, data: { confirm: 'Are you sure?' } %></p>
+          <td class='index-actions'><p><%= link_to 'Mark as Complete', complete_project_path(project), method: :patch, data: { confirm: 'Are you sure?' } %></p>
           <p><%= link_to 'Manage Project', project_path(project) %></p>
           <p><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p></td></tr>
       <% end %>
