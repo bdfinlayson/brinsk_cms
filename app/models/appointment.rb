@@ -6,8 +6,8 @@ class Appointment < ActiveRecord::Base
   belongs_to :project
   belongs_to :contact
   validates :name, presence: true
-  validates_uniqueness_of :name, scope: :user_id
-  validates_uniqueness_of :starts_at, scope: :user_id
+  # validates_uniqueness_of :name, scope: :user_id
+  # validates_uniqueness_of :starts_at, scope: :user_id
   validates :starts_at, presence: true
   validate :date_cannot_be_in_the_past
   validates :user_id, presence: true

@@ -281,6 +281,9 @@
       .search-button {
         @include span-columns(3);
       }
+      .add-new {
+        @include span-columns(3);
+      }
     }
   }
 }

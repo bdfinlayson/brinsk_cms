@@ -18,6 +18,7 @@ gem "simple_calendar"
 gem 'geocoder'
 gem 'jquery-turbolinks'
 gem 'sunspot_rails'
+gem "sunspot_test"
 
 gem 'sass'
 

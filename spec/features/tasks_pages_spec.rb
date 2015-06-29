@@ -22,15 +22,13 @@ describe 'Tasks' do
     end
 
     scenario 'should see a button to add a task' do
-      click_link 'Show'
-      expect(page).to have_button('Create Task')
+      expect(page).to have_button('Add Task')
     end
 
     let(:task) { FactoryGirl.build(:task) }
 
     scenario 'should create a task' do
-      click_link 'Show'
-      expect(page).to have_button('Create Task')
+      expect(page).to have_button('Add Task')
       create_task(task)
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)

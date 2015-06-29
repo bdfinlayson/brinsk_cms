@@ -9,6 +9,7 @@
     <div class='search-field'><%= text_field_tag :search, params[:search] %></div>
     <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
   <% end %>
+    <div class='add-new'><%= link_to 'Add Contact', new_contact_path(@contact)%></div>
 </div>
 
     <% if @contacts.empty? %>

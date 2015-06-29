@@ -6,7 +6,6 @@ FactoryGirl.define do
     last_name { Faker::Name.last_name }
     company_name { Faker::Company.name }
     email { Faker::Internet.email }
-    alt_email { Faker::Internet.email }
     phone { Faker::PhoneNumber.phone_number }
     title { Faker::Name.title }
     background { Faker::Lorem.paragraph(2, false, 4) }
