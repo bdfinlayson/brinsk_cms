@@ -12,12 +12,12 @@ class ProjectsController < ApplicationController
   end
 
   def index
+    @projects = Project.where('user_id = ?', current_user)
     @search = Project.search do
       fulltext params[:search]
       order_by(:updated_at, :desc)
     end
-    @projects = @search.results
-    # @projects = Project.where('user_id = ?', current_user)
+    @projects = @search.results.select { |project| project[:user_id] == current_user.id } unless @search.results.empty?
     @stages = Stage.where('user_id = ?', current_user)
     @tasks = Task.where('user_id = ?', current_user)
     @appointments = Appointment.where('user_id = ?', current_user)
@@ -29,7 +29,12 @@ class ProjectsController < ApplicationController
     @stages = @project.stages.all
     @note = Note.new
     @notes = Note.where('project_id = ?', @project.id)
-    @appointments = Appointment.where('appointable_id = ?', @project)
+    @search = Note.search do
+      fulltext params[:search]
+      order_by(:updated_at, :desc)
+    end
+    @notes = @search.results.select { |note| note[:project_id] == @project.id } unless @search.results.empty?
+    @appointments = Appointment.where('appointable_id = ? and contact_id = ?', @project, @contact)
   end
 
   def create

@@ -22,22 +22,26 @@ describe 'Tasks' do
     end
 
     scenario 'should see a button to add a task' do
-      expect(page).to have_button('Add Task')
+      click_link "#{contact.full_name}"
+      expect(page).to have_content('Add Task')
     end
 
     let(:task) { FactoryGirl.build(:task) }
 
     scenario 'should create a task' do
-      expect(page).to have_button('Add Task')
+      click_link "#{contact.full_name}"
+      expect(page).to have_content('Add Task')
       create_task(task)
+      expect(page).to have_content("Task created!")
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
     end
 
     scenario 'should not be able to edit a completed task' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       expect(page).to have_button('Create Task')
       create_task(task)
+      expect(page).to have_content("Task created!")
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
       click_link 'Mark as Complete'
@@ -47,35 +51,45 @@ describe 'Tasks' do
     let(:other_task) { FactoryGirl.build(:task) }
 
     scenario 'should cancel a transaction' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_task(task)
+      expect(page).to have_content("Task created!")
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
-      click_link 'Edit'
+      within('div.task_list_wrapper') do
+        click_link 'Edit Task'
+      end
       expect(page).to have_link('Cancel')
       click_link 'Cancel'
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
-      expect(page).to_not have_link('Cancel')
+      expect(page).to have_content('Add Task')
     end
 
     scenario 'should edit a task' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_task(task)
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
-      click_link 'Edit'
+      within('div.task_list_wrapper') do
+        click_link 'Edit Task'
+      end
       edit_task(other_task)
+      expect(page).to have_content('Task updated!')
       expect(page).to have_content(other_task.name)
       expect(page).to have_content(other_task.description)
     end
 
     scenario 'should delete a task' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_task(task)
+      expect(page).to have_content("Task created!")
       expect(page).to have_content(task.name)
       expect(page).to have_content(task.description)
-      click_link 'Delete'
+      within('div.task_list_wrapper') do
+        click_link 'Delete Task'
+      end
+      expect(page).to have_content("Task deleted!")
       expect(page).to_not have_content(other_task.name)
       expect(page).to_not have_content(other_task.description)
     end

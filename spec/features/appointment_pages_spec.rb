@@ -17,7 +17,7 @@ describe 'Appointments' do
   describe 'appointment creation in the contact profile page' do
     before do
       visit root_path
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_appointment(appointment)
     end
 
@@ -55,7 +55,7 @@ describe 'Appointments' do
   describe 'appointment creation in the project page' do
     before do
       visit root_path
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       click_link 'Manage Project'
       create_appointment(appointment)
@@ -92,21 +92,27 @@ describe 'Appointments' do
     end
 
     scenario 'should see a project appointment in the contact profile page' do
-      click_link 'Back'
       expect(page).to have_content(appointment.name)
     end
 
     scenario 'should delete a project and no longer see the appointments in the contact page' do
-      click_link 'Back'
+      within('#title_header') do
+        click_link "#{contact.full_name}"
+      end
       click_link 'Delete Project'
       expect(page).to_not have_content(appointment.name)
     end
 
     scenario 'should delete a contact and no longer see the appointments for the contact in the home page' do
-      click_link 'Back'
-      click_link 'Home'
-      click_link 'Edit'
-      click_link 'Delete'
+      within('nav') do
+        click_link 'Contacts'
+      end
+      within('td.index-actions') do
+        click_link 'Delete'
+      end
+      within('nav') do
+        click_link 'Calendar'
+      end
       expect(page).to_not have_content(appointment.name)
     end
   end

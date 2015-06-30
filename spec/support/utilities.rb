@@ -82,7 +82,7 @@ require 'pry'
 
 
   def create_stage(stage)
-    within('form#new_stage') do
+    within('#new_stage') do
       fill_in 'Name', with: stage.name
     end
     click_button 'Create Stage'

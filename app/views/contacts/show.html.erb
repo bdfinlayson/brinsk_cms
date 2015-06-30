@@ -52,6 +52,14 @@
       </li>
     </ul>
 
+    <div class='search-bar'>
+      <%= form_tag contact_path(@contact), :method => :get do %>
+        <div class='search-field'><%= text_field_tag :search, params[:search] %></div>
+        <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
+      <% end %>
+    </div>
+
+
     <% if @notes.empty? %>
       <p> No notes found. </p>
     <% else %>

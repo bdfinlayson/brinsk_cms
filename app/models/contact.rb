@@ -5,7 +5,7 @@ class Contact < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false}
   before_save { email.downcase! }
-  validates_uniqueness_of :email, scope: :user_id
+  # validates_uniqueness_of :email, scope: :user_id
   before_save { self.email = email.downcase }
   has_many :notes, dependent: :destroy
   has_many :projects, dependent: :destroy

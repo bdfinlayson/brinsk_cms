@@ -39,7 +39,7 @@ describe 'Authentication' do
   describe 'new user registration page' do
     before { visit new_user_registration_path }
 
-    it { should have_content('Sign up') }
+    it { should have_content('Create a new account') }
     it { should have_title('Sign up') }
     it { should have_content('First Name') }
     it { should have_content('Last Name') }

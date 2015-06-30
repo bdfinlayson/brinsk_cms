@@ -22,21 +22,21 @@ describe 'Projects' do
     end
 
     scenario 'should see a button to add a project' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       expect(page).to have_button('Create Project')
     end
 
     let(:project) { FactoryGirl.build(:project) }
 
     scenario 'should create a project' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       expect(page).to have_button('Create Project')
       create_project(project)
       expect(page).to have_content(project.name)
     end
 
     scenario 'should not be able to manage a completed project' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       expect(page).to have_button('Create Project')
       create_project(project)
       expect(page).to have_content(project.name)
@@ -47,10 +47,9 @@ describe 'Projects' do
     let(:other_project) { FactoryGirl.build(:project) }
 
     scenario 'should cancel a transaction' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       expect(page).to have_content(project.name)
-      expect(page).to have_content(project.description)
       click_link 'Manage Project'
       click_link 'Edit project'
       expect(page).to have_link('Cancel')
@@ -61,7 +60,7 @@ describe 'Projects' do
     end
 
     scenario 'should manage a project' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       expect(page).to have_content(project.name)
       click_link 'Manage Project'
@@ -70,7 +69,7 @@ describe 'Projects' do
     end
 
     scenario 'should delete a project' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       expect(page).to have_content(project.name)
       click_link 'Delete'

@@ -16,7 +16,7 @@ describe 'Stages pages' do
   describe 'stage creation in the project page' do
     before do
       visit root_path
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       click_link 'Manage Project'
     end
@@ -57,7 +57,7 @@ describe 'Stages pages' do
   describe 'task creation for stages' do
     before do
       visit root_path
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       click_link 'Manage Project'
       create_stage(stage)
@@ -72,23 +72,23 @@ describe 'Stages pages' do
 
     scenario 'should add a task to the first stage' do
       create_stage_task(task, stage)
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         expect(page).to have_content(task.name)
       end
     end
 
     scenario 'should move a task to the next stage' do
       create_stage_task(task, stage)
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         expect(page).to have_content(task.name)
       end
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         click_link 'Next'
       end
-      within("div##{other_stage.name}") do
+      within("tbody##{other_stage.name}") do
         expect(page).to have_content(task.name)
       end
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         expect(page).to_not have_content(task.name)
       end
     end
@@ -96,17 +96,17 @@ describe 'Stages pages' do
 
     scenario 'should move a task back to the original stage' do
       create_stage_task(task, stage)
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         expect(page).to have_content(task.name)
       end
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         click_link 'Next'
       end
-      within("div##{other_stage.name}") do
+      within("tbody##{other_stage.name}") do
         expect(page).to have_content(task.name)
         click_link 'Back'
       end
-      within("div##{stage.name}") do
+      within("tbody##{stage.name}") do
         expect(page).to have_content(task.name)
       end
     end

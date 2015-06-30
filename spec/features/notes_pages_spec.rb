@@ -21,14 +21,14 @@ describe "Notes" do
     end
 
     scenario 'should see a button to add a note' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       expect(page).to have_button('Create Note')
     end
 
     let(:note) { FactoryGirl.build(:note) }
 
     scenario 'should create a note' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_note(note)
       expect(page).to have_content(note.subject)
       expect(page).to have_content(note.content)
@@ -37,37 +37,46 @@ describe "Notes" do
     let(:other_note) { FactoryGirl.build(:note) }
 
     scenario 'should cancel a transaction' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_note(note)
       expect(page).to have_content(note.subject)
       expect(page).to have_content(note.content)
-      click_link 'Edit'
+      expect(page).to have_content('Note created!')
+      within('div.note_container') do
+        click_link 'Edit'
+      end
       expect(page).to have_link('Cancel')
       click_link 'Cancel'
       expect(page).to have_content(note.subject)
       expect(page).to have_content(note.content)
-      expect(page).to_not have_link('Cancel')
+      expect(page).to have_button('Create Note')
     end
 
     scenario 'should edit a note' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_note(note)
       expect(page).to have_content(note.subject)
       expect(page).to have_content(note.content)
-      click_link 'Edit'
+      within('div.note_container') do
+        click_link 'Edit'
+      end
       edit_note(other_note)
       expect(page).to have_content(other_note.subject)
       expect(page).to have_content(other_note.content)
+      expect(page).to have_content('Note updated!')
     end
 
     scenario 'should delete a note' do
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_note(note)
       expect(page).to have_content(note.subject)
       expect(page).to have_content(note.content)
-      click_link 'Delete'
+      within('div.note_container') do
+        click_link 'Delete'
+      end
       expect(page).to_not have_content(other_note.subject)
       expect(page).to_not have_content(other_note.content)
+      expect(page).to have_content('Note deleted!')
     end
   end
 
@@ -78,7 +87,7 @@ describe "Notes" do
 
     before do
       visit root_path
-      click_link 'Show'
+      click_link "#{contact.full_name}"
       create_project(project)
       click_link 'Manage Project'
     end
@@ -130,7 +139,7 @@ describe "Notes" do
       create_note(note)
       expect(page).to have_content(note.subject)
       expect(page).to have_content(note.content)
-      click_link 'Back'
+      click_link "#{contact.full_name}"
       expect(page).to_not have_content(note.subject)
       expect(page).to_not have_content(note.content)
     end
