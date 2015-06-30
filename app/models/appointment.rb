@@ -11,9 +11,9 @@ class Appointment < ActiveRecord::Base
   validates :starts_at, presence: true
   validate :date_cannot_be_in_the_past
   validates :user_id, presence: true
-  validates :description, length: { maximum: 300 }, allow_blank: true
+  # validates :description, length: { maximum: 300 }, allow_blank: true
   # validates :street1, presence: true
-  validates :street2, length: { maximum: 100 }, allow_blank: true
+  # validates :street2, length: { maximum: 100 }, allow_blank: true
   # validates :city, presence: true
   # validates :state, presence: true
   # validates :zipcode, presence: true

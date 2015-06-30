@@ -40,8 +40,7 @@ class AppointmentsController < ApplicationController
     if @appointment.update(appointment_params)
       redirect_to contact_path(@appointment.appointable_id), notice: 'Appointment updated!'
     else
-      flash.nowi[:error] = 'Could not save appointment!'
-      render 'edit'
+      render 'edit', notice: 'Could not update appointment!'
     end
   end
 
