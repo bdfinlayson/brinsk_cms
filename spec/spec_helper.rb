@@ -2,7 +2,6 @@ ENV['RAILS_ENV'] = 'test'
 require 'capybara'
 require 'database_cleaner'
 require 'rails_helper'
-require 'sunspot_test/rspec'
 require_relative 'support/utilities'
 
 

@@ -6,10 +6,12 @@ class Note < ActiveRecord::Base
   belongs_to :contact
   acts_as_taggable
 
-  searchable do
-    text :subject, :content
-    time :created_at
-    time :updated_at
+  def self.search(search)
+    if search
+      where('subject like ? or content like ?', "%#{search}%", "%#{search}%")
+    else
+      []
+    end
   end
 
 

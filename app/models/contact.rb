@@ -16,10 +16,12 @@ class Contact < ActiveRecord::Base
   geocoded_by :street1
   after_validation :geocode
 
-  searchable do
-    text :first_name, :last_name, :background, :street1, :email
-    time :created_at
-    time :updated_at
+  def self.search(search)
+    if search
+      where('first_name like ? or last_name like ? or street1 like ? or email like ? or background like ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
+    else
+      []
+    end
   end
 
 

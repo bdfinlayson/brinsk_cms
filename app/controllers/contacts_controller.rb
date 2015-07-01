@@ -4,22 +4,16 @@ class ContactsController < ApplicationController
   def index
     @user = current_user
     @contacts = current_user.contacts.all
-    @search = Contact.search do
-      fulltext params[:search]
-      order_by(:updated_at, :desc)
-    end
-    @contacts = @search.results.select { |contact| contact[:user_id] == current_user.id } unless @search.results.empty?
+    @search = Contact.search(params[:search])
+    @contacts = @search.select { |contact| contact[:user_id] == current_user.id } unless @search.empty?
     @appointments = Appointment.where('user_id = ?', current_user.id)
   end
 
   def show
     @contact = Contact.find(params[:id])
     @notes = @contact.notes.all
-    @search = Note.search do
-      fulltext params[:search]
-      order_by(:created_at, :desc)
-    end
-    @notes = @search.results.select { |note| note[:contact_id] == @contact.id } unless @search.results.empty?
+    @search = Note.search(params[:search])
+    @notes = @search.select { |note| note[:contact_id] == @contact.id } unless @search.empty?
     @tasks = @contact.tasks.all
     @projects = @contact.projects.all
     @appointments = Appointment.where('contact_id = ?', @contact.id)

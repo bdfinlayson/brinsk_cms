@@ -12,10 +12,13 @@ class Project < ActiveRecord::Base
   has_many :appointments, :as => :appointable, dependent: :destroy
   acts_as_taggable
 
-  searchable do
-    text :name, :description
-    time :created_at
-    time :updated_at
+  def self.search(search)
+    if search
+      where('name like ? or description like ?', "%#{search}%", "%#{search}%")
+    else
+      []
+    end
   end
+
 
 end
