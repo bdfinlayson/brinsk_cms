@@ -2,7 +2,7 @@
 
 Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It's features include:
 
-- Full text search (handrolled by your's truely)
+- Full text search
 - Google Maps and geolocation
 - Gravatar
 - Calendar management
@@ -15,6 +15,9 @@ and much more...
 
 Built using the Bourbon and Neat CSS frameworks. 
 
-To install, clone the repo, run `bundle install` followed by `rake db:migrate` then enjoy!
+To install, clone the repo, run `bundle install` followed by `rake db:migrate` then enjoy by running it on localhost!
 
-You can also test-drive the app live on Heroku here[https://brinsk.herokuapp.com/users/sign_in].
+You can also test-drive the app live on Heroku here[https://brinsk.herokuapp.com/users/sign_in]. Sign in with the demo account credentials:
+
+- Username: demo@demo.com
+- Password: demo1234
