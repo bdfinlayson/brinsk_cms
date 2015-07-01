@@ -112,5 +112,74 @@ describe "Contacts page" do
       click_link 'Delete'
       expect(page).to have_content('0')
     end
+
+    let(:contact1) { FactoryGirl.build(:contact) }
+    let(:contact2) { FactoryGirl.build(:contact) }
+    let(:contact3) { FactoryGirl.build(:contact) }
+    let(:contact4) { FactoryGirl.build(:contact) }
+    let(:contact5) { FactoryGirl.build(:contact) }
+
+    scenario 'should search and find the searched for contact by last name' do
+      visit root_path
+      expect(page).to have_content('0')
+      create_contact(contact1)
+      create_contact(contact2)
+      create_contact(contact3)
+      create_contact(contact4)
+      create_contact(contact5)
+      visit root_path
+      expect(page).to have_content('5')
+      within('.search-field') do
+        fill_in 'search', with: "#{contact1.last_name}"
+      end
+      click_button 'Search'
+      expect(page).to have_content(contact1.last_name)
+      expect(page).to_not have_content(contact2.last_name)
+      expect(page).to_not have_content(contact3.last_name)
+      expect(page).to_not have_content(contact4.last_name)
+      expect(page).to_not have_content(contact5.last_name)
+    end
+
+    scenario 'should search and find another searched for contact by first name' do
+      visit root_path
+      expect(page).to have_content('0')
+      create_contact(contact1)
+      create_contact(contact2)
+      create_contact(contact3)
+      create_contact(contact4)
+      create_contact(contact5)
+      visit root_path
+      expect(page).to have_content('5')
+      within('.search-field') do
+        fill_in 'search', with: "#{contact5.first_name}"
+      end
+      click_button 'Search'
+      expect(page).to_not have_content(contact1.first_name)
+      expect(page).to_not have_content(contact2.first_name)
+      expect(page).to_not have_content(contact3.first_name)
+      expect(page).to_not have_content(contact4.first_name)
+      expect(page).to have_content(contact5.first_name)
+    end
+
+    scenario 'should search and find another searched for contact by email' do
+      visit root_path
+      expect(page).to have_content('0')
+      create_contact(contact1)
+      create_contact(contact2)
+      create_contact(contact3)
+      create_contact(contact4)
+      create_contact(contact5)
+      visit root_path
+      expect(page).to have_content('5')
+      within('.search-field') do
+        fill_in 'search', with: "#{contact2.email}"
+      end
+      click_button 'Search'
+      expect(page).to_not have_content(contact1.email)
+      expect(page).to have_content(contact2.email)
+      expect(page).to_not have_content(contact3.email)
+      expect(page).to_not have_content(contact4.email)
+      expect(page).to_not have_content(contact5.email)
+    end
   end
 end

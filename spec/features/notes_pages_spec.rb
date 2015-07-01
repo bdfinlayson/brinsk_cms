@@ -78,6 +78,43 @@ describe "Notes" do
       expect(page).to_not have_content(other_note.content)
       expect(page).to have_content('Note deleted!')
     end
+
+    let(:note1) { FactoryGirl.build(:note) }
+    let(:note2) { FactoryGirl.build(:note) }
+    let(:note3) { FactoryGirl.build(:note) }
+    let(:note4) { FactoryGirl.build(:note) }
+
+    scenario 'should search for a note' do
+      click_link "#{contact.full_name}"
+      create_note(note1)
+      create_note(note2)
+      create_note(note3)
+      create_note(note4)
+      within('.search-field') do
+        fill_in 'search', with: "#{note1.subject}"
+      end
+      click_button 'Search'
+      expect(page).to have_content(note1.subject)
+      expect(page).to_not have_content(note2.subject)
+      expect(page).to_not have_content(note3.subject)
+      expect(page).to_not have_content(note4.subject)
+    end
+
+    scenario 'should search for a note content' do
+      click_link "#{contact.full_name}"
+      create_note(note1)
+      create_note(note2)
+      create_note(note3)
+      create_note(note4)
+      within('.search-field') do
+        fill_in 'search', with: "#{note1.content}"
+      end
+      click_button 'Search'
+      expect(page).to have_content(note1.content)
+      expect(page).to_not have_content(note2.content)
+      expect(page).to_not have_content(note3.content)
+      expect(page).to_not have_content(note4.content)
+    end
   end
 
   describe 'note creation in the project page' do
@@ -142,6 +179,41 @@ describe "Notes" do
       click_link "#{contact.full_name}"
       expect(page).to_not have_content(note.subject)
       expect(page).to_not have_content(note.content)
+    end
+
+    let(:note1) { FactoryGirl.build(:note) }
+    let(:note2) { FactoryGirl.build(:note) }
+    let(:note3) { FactoryGirl.build(:note) }
+    let(:note4) { FactoryGirl.build(:note) }
+
+    scenario 'should search for a note' do
+      create_note(note1)
+      create_note(note2)
+      create_note(note3)
+      create_note(note4)
+      within('.search-field') do
+        fill_in 'search', with: "#{note1.subject}"
+      end
+      click_button 'Search'
+      expect(page).to have_content(note1.subject)
+      expect(page).to_not have_content(note2.subject)
+      expect(page).to_not have_content(note3.subject)
+      expect(page).to_not have_content(note4.subject)
+    end
+
+    scenario 'should search for a note content' do
+      create_note(note1)
+      create_note(note2)
+      create_note(note3)
+      create_note(note4)
+      within('.search-field') do
+        fill_in 'search', with: "#{note1.content}"
+      end
+      click_button 'Search'
+      expect(page).to have_content(note1.content)
+      expect(page).to_not have_content(note2.content)
+      expect(page).to_not have_content(note3.content)
+      expect(page).to_not have_content(note4.content)
     end
   end
 end

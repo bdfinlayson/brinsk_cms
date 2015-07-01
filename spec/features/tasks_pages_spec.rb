@@ -7,8 +7,66 @@ describe 'Tasks' do
   let(:user) { FactoryGirl.create(:user) }
   let(:other_contact) { FactoryGirl.build(:contact) }
   let(:contact) { FactoryGirl.build(:contact) }
+  let(:task1) { FactoryGirl.build(:task) }
+  let(:task2) { FactoryGirl.build(:task) }
+  let(:task3) { FactoryGirl.build(:task) }
   before { sign_in user }
   before { create_contact(contact) }
+
+  describe 'index page for tasks' do
+
+    before {
+      visit root_path
+      click_link "#{contact.full_name}"
+      create_task(task1)
+      create_task(task2)
+      create_task(task3)
+      within('nav') do
+        click_link 'Tasks'
+      end
+    }
+
+    it { should have_content('Tasks (3)') }
+    it { should have_content(task1.name) }
+    it { should have_content(task2.name) }
+    it { should have_content(task3.name) }
+
+    scenario 'should search and find the searched for task by name' do
+      expect(page).to have_content('Tasks (3)')
+      within('.search-field') do
+        fill_in 'search', with: "#{task1.name}"
+      end
+      click_button 'Search'
+      expect(page).to have_content('Tasks (1)')
+      expect(page).to have_content(task1.name)
+      expect(page).to_not have_content(task2.name)
+      expect(page).to_not have_content(task3.name)
+    end
+
+    scenario 'should search and find the searched for task by description' do
+      expect(page).to have_content('Tasks (3)')
+      within('.search-field') do
+        fill_in 'search', with: "#{task2.description}"
+      end
+      click_button 'Search'
+      expect(page).to have_content('Tasks (1)')
+      expect(page).to have_content(task2.name)
+      expect(page).to_not have_content(task1.name)
+      expect(page).to_not have_content(task3.name)
+    end
+
+    scenario 'should search and not find an invalid search parameter' do
+      expect(page).to have_content('Tasks (3)')
+      within('.search-field') do
+        fill_in 'search', with: "#{contact.last_name}"
+      end
+      click_button 'Search'
+      expect(page).to have_content('Tasks (3)')
+      expect(page).to have_content(task1.name)
+      expect(page).to have_content(task2.name)
+      expect(page).to have_content(task3.name)
+    end
+  end
 
   describe 'task creation in the contact page' do
     before { visit root_path }
