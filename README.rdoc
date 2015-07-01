@@ -1,5 +1,20 @@
 == README
 
-FYI: THE APP'S DEPLOYMENT ON HEROKU IS CURRENTLY FAILING DUE TO SOLAR SEARCH GEM INCOMPATIBILITIES (FOR HEROKU I NEED TO PAY $20/mo FOR A WEBSOLR ADD-ON). INSTEAD, I'LL BE FACTORING OUT SOLAR SEARCH AND HANDROLLING MY OWN SIMPLE SEARCH SOLUTION TO REPLACE IT TODAY/TOMORROW. I WILL DEPLOY WITH THOSE CHANGES ASAP. - BRYAN
+Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It's features include:
 
-Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It is live on Heroku here[https://brinsk.herokuapp.com/users/sign_in].
+- Full text search (handrolled by your's truely)
+- Google Maps and geolocation
+- Gravatar
+- Calendar management
+- Email via ActiveMailer
+- Task management
+- Project management
+- Notes (for contacts and projects)
+
+and much more...
+
+Built using Bourbon and Neat as CSS framework. 
+
+To install, clone the repo and run `rake db:migrate` then enjoy!
+
+You can also test-drive the app live on Heroku here[https://brinsk.herokuapp.com/users/sign_in].
