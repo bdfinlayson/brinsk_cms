@@ -1,3 +1,5 @@
 == README
 
+FYI: THE APP'S DEPLOYMENT ON HEROKU IS CURRENTLY FAILING DUE TO SOLAR SEARCH GEM INCOMPATIBILITIES (FOR HEROKU I NEED TO PAY $20/mo FOR A WEBSOLR ADD-ON). INSTEAD, I'LL BE FACTORING OUT SOLAR SEARCH AND HANDROLLING MY OWN SIMPLE SEARCH SOLUTION TO REPLACE IT TODAY/TOMORROW. I WILL DEPLOY WITH THOSE CHANGES ASAP. - BRYAN
+
 Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It is live on Heroku here[https://brinsk.herokuapp.com/users/sign_in].
