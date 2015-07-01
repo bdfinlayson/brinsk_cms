@@ -15,6 +15,6 @@ and much more...
 
 Built using the Bourbon and Neat CSS frameworks. 
 
-To install, clone the repo and run `rake db:migrate` then enjoy!
+To install, clone the repo, run `bundle install` followed by `rake db:migrate` then enjoy!
 
 You can also test-drive the app live on Heroku here[https://brinsk.herokuapp.com/users/sign_in].
