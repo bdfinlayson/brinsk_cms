@@ -13,7 +13,7 @@ Brinsk is a contact management system written in Ruby and Rails as my final caps
 
 and much more...
 
-Built using Bourbon and Neat as CSS framework. 
+Built using the Bourbon and Neat CSS frameworks. 
 
 To install, clone the repo and run `rake db:migrate` then enjoy!
 
