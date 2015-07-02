@@ -1,6 +1,7 @@
 
 .main-footer {
   @include outer-container;
+  max-width: 100%;
   padding-top: 100px;
   .footer-wrapper {
     @include span-columns(12);
