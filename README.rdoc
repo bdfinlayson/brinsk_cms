@@ -21,3 +21,7 @@ You can also test-drive[https://brinsk.herokuapp.com/users/sign_in] the app live
 
 - Username: demo@demo.com
 - Password: demo1234
+
+This is the initial ERM (entity relationship model) that I created during the initial planning process. It proved invaluable as a roadmap during the app's development:
+
+[capstone_erm_vt.jpg]
