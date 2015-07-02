@@ -1,5 +1,3 @@
-== README
-
 Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It's features include:
 
 - Full text search
