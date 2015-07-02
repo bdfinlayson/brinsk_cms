@@ -24,4 +24,4 @@ You can also test-drive[https://brinsk.herokuapp.com/users/sign_in] the app live
 
 This is the initial ERM (entity relationship model) that I created during the initial planning process. It proved invaluable as a roadmap during the app's development:
 
-Capstone ERM[./capstone_erm_v2.jpg]
+Capstone ERM[https://github.com/bdfinlayson/brinsk_cms/blob/master/capstone_erm_v2.jpg]
