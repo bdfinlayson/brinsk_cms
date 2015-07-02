@@ -38,7 +38,8 @@ class AppointmentsController < ApplicationController
   def update
     @appointment = Appointment.find(params[:id])
     if @appointment.update(appointment_params)
-      redirect_to contact_path(@appointment.appointable_id), notice: 'Appointment updated!'
+      redirect_to contact_path(@appointment.appointable_id), notice: 'Appointment updated!' if @appointment.appointable_type == 'Contact'
+      redirect_to project_path(@appointment.appointable_id), notice: 'Appointment updated!' if @appointment.appointable_type == 'Project'
     else
       render 'edit', notice: 'Could not update appointment!'
     end
@@ -53,7 +54,7 @@ class AppointmentsController < ApplicationController
       @project = Project.find(@appointment.appointable_id)
       redirect_to project_path(@project), notice: 'Appointment deleted!'
     else
-      redirect_to root_path
+      redirect_to appointment_path(@appointment), notice: 'Appointment could not be deleted!'
     end
   end
 
