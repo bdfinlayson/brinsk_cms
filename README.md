@@ -1,13 +1,13 @@
 Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It's features include:
 
-    - Full text search
-    - Google Maps and geolocation
-    - Gravatar
-    - Calendar management
-    - Email via ActiveMailer
-    - Task management
-    - Project management
-    - Notes (for contacts and projects)
+- Full text search
+- Google Maps and geolocation
+- Gravatar
+- Calendar management
+- Email via ActiveMailer
+- Task management
+- Project management
+- Notes (for contacts and projects)
 
 and much more...
 
