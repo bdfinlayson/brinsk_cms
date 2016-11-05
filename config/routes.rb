@@ -29,16 +29,13 @@ Rails.application.routes.draw do
       end
     end
     resources :notes
-    resources :appointments
   end
 
-  resources :appointments
   resources :projects do
     member do
       patch :complete
       post :email_contact
     end
-    resources :appointments
   end
   resources :stages, except: [:show]
   resources :notes, except: [:show]

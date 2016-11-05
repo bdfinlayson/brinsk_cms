@@ -27,7 +27,7 @@ feature "Signing in" do
       fill_in 'Password', :with => other_user.password
     end
     click_button 'Sign in'
-    expect(page).to have_content 'Invalid email or password'
+    expect(page).to have_content 'Invalid Email or password'
   end
 end
 

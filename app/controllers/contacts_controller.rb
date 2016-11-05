@@ -6,7 +6,6 @@ class ContactsController < ApplicationController
     @contacts = current_user.contacts.all
     @search = Contact.search(params[:search])
     @contacts = @search.select { |contact| contact[:user_id] == current_user.id } unless @search.empty?
-    @appointments = Appointment.where('user_id = ?', current_user.id)
   end
 
   def show
@@ -16,7 +15,6 @@ class ContactsController < ApplicationController
     @notes = @search.select { |note| note[:contact_id] == @contact.id } unless @search.empty?
     @tasks = @contact.tasks.all
     @projects = @contact.projects.all
-    @appointments = Appointment.where('contact_id = ?', @contact.id)
   end
 
   def email_contact

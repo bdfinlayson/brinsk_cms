@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.2.2'
+ruby '2.3.1'
 
 
-gem 'rails', '4.2.1'
+gem 'rails', '5.0.0.1'
 
 gem 'devise'
 gem 'sass-rails', '~> 5.0'
@@ -41,8 +41,8 @@ group :development do
   gem 'gemsurance'
   gem 'guard'
   gem 'meta_request'
-  gem 'quiet_assets'
   gem 'rails_best_practices'
+  gem 'web-console', '~> 2.0'
 end
 
 group :test do
@@ -60,6 +60,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring'
   gem 'sqlite3'
-  gem 'web-console', '~> 2.0'
 end
 

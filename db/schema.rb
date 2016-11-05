@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,29 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625173053) do
-
-  create_table "appointments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "description"
-    t.string   "street1"
-    t.string   "street2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zipcode"
-    t.string   "full_address"
-    t.integer  "appointable_id"
-    t.string   "appointable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.datetime "starts_at"
-    t.string   "name"
-    t.integer  "contact_id"
-    t.float    "latitude"
-    t.float    "longitude"
-  end
-
-  add_index "appointments", ["appointable_type", "appointable_id"], name: "index_appointments_on_appointable_type_and_appointable_id"
+ActiveRecord::Schema.define(version: 20161105220518) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "user_id"
@@ -96,17 +73,15 @@ ActiveRecord::Schema.define(version: 20150625173053) do
     t.string   "tagger_type"
     t.string   "context",       limit: 128
     t.datetime "created_at"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
   end
-
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
 
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true
   end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "user_id"
@@ -119,9 +94,8 @@ ActiveRecord::Schema.define(version: 20150625173053) do
     t.datetime "updated_at",    null: false
     t.datetime "completed_at"
     t.integer  "project_id"
+    t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id"
   end
-
-  add_index "tasks", ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -140,9 +114,8 @@ ActiveRecord::Schema.define(version: 20150625173053) do
     t.string   "last_name"
     t.float    "latitude"
     t.float    "longitude"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

@@ -64,30 +64,11 @@
 
 <div class='project-right-column'>
 
-  <%= render 'shared/calendars' %>
 
   <div class='button-wrapper'>
     <ul>
       <li>
         <div class='secondary-content'>
-          <div class="modal">
-            <label for="modal-1">
-              <div class="modal-trigger">Add Meeting</div>
-            </label>
-            <input class="modal-state" id="modal-1" type="checkbox" />
-            <div class="modal-window">
-              <div class="modal-inner">
-                <label class="modal-close" for="modal-1"></label>
-                <h1 class='modal-intro'>Add Meeting</h1>
-                <%= simple_form_for([@project, @project.appointments.build]) do |f| %>
-                  <%= f.input :name, placeholder: "Appointment Name" %>
-                  <%= f.input :street1, placeholder: "Address" %>
-                  <%= f.input :starts_at, placeholder: "Starts At" %>
-                  <%= f.submit %>
-                <% end %>
-              </div>
-            </div>
-          </div></span>
         </div>
       </li>
 
