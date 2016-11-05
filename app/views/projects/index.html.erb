@@ -54,7 +54,6 @@
             </tbody>
             </table>
         </td>
-        <td class='index-actions'><%= pluralize(project.appointments.count, 'meeting') %></td>
         <% if project.completed_at %>
           <td class='index-actions'><h3><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></h3><td>
         <% else %>

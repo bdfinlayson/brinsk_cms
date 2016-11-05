@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/bdfinlayson/brinsk_cms/tree/master.svg?style=svg)](https://circleci.com/gh/bdfinlayson/brinsk_cms/tree/master)
+
 Brinsk is a contact management system written in Ruby and Rails as my final capstone project at Nashville Software School. It's features include:
 
 - Full text search
