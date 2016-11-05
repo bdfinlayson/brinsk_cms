@@ -17,7 +17,6 @@ class ProjectsController < ApplicationController
     @projects = @search.select { |project| project[:user_id] == current_user.id } unless @search.empty?
     @stages = Stage.where('user_id = ?', current_user)
     @tasks = Task.where('user_id = ?', current_user)
-    @appointments = Appointment.where('user_id = ?', current_user)
   end
 
   def show
@@ -28,7 +27,6 @@ class ProjectsController < ApplicationController
     @notes = Note.where('project_id = ?', @project.id)
     @search = Note.search(params[:search])
     @notes = @search.select { |note| note[:project_id] == @project.id } unless @search.empty?
-    @appointments = Appointment.where('appointable_id = ? and contact_id = ?', @project, @contact)
   end
 
   def create
