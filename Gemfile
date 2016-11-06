@@ -17,6 +17,10 @@ gem 'simple_form'
 gem "simple_calendar"
 gem 'geocoder'
 gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
+gem 'state_machines-activerecord'
+gem 'draper', github: 'audionerd/draper', branch: 'rails5'
+gem 'activemodel-serializers-xml'
 
 gem 'sass'
 
@@ -50,6 +54,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do

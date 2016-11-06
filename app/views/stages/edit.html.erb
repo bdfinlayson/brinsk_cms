@@ -1,7 +1,0 @@
-<%= simple_form_for ([@stage]) do |f| %>
-  <%# <%= render 'shared/error_messages', object: f.object %1> %>
-  <%= f.input :name, placeholder: "Name" %>
-  <%= f.button :submit %>
-<% end %>
-
-<%= link_to 'Cancel', project_path(@stage.project_id) %>

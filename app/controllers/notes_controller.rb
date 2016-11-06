@@ -1,6 +1,4 @@
 class NotesController < ApplicationController
-  before_action :authenticate_user!
-
   def new
     @note = Note.new
   end

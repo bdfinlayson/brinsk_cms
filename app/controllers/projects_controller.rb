@@ -1,6 +1,4 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
-
   def new
     @project = Project.new
   end
@@ -15,14 +13,12 @@ class ProjectsController < ApplicationController
     @projects = Project.where('user_id = ?', current_user)
     @search = Project.search(params[:search])
     @projects = @search.select { |project| project[:user_id] == current_user.id } unless @search.empty?
-    @stages = Stage.where('user_id = ?', current_user)
     @tasks = Task.where('user_id = ?', current_user)
   end
 
   def show
     @project = Project.find(params[:id])
     @contact = Contact.find(@project.contact_id)
-    @stages = @project.stages.all
     @note = Note.new
     @notes = Note.where('project_id = ?', @project.id)
     @search = Note.search(params[:search])
