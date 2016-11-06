@@ -1,20 +1,21 @@
-
 <div class="main-wrapper">
   <div class="main-content">
-    <h1 id="title_header">
+    <div class='header-wrapper'>
       <%= gravatar_for @contact %>
-      <%= "#{@contact.title} #{@contact.full_name}" %>
-      <br />
-      <h3><%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %></h3></h1>
-      <%= render partial: 'shared/modal', locals: { resource: 'Task', resource_path: 'shared/task_form' } %>
-      <%= render partial: 'shared/modal', locals: { resource: 'Note', resource_path: 'shared/note_form' } %>
-      <%= render partial: 'shared/modal', locals: { resource: 'Info', resource_path: 'contacts/info' } %>
-
-    <div class='search-bar'>
-      <%= form_tag contact_path(@contact), :method => :get do %>
-        <div class='search-field'><%= text_field_tag :search, params[:search] %></div>
-        <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
-      <% end %>
+      <div class='name-actions'>
+        <%= render partial: 'shared/modal', locals: { resource: @contact.full_name, resource_path: 'contacts/info' } %>
+        <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+      <div class='modals-search'>
+        <div class='search-bar'>
+          <%= form_tag contact_path(@contact), :method => :get do %>
+            <div class='search-field'><%= text_field_tag :search, params[:search], placeholder: 'Search...' %></div>
+            <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
+          <% end %>
+        </div>
+        <%= render partial: 'shared/modal', locals: { resource: '+ Task', resource_path: 'shared/task_form' } %>
+        <%= render partial: 'shared/modal', locals: { resource: '+ Note', resource_path: 'shared/note_form' } %>
+      </div>
     </div>
 
 

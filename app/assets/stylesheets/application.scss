@@ -19,13 +19,25 @@
 @import 'partials/responsive';
 
 // custom styles
-@import 'partials/layout';
 @import 'signin';
 @import 'forms';
 @import 'contacts';
-@import 'search_bar';
 
+.page-header {
+  font-size:1.5em;
+}
 
+.index-gravatar {
+  text-align:center;
+}
+
+.index-actions {
+  text-align:center;
+}
+
+.gravatar {
+  border-radius:50%;
+}
 
 .content-wrapper {
   padding: 0 25px;
