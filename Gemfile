@@ -17,6 +17,7 @@ gem 'simple_form'
 gem "simple_calendar"
 gem 'geocoder'
 gem 'jquery-turbolinks'
+gem 'jquery-ui-rails'
 
 gem 'sass'
 
@@ -50,6 +51,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
 end
 
 group :development, :test do
