@@ -1,5 +1,6 @@
-<div class='page-header'>
-  <h1>Planning Board<h1>
+<div id='tasks-header' class='page-header'>
+  <h1>Planning Board</h1>
+  <%= render partial: 'shared/modal', locals: { resource: '+ Task', resource_path: 'shared/task_form' } %>
 </div>
 
 <div id='planning-board'>

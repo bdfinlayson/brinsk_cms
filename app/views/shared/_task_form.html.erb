@@ -1,20 +1,9 @@
 <div class='outer-container'>
-  <%= simple_form_for ([@contact, @obj = @contact.tasks.build]) do |f| %>
-    <% if @obj.id == nil %>
-      <p id='form_header'>Add New Task</p>
-    <% else %>
-      <p id='form_header'>Edit Task</p>
-    <% end %>
+  <%= simple_form_for Task.new do |f| %>
+    <p id='form_header'>Add New Task</p>
     <%= f.input :name, placeholder: "Name" %>
     <%= f.label :description %>
     <%= f.text_area :description, placeholder: "Describe your task..." %>
-    <%= f.input :due, placeholder: "Due" %>
     <%= f.button :submit %>
-    <% if @obj.id == nil %>
-      <%= link_to 'Cancel', :back %>
-    <% else %>
-      <%= link_to 'Delete', task_path(@task), method: :delete, data: { confirm: "Are you sure?" } %>
-      <%= link_to 'Cancel', task_path(@task) %>
-    <% end %>
   <% end %>
 </div>

@@ -25,10 +25,6 @@
 @import 'contacts';
 @import 'tasks';
 
-.page-header {
-  font-size:1.5em;
-}
-
 .index-gravatar {
   text-align:center;
 }
@@ -55,20 +51,4 @@
   p.alert {
     background-color: #fff6bf;
   }
-}
-
-.page-header {
-  font-size:1.5em;
-}
-
-.index-gravatar {
-  text-align:center;
-}
-
-.index-actions {
-  text-align:center;
-}
-
-.gravatar {
-  border-radius:50%;
 }
