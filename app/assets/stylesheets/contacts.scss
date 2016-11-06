@@ -1,3 +1,10 @@
-// Place all the styles related to the contacts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.note_container {
+  font-size: .9em;
+  @include outer-container;
+  .note_subject {
+    @include span-columns(2);
+  }
+  .note_content {
+    @include span-columns(10);
+  }
+}

@@ -5,7 +5,6 @@
 @import "neat/neat";
 
 @import "refills/navigation";
-@import 'refills/footer';
 @import 'refills/flashes';
 @import 'refills/accordion-tabs';
 @import 'refills/accordion-tabs-minimal';
@@ -15,8 +14,47 @@
 @import 'refills/device';
 @import 'refills/tables';
 @import 'refills/cards';
-@import 'refills/maps';
 
 
 @import 'partials/responsive';
+
+// custom styles
 @import 'partials/layout';
+@import 'signin';
+@import 'forms';
+@import 'contacts';
+@import 'search_bar';
+
+
+
+.content-wrapper {
+  padding: 0 25px;
+}
+
+.notice-wrapper {
+  padding: 15px;
+  text-align:center;
+  p.notice {
+    background-color:#e5edf8;
+    border-radius:5%;
+  }
+  p.alert {
+    background-color: #fff6bf;
+  }
+}
+
+.page-header {
+  font-size:1.5em;
+}
+
+.index-gravatar {
+  text-align:center;
+}
+
+.index-actions {
+  text-align:center;
+}
+
+.gravatar {
+  border-radius:50%;
+}
