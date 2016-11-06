@@ -19,6 +19,8 @@ gem 'geocoder'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'state_machines-activerecord'
+gem 'draper'
+gem 'activemodel-serializers-xml'
 
 gem 'sass'
 
