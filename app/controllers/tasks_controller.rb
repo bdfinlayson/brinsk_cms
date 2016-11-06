@@ -6,4 +6,15 @@ class TasksController < ApplicationController
   def edit
 
   end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.update_attributes!(task_params)
+    render json: {}
+  end
+
+  private
+    def task_params
+      params.require(:task).permit(:state, :position, :name, :description)
+    end
 end
