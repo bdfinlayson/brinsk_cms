@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106174853) do
+ActiveRecord::Schema.define(version: 20161106185458) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "user_id"
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20161106174853) do
     t.datetime "updated_at",    null: false
     t.datetime "completed_at"
     t.integer  "project_id"
+    t.string   "state"
     t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id"
   end
 
