@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :kanbans, only: [:index]
-
   resources :contacts do
     member do
       post :email_contact

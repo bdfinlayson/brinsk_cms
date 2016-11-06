@@ -18,7 +18,6 @@ gem "simple_calendar"
 gem 'geocoder'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
-gem 'state_machines'
 gem 'state_machines-activerecord'
 
 gem 'sass'

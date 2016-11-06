@@ -1,11 +1,13 @@
 class Task < ActiveRecord::Base
   belongs_to :taskable, polymorphic:true
   validates :name, presence: true, length: { maximum: 50 }
-  # validates :due, presence: true
   # validate :due_date_cannot_be_in_the_past
   acts_as_taggable
 
+  STATES = %w(inbox working completed)
+
   state_machine :initial => :inbox do
+
     event :working do
       transition [:inbox, :completed] => :working
     end
