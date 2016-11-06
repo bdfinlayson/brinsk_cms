@@ -2,6 +2,8 @@
 // Form styling
 //
 
+textarea { height: 20em; }
+
 .outer-container {
   @include outer-container;
   #sign_in_header {
