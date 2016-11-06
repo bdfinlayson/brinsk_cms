@@ -26,11 +26,6 @@ describe Task do
                    )
   end
 
-  describe 'when taskable id is not present' do
-    before { task.taskable_id = '' }
-    it { should_not be_valid }
-  end
-
   describe 'when name is not present' do
     before { task.name = '' }
     it { should_not be_valid }
