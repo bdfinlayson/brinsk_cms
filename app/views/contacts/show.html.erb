@@ -1,225 +1,40 @@
-
 <div class="main-wrapper">
   <div class="main-content">
-     <h1 id="title_header"> <%= gravatar_for @contact %>   <%= "#{@contact.title} #{@contact.first_name} #{@contact.last_name}" %> <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %></h1>
-    <ul class="accordion-tabs">
-      <li class="tab-header-and-content">
-        <a href="javascript:void(0)" class="tab-link">Add a Note</a>
-        <div class="tab-content">
-          <%= render 'shared/note_form' %>
-          <br />
-        </div>
-      </li>
-      <li class="tab-header-and-content">
-        <a href="javascript:void(0)" class="tab-link">Send An Email</a>
-        <div class="tab-content">
-          <br>
-          <p><strong>To: </strong><%= @contact.email %></p>
-          <%= render 'email/email_contact' %>
-        </div>
-      </li>
-      <li class="tab-header-and-content">
-        <a href="javascript:void(0)" class="tab-link">Start A Project</a>
-        <div class="tab-content">
-          <%= render 'shared/project_form' %>
-          <table>
-            <thead>
-              <tr>
-                <th>Project Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-          <% @projects.each do |project| %>
-            <div class="project_wrapper">
-              <div class="project_name">
-                <% if project.completed_at %>
-                  <tr><td><strike style='opacity: 0.4;'><p> <%= project.name %></strike></td>
-                    <td><%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p></td></tr>
-                <% else %>
-                  <tr><td><p><%= project.name %></td>
-                    <td><%= link_to 'Mark as Complete', complete_contact_project_path(@contact, project), method: :patch, data: { confirm: 'Are you sure?' } %>
-                    <br>
-                    <%= link_to 'Manage Project', project_path(project) %>
-                    <br>
-                    <%= link_to 'Delete Project', project_path(project), method: :delete, data: { confirm: 'Are you sure?' } %></p></td></tr>
-                <% end %>
-              </div>
-            </div>
+    <div class='header-wrapper'>
+      <%= gravatar_for @contact %>
+      <div class='name-actions'>
+        <%= render partial: 'shared/modal', locals: { resource: @contact.full_name, resource_path: 'contacts/info' } %>
+        <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
+      </div>
+      <div class='modals-search'>
+        <div class='search-bar'>
+          <%= form_tag contact_path(@contact), :method => :get do %>
+            <div class='search-field'><%= text_field_tag :search, params[:search], placeholder: 'Search...' %></div>
+            <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
           <% end %>
-            </tbody>
-          </table>
-      </li>
-    </ul>
-
-    <div class='search-bar'>
-      <%= form_tag contact_path(@contact), :method => :get do %>
-        <div class='search-field'><%= text_field_tag :search, params[:search] %></div>
-        <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
-      <% end %>
+        </div>
+        <%= render partial: 'shared/modal', locals: { resource: '+ Task', resource_path: 'shared/task_form' } %>
+        <%= render partial: 'shared/modal', locals: { resource: '+ Note', resource_path: 'shared/note_form' } %>
+      </div>
     </div>
 
 
     <% if @notes.empty? %>
       <p> No notes found. </p>
     <% else %>
-
-          <% @notes.each do |note| %>
-            <div class='note_container'>
-              <span class='note_subject'><strong><%= note.subject %></strong> created on <strong> <%= note.created_at.to_date %></strong>
-                <br/>
-                <%= link_to 'Edit', edit_note_path(note) %>
-                <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-              </span>
-              <p class='note_content'><%= note.content %></p>
-            </div>
-            <hr>
-          <% end %>
-
-
-        <% end %>
-
-
-
-
-
-
+      <% @notes.each do |note| %>
+        <div class='note_container'>
+          <span class='note_subject'><strong><%= note.subject %></strong>
+            <br />
+            <%= note.created_at.to_date %>
+            <br/>
+            <%= link_to 'Edit', edit_note_path(note) %>
+            <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+          </span>
+          <p class='note_content'><%= note.content %></p>
         </div>
-
-
-        <div class='secondary-content'>
-          <div class='contact-info-wrapper'>
-            <ul class="accordion-tabs-minimal">
-              <li class="tab-header-and-content">
-                <a href="#" class="tab-link is-active">Google Maps</a>
-                <div class="tab-content">
-                  <div id="map_canvas"></div>
-                  <table>
-                    <thead>
-                        <tr>
-                          <th></th>
-                          <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <tr><td><h3>Address:</td><td> <%= @contact.street1 %></h3></td></tr>
-                      <tr><td><h3>Email:</td><td> <%= @contact.email %></h3></td></tr>
-                      <tr><td><h3>Company:</td><td> <%= @contact.company_name %></h3></td></tr>
-                      <tr><td><h3>Phone:</td><td> <%= @contact.phone %></h3></td></tr>
-                      <tr><td><h3>Background:</h3></td><td> <p><%= @contact.background %></p><br></td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class='task_list_wrapper'>
-            <span><h2 class='task_list_header'>Task List</h2>
-              <div class="modal">
-                <label for="modal-2">
-                  <div class="modal-trigger">Add Task</div>
-                </label>
-                <input class="modal-state" id="modal-2" type="checkbox" />
-                <div class="modal-window">
-                  <div class="modal-inner">
-                    <label class="modal-close" for="modal-2"></label>
-                    <div class='modal-intro'><%= render 'shared/task_form' %></div>
-                  </div>
-                </div>
-              </div></span>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Task</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-            <% if @tasks.empty? %>
-              <tr><td> No tasks found. </td></tr>
-                <% else %>
-              <% @tasks.each do |task| %>
-                <% if task.completed_at %>
-                  <tr><td><div class='task_name'>
-                        <strike style='opacity: 0.4;'><p> <%= task.name %></strike></p>
-                      </div></td>
-                    <td><div class='task_buttons'>
-                      <p> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-                      </div></td>
-                <% else %>
-                  <tr><td><div class='task_name'>
-                    <p><%= task.name %><%= task.description %> </p>
-                      </div></td>
-                      <td><div class='task_buttons'>
-                    <p> <%= link_to 'Mark as Complete', complete_contact_task_path(@contact, task), method: :patch, data: { confirm: 'Are you sure?' } %> <%= link_to 'Edit Task', edit_task_path(task) %> <%= link_to 'Delete Task', task_path(task), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-                        </div></td></tr>
-                <% end %>
-              <% end %>
-            <% end %>
-                </tbody>
-              </table>
-          </div>
-        </div>
+        <hr>
+      <% end %>
+    <% end %>
   </div>
 </div>
-</div>
-
-
-
-<script src="https://maps.googleapis.com/maps/api/js"></script>
-<script>
-  var bittersMap = (function () {
-    var myLatlng = new google.maps.LatLng(<%= @contact.latitude%>, <%= @contact.longitude %>),
-        mapCenter = new google.maps.LatLng(<%= @contact.latitude%>, <%= @contact.longitude %>),
-        mapCanvas = document.getElementById('map_canvas'),
-        mapOptions = {
-          center: mapCenter,
-          zoom: 10,
-          scrollwheel: true,
-          draggable: true,
-          disableDefaultUI: false,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        },
-        map = new google.maps.Map(mapCanvas, mapOptions),
-        contentString =
-          '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">thoughtbot</h1>'+
-          '<div id="bodyContent"'+
-          '<p>Sveavägen 98</p>'+
-          '</div>'+
-          '</div>',
-        infowindow = new google.maps.InfoWindow({
-          content: contentString,
-          maxWidth: 300
-        }),
-        marker = new google.maps.Marker({
-          position: myLatlng,
-          map: map,
-          title: "<%= @contact.first_name %> <%= @contact.last_name %> | <%= @contact.street1 %>"
-        });
-
-    return {
-      init: function () {
-        map.set('styles', [{
-          featureType: 'landscape',
-          elementType: 'geometry',
-          stylers: [
-            { hue: '#ffff00' },
-            { saturation: 30 },
-            { lightness: 10}
-          ]}
-        ]);
-
-        google.maps.event.addListener(marker, 'click', function () {
-          infowindow.open(map,marker);
-        });
-      }
-    };
-  }());
-
-  bittersMap.init();
-</script>
-

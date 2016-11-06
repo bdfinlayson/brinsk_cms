@@ -1,0 +1,14 @@
+<div class="modal">
+  <label for="modal-<%= resource %>">
+    <div class="modal-<%= resource %>"><%= resource %></div>
+  </label>
+  <input class="modal-state" id="modal-<%= resource %>" type="checkbox" />
+  <div class="modal-window">
+    <div class="modal-inner">
+      <label class="modal-close" for="modal-<%= resource %>"></label>
+      <div class='modal-intro'><%= render resource_path %></div>
+    </div>
+  </div>
+</div>
+
+

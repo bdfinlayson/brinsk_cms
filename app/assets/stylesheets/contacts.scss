@@ -1,3 +1,31 @@
-// Place all the styles related to the contacts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 10px 7px -5px lightgrey;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+
+  .gravatar { height: 80px; }
+
+  .name-actions {
+    text-align: center;
+    .modal > label {
+      font-size: x-large;
+    }
+  }
+
+  .modals-search { text-align:right }
+  .search-field { width: 100% }
+  .search-button { display: none; }
+}
+
+.note_container {
+  font-size: .9em;
+  @include outer-container;
+  .note_subject {
+    @include span-columns(2);
+  }
+  .note_content {
+    @include span-columns(10);
+  }
+}
