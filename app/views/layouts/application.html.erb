@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render 'refills/navigation' if user_signed_in? %>
+  <%= render 'shared/navigation' if user_signed_in? %>
   <div class='content-wrapper'>
     <div class='notice-wrapper'>
       <strong><p class="notice"><%= notice %></p></strong>
