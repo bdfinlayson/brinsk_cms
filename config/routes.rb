@@ -12,7 +12,11 @@ Rails.application.routes.draw do
     end
   end
   resources :notes, except: [:show]
-  resources :tasks, except: [:show]
+  resources :tasks, except: [:show] do
+    collection do
+      patch :update_batch
+    end
+  end
 
   root "contacts#index"
 

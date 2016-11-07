@@ -18,8 +18,17 @@ class TasksController < ApplicationController
     render json: {}
   end
 
+  def update_batch
+    tasks = task_params[:ids].zip task_params[:positions]
+    tasks.each do |task|
+      t = Task.find task[0]
+      t.update(position: task[1], state: task_params[:state])
+    end
+    render json: {}
+  end
+
   private
     def task_params
-      params.require(:task).permit(:state, :position, :name, :description)
+      params.require(:task).permit(:state, :position, :name, :description, ids: [], positions: [])
     end
 end
