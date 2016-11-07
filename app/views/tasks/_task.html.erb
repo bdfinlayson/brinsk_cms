@@ -1,1 +1,8 @@
-<li data-id='<%= task.id %>' data-position='<%= task.position %>' class="task"><%= task.name %></li>
+<li data-id='<%= task.id %>' data-position='<%= task.position %>' class="task">
+  <div class='card-title'>
+    <%= task.name %>
+  </div>
+  <div class='card-description'>
+    <%= task.description %>
+  </div>
+</li>

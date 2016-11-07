@@ -4,10 +4,10 @@ $ ->
     connectWith: 'ul'
     stop: (ev, ui) ->
       id = ui.item.data('id')
-      state = ev.toElement.parentElement.id
+      state = ev.toElement.closest('ul').id
       ids = []
       positions = []
-      $(ev.toElement.parentElement).find('li').each (i, e) =>
+      $(ev.toElement.closest('ul')).find('li').each (i, e) =>
         positions.push(i)
         $(e).attr('data-position', i)
         ids.push($(e).data('id'))
