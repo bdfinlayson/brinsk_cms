@@ -1,8 +1,14 @@
 $ ->
 
   $('.task').on 'click', ->
-    console.log 'blab'
+    console.log 'clicked task:', @
+    $('#modal-content-edit-task').empty()
     $('#empty-modal-edit-task > label').click()
+    $.ajax
+      url: "/tasks/#{$(@).data('id')}/edit"
+      method: 'GET'
+      success: (template) ->
+        $('#modal-content-edit-task').append(template)
 
   $('.task-state-well > ul').sortable
     connectWith: 'ul'

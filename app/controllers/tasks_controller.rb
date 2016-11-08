@@ -4,7 +4,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-
+    @task = Task.find params[:id]
+    render :edit, layout: false
   end
 
   def create
