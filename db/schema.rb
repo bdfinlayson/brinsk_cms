@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161106202005) do
+ActiveRecord::Schema.define(version: 20161108143627) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "user_id"
@@ -72,7 +72,10 @@ ActiveRecord::Schema.define(version: 20161106202005) do
   create_table "tags", force: :cascade do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
+    t.integer "user_id"
+    t.string  "color"
     t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|

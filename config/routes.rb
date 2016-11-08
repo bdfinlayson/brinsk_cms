@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :notes
   end
 
+  resources :tags, only: [:index, :edit, :update, :destroy]
+
   resources :projects do
     member do
       patch :complete
