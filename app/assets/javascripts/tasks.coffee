@@ -1,5 +1,9 @@
 $ ->
 
+  $('.task').on 'click', ->
+    console.log 'blab'
+    $('#empty-modal-edit-task > label').click()
+
   $('.task-state-well > ul').sortable
     connectWith: 'ul'
     stop: (ev, ui) ->
