@@ -109,7 +109,7 @@
     width: 95%;
 
     @include media($medium-screen) {
-      max-height: 70%;
+      //max-height: 70%;
       padding: $modal-padding;
       width: 60%;
     }
@@ -133,7 +133,7 @@
       color: $base-font-color;
 
       @include media($medium-screen) {
-        @include columns(2 8em);
+        //@include columns(2 8em);
       }
     }
 

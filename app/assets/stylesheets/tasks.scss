@@ -29,6 +29,8 @@
       background: #fff;
       border: solid 1px #ccc;
       padding: 10px;
+      margin-top: 5px;
+      &:hover { cursor: pointer; }
       .card-title {
         text-align: left;
         color: white;
