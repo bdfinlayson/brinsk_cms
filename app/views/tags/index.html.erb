@@ -1,0 +1,18 @@
+
+<table id="tags">
+  <thead>
+    <tr>
+      <th>Tag Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

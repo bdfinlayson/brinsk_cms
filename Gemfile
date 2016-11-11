@@ -21,6 +21,7 @@ gem 'jquery-ui-rails'
 gem 'state_machines-activerecord'
 gem 'draper', github: 'audionerd/draper', branch: 'rails5'
 gem 'activemodel-serializers-xml'
+gem 'jquery-datatables-rails'
 
 gem 'sass'
 
