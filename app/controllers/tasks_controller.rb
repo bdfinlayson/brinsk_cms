@@ -15,7 +15,9 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
+    Tagging.create(taggable: @task, tag: Tag.find(params[:task][:tag][:id])) if params[:task][:tag][:id]
     @task.update_attributes!(task_params)
+    @task.save
     redirect_to tasks_path
   end
 

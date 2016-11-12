@@ -1,6 +1,9 @@
 <%= simple_form_for (@task) do |f| %>
   <%= f.input :name, placeholder: "Name", label: false %>
   <%= f.text_area :description, placeholder: "Describe your task..." %>
+  <%= f.fields_for 'tag' do |t| %>
+    <%= t.collection_select :id, Tag.all, :id, :name, include_blank: true %>
+  <% end %>
   <%= f.button :submit %>
   <div class='task_buttons'>
     <%= link_to 'Cancel', :back %>
