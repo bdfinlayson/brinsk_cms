@@ -3,7 +3,6 @@ class ContactsController < ApplicationController
   def index
     @user = current_user
     @contacts = current_user.contacts.all
-    @contacts = @search.select { |contact| contact[:user_id] == current_user.id }
   end
 
   def show
