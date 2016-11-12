@@ -7,13 +7,5 @@ class Note < ActiveRecord::Base
   has_many :taggings, as: :taggable
   has_many :tags, through: :taggings, as: :taggable
 
-  def self.search(search)
-    if search
-      where('subject like ? or content like ?', "%#{search}%", "%#{search}%")
-    else
-      []
-    end
-  end
-
-
+  default_scope -> { order(created_at: :desc) }
 end

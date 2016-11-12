@@ -9,6 +9,7 @@ class NotesController < ApplicationController
     @project = Project.find(params[:project_id]) unless params[:project_id].nil?
     if params[:project_id].nil?
       @note = @contact.notes.build(note_params)
+      binding.pry
     else
       @note = @project.notes.build(note_params)
     end
@@ -45,6 +46,6 @@ class NotesController < ApplicationController
   private
 
   def note_params
-    params.require(:note).permit(:subject, :content, :project_id, :contact_id)
+    params.require(:note).permit(:subject, :content, :project_id, :contact_id).merge(user_id: current_user.id)
   end
 end

@@ -7,9 +7,7 @@ class ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
-    @notes = @contact.notes.all
-    @tasks = @contact.tasks.all
-    @projects = @contact.projects.all
+    @notes = Note.where(contact_id: @contact.id)
   end
 
   def email_contact
