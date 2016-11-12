@@ -49,7 +49,7 @@ textarea {
 form {
   display: flex;
   flex-direction: column;
-  input {
+  input, textarea {
     width: 100% !important;
   }
 }

@@ -13,19 +13,22 @@
       font-size: x-large;
     }
   }
-
-  .modals-search { text-align:right }
-  .search-field { width: 100% }
-  .search-button { display: none; }
 }
 
-.note_container {
-  font-size: .9em;
-  @include outer-container;
-  .note_subject {
-    @include span-columns(2);
+.note-header {
+  .note-info {
+    display: flex;
+    justify-content: space-between;
+    .note-title, .note-date {
+      font-weight: bold;
+    }
+
   }
-  .note_content {
-    @include span-columns(10);
+  .note-actions {
+    display: flex;
+    justify-content: flex-end;
+    .divider {
+      padding: 0 10px;
+    }
   }
 }

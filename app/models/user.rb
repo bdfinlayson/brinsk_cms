@@ -15,5 +15,6 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :projects, through: :contacts
   has_many :tasks
-  acts_as_taggable_on :tags
+  has_many :tags
+  has_many :taggings, through: :tags
 end

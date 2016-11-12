@@ -10,41 +10,33 @@
         <%= render partial: 'shared/modal', locals: { resource: '+ Note', resource_path: 'shared/note_form' } %>
       </div>
     </div>
-
-
-    <% if @notes.empty? %>
-      <p> No notes found. </p>
-    <% else %>
-
-
-        <table class='dataTable'>
-          <thead>
-            <tr>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @notes.each do |note| %>
-              <tr>
-                <td>
-                  <div class='note-header'>
-                    <div class='note-info'>
-                      <%= note.created_at.to_date %>
-                      <%= note.subject %>
-                    </div>
-                    <div class='note-actions'>
-                      <%= link_to 'Edit', edit_note_path(note) %>
-                      | <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-                    </div>
-                  </div>
-                  <br />
-                  <%= note.content %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-
+    <table class='dataTable'>
+      <thead>
+        <tr>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notes.each do |note| %>
+          <tr>
+            <td>
+              <div class='note-header'>
+                <div class='note-info'>
+                  <div class='note-date'><%= note.created_at.to_date %></div>
+                  <div class='note-title'><%= note.subject %></div>
+                </div>
+                <div class='note-actions'>
+                  <%= link_to 'Edit', edit_note_path(note) %>
+                  <div class='divider'>|</div>
+                  <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+                </div>
+              </div>
+              <br />
+              <%= note.content %>
+            </td>
+          </tr>
         <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -54,8 +54,6 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (4.0.0)
-      activerecord (>= 4.0)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
     arel (7.1.4)
@@ -348,7 +346,6 @@ PLATFORMS
 
 DEPENDENCIES
   activemodel-serializers-xml
-  acts-as-taggable-on
   awesome_print
   better_errors
   binding_of_caller

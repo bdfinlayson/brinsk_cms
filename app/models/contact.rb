@@ -10,7 +10,8 @@ class Contact < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :tasks, :as => :taskable
-  acts_as_taggable
+  has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings, as: :taggable
 
   geocoded_by :street1
   after_validation :geocode

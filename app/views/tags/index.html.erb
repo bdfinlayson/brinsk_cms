@@ -1,4 +1,5 @@
-
+<h1>Tags (<%= @tags.count %>)</h1>
+<%= render partial: 'shared/modal', locals: { resource: '+ Tag', resource_path: 'shared/tag_form' } %>
 <table class='dataTable'>
   <thead>
     <tr>

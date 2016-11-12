@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :notes
   end
 
-  resources :tags, only: [:index, :edit, :update, :destroy]
+  resources :tags, only: [:index, :edit, :create, :update, :destroy]
 
   resources :projects do
     member do
