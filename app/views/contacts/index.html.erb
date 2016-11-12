@@ -1,74 +1,62 @@
 <div class='page-header'>
-<h1>Contacts (<%= @contacts.count %>)</h1>
+  <h1>Contacts (<%= @contacts.count %>)</h1>
 </div>
 
-<% provide(:title, 'Contacts') %>
+<%= provide(:title, 'Contacts') %>
 
-<div class='search-bar'>
-  <%= form_tag contacts_path, :method => :get do %>
-    <div class='search-field'><%= text_field_tag :search, params[:search] %></div>
-    <div class='search-button'><%= submit_tag 'Search', :name => nil %></div>
-  <% end %>
-    <div class='add-new'><%= link_to 'Add Contact', new_contact_path(@contact)%></div>
-</div>
-
-    <% if @contacts.empty? %>
-      <p> No contacts found. </p>
-    <% else %>
-
-
-<table class="tables">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Contact Info</th>
-      <th>Activity</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @contacts.each do |contact| %>
+<% if @contacts.empty? %>
+  <p> No contacts found. </p>
+<% else %>
+  <table class="tables dataTable">
+    <thead>
       <tr>
-        <td class='index-gravatar'>
-          <%= gravatar_for contact %>
-          <br>
-          <%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact) %>
-        </td>
-        <td>
-          <table>
-            <thead>
-              <tr>
-                <th>Info</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><%= contact.phone %></td></tr>
-              <tr><td><%= contact.email %></td></tr>
-              <tr><td><%= contact.street1 %></td></tr>
-            </tbody>
-          </table>
-        </td>
-        <td>
-          <table>
-            <thead>
-              <tr>
-                <th>Notes</th>
-                <th>Tasks</th>
-                <th>Meetings</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><%= pluralize(contact.notes.count, 'note') %></td><td> <%= pluralize(contact.tasks.count, 'task') %></td></tr>
-            </tbody>
-          </table>
-        </td>
-        <td class='index-actions'>
-        <p><%= link_to 'Edit', edit_contact_path(contact) %></p>
-        <p><%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' } %></p></td>
+        <th>Name</th>
+        <th>Contact Info</th>
+        <th>Activity</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td class='index-gravatar'>
+            <%= gravatar_for contact %>
+            <br>
+            <%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact) %>
+          </td>
+          <td>
+            <table>
+              <thead>
+                <tr>
+                  <th>Info</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><%= contact.phone %></td></tr>
+                <tr><td><%= contact.email %></td></tr>
+                <tr><td><%= contact.street1 %></td></tr>
+              </tbody>
+            </table>
+          </td>
+          <td>
+            <table>
+              <thead>
+                <tr>
+                  <th>Notes</th>
+                  <th>Tasks</th>
+                  <th>Meetings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><%= pluralize(contact.notes.count, 'note') %></td><td> <%= pluralize(contact.tasks.count, 'task') %></td></tr>
+              </tbody>
+            </table>
+          </td>
+          <td class='index-actions'>
+          <p><%= link_to 'Edit', edit_contact_path(contact) %></p>
+          <p><%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' } %></p></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
-
-

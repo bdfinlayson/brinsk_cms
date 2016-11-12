@@ -1,2 +1,2 @@
 $ ->
-  $('#tags').dataTable()
+  $('.dataTable').dataTable();
