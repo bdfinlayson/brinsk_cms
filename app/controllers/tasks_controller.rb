@@ -5,6 +5,7 @@ class TasksController < ApplicationController
 
   def edit
     @task = Task.find params[:id]
+    @tags = current_user.tags
     render :edit, layout: false
   end
 
@@ -15,10 +16,19 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find(params[:id])
-    Tagging.create(taggable: @task, tag: Tag.find(params[:task][:tag][:id])) if params[:task][:tag][:id]
+    destroy_and_create_taggings
     @task.update_attributes!(task_params)
     @task.save
     redirect_to tasks_path
+  end
+
+  def destroy_and_create_taggings
+    if tag_params[:tags][:ids].delete_if{|x| x.empty? }.any?
+      @task.taggings.destroy_all
+      Tag.where(id: tag_params[:tags][:ids]).each do |t|
+        Tagging.create(taggable: @task, tag: t)
+      end
+    end
   end
 
   def update_batch
@@ -33,5 +43,9 @@ class TasksController < ApplicationController
   private
     def task_params
       params.require(:task).permit(:state, :position, :name, :description, ids: [], positions: [])
+    end
+
+    def tag_params
+      params.require(:task).permit(tags: [ids: []])
     end
 end
