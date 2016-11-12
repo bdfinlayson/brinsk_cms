@@ -9,7 +9,6 @@ class NotesController < ApplicationController
     @project = Project.find(params[:project_id]) unless params[:project_id].nil?
     if params[:project_id].nil?
       @note = @contact.notes.build(note_params)
-      binding.pry
     else
       @note = @project.notes.build(note_params)
     end

@@ -7,5 +7,5 @@ class Note < ActiveRecord::Base
   has_many :taggings, as: :taggable
   has_many :tags, through: :taggings, as: :taggable
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(subject: :asc) }
 end
