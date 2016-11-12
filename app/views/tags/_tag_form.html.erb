@@ -2,6 +2,7 @@
   <%= simple_form_for @tag do |f| %>
     <p id='form_header'>Add New Tag</p>
     <%= f.input :name, placeholder: "Name" %>
+    <%= f.input :color, placeholder: "Color" %>
     <%= f.button :submit %>
   <% end %>
 </div>

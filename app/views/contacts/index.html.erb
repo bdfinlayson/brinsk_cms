@@ -22,7 +22,7 @@
           <td class='index-gravatar'>
             <%= gravatar_for contact %>
             <br>
-            <%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact) %>
+            <%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact), data: { turbolinks: false }  %>
           </td>
           <td>
             <table>
@@ -53,7 +53,7 @@
             </table>
           </td>
           <td class='index-actions'>
-          <p><%= link_to 'Edit', edit_contact_path(contact) %></p>
+          <p><%= link_to 'Edit', edit_contact_path(contact), data: { turbolinks: false }  %></p>
           <p><%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' } %></p></td>
         </tr>
       <% end %>
