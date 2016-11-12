@@ -1,6 +1,8 @@
 class TasksController < ApplicationController
   def index
     @user = current_user.decorate
+    @tags = current_user.tags
+    @task = Task.new
   end
 
   def edit
@@ -10,7 +12,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task_params.merge(user: current_user))
+    @task = Task.create(task_params.merge(user: current_user))
+    destroy_and_create_taggings
     redirect_to tasks_path
   end
 
@@ -22,15 +25,6 @@ class TasksController < ApplicationController
     redirect_to tasks_path
   end
 
-  def destroy_and_create_taggings
-    if tag_params[:tags][:ids].delete_if{|x| x.empty? }.any?
-      @task.taggings.destroy_all
-      Tag.where(id: tag_params[:tags][:ids]).each do |t|
-        Tagging.create(taggable: @task, tag: t)
-      end
-    end
-  end
-
   def update_batch
     tasks = task_params[:ids].zip task_params[:positions]
     tasks.each do |task|
@@ -40,6 +34,11 @@ class TasksController < ApplicationController
     render json: {}
   end
 
+  def destroy
+    Task.find(params[:id]).destroy
+    redirect_to tasks_path, notice: 'Task destroyed!'
+  end
+
   private
     def task_params
       params.require(:task).permit(:state, :position, :name, :description, ids: [], positions: [])
@@ -47,5 +46,14 @@ class TasksController < ApplicationController
 
     def tag_params
       params.require(:task).permit(tags: [ids: []])
+    end
+
+    def destroy_and_create_taggings
+      if tag_params[:tags][:ids].delete_if{|x| x.empty? }.any?
+        @task.taggings.destroy_all
+        Tag.where(id: tag_params[:tags][:ids]).each do |t|
+          Tagging.create(taggable: @task, tag: t)
+        end
+      end
     end
 end

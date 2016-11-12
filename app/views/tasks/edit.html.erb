@@ -6,6 +6,6 @@
   <% end %>
   <%= f.button :submit %>
   <div class='task_buttons'>
-    <%= link_to 'Cancel', :back %>
+    <%= link_to 'Delete', task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
   </div>
 <% end %>
