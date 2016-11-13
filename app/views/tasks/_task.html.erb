@@ -1,8 +1,9 @@
 <li data-id='<%= task.id %>' data-position='<%= task.position %>' class="task">
-  <div class='card-title' style='background:<%= task.try(:taggings).try(:last).try(:tag).try(:color) %>;color: <%= "white" if task.try(:tags).try(:present?) %>'>
+  <div class='card-title'>
     <%= task.name %>
   </div>
   <div class='card-description'>
     <%= task.description %>
   </div>
+  <%= render partial: 'tags/tag_indicator', collection: task.tags, as: :tag %>
 </li>
