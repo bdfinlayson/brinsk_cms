@@ -1,14 +1,11 @@
-
-<div class='outer-container'>
-  <%= simple_form_for (@task) do |f| %>
-  <p id='form_header'>Edit Task</p>
-    <%= f.input :name, placeholder: "Name" %>
-    <%= f.label :description %>
-    <%= f.text_area :description, placeholder: "Describe your task..." %>
-    <%= f.input :due, placeholder: "Due" %>
-    <%= f.button :submit %>
-    <div class='task_buttons'>
-      <%= link_to 'Cancel', :back %>
-    </div>
+<%= simple_form_for (@task) do |f| %>
+  <%= f.input :name, placeholder: "Name", label: false %>
+  <%= f.text_area :description, placeholder: "Describe your task..." %>
+  <%= f.fields_for 'tags' do |t| %>
+    <%= t.collection_select(:ids, @tags, :id, :name, { selected: @task.tags.pluck(:id) }, { multiple: true }) %>
   <% end %>
-</div>
+  <%= f.button :submit %>
+  <div class='task_buttons'>
+    <%= link_to 'Delete', task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>

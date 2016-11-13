@@ -1,0 +1,33 @@
+.color-box {
+  height: 30px;
+  width: 30px;
+}
+
+.tag-index-header {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px;
+
+  .modal {
+    border: 1px solid lightgrey;
+    padding: 1px 5px;
+    margin-left: 20px;
+  }
+}
+
+.tag-indicator {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  .identifier { display: none; }
+  &:hover {
+    .identifier {
+      display: flex;
+      font-size: 10px;
+      background: white;
+      position: absolute;
+      border: solid 1px black;
+      padding: 0 1px;
+    }
+  }
+}

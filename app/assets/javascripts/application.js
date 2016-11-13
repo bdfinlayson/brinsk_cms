@@ -15,4 +15,6 @@
 //= require jquery_ujs
 //= require jquery-ui/sortable
 //= require turbolinks
+//= require dataTables/jquery.dataTables
+//= require jquery.minicolors
 //= require_tree .

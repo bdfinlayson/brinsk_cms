@@ -2,9 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :contacts do
-    resources :tasks, except: [:show]
     resources :notes
   end
+
+  resources :tags, only: [:index, :edit, :create, :update, :destroy]
 
   resources :projects do
     member do

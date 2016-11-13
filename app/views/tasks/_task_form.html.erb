@@ -1,9 +1,12 @@
 <div class='outer-container'>
-  <%= simple_form_for Task.new do |f| %>
+  <%= simple_form_for @task do |f| %>
     <p id='form_header'>Add New Task</p>
     <%= f.input :name, placeholder: "Name" %>
     <%= f.label :description %>
     <%= f.text_area :description, placeholder: "Describe your task..." %>
+    <%= f.fields_for 'tags' do |t| %>
+      <%= t.collection_select(:ids, @tags, :id, :name, { selected: @task.tags.pluck(:id) }, { multiple: true }) %>
+    <% end %>
     <%= f.button :submit %>
   <% end %>
 </div>

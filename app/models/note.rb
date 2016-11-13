@@ -4,15 +4,8 @@ class Note < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
   belongs_to :contact
-  acts_as_taggable
+  has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings, as: :taggable
 
-  def self.search(search)
-    if search
-      where('subject like ? or content like ?', "%#{search}%", "%#{search}%")
-    else
-      []
-    end
-  end
-
-
+  default_scope -> { order(subject: :asc) }
 end

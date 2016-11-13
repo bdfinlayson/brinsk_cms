@@ -1,0 +1,25 @@
+<div class='tag-index-header'>
+  <h1>Tags (<%= @tags.count %>)</h1>
+  <%= render partial: 'shared/modal', locals: { resource: '+ Tag', resource_path: 'tags/tag_form' } %>
+</div>
+<table class='dataTable'>
+  <thead>
+    <tr>
+      <th>Tag Name</th>
+      <th>Tag Color</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.name %></td>
+        <td><div class='color-box' style='background:<%=tag.color%>'></div></td>
+        <td>
+          <%= link_to 'Edit', edit_tag_path(tag), data: { turbolinks: false } %>
+          | <%= link_to 'Delete', tag_path(tag), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,16 +1,10 @@
+
+
 fieldset {
   background-color: lighten($base-border-color, 10%);
   border: $base-border;
   margin: 0 0 $small-spacing;
   padding: $base-spacing;
-}
-
-input,
-label,
-select {
-  display: block;
-  font-family: $base-font-family;
-  font-size: $base-font-size;
 }
 
 label {
@@ -39,7 +33,7 @@ textarea {
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 3;
   transition: border-color;
-  width: 100%;
+  width: auto;
 
   &:hover {
     border-color: darken($base-border-color, 10%);
@@ -52,12 +46,16 @@ textarea {
   }
 }
 
-textarea {
-  resize: vertical;
+form {
+  display: flex;
+  flex-direction: column;
+  input, textarea {
+    width: 100% !important;
+  }
 }
 
-input[type="search"] {
-  @include appearance(none);
+textarea {
+  resize: vertical;
 }
 
 input[type="checkbox"],

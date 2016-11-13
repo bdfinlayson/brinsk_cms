@@ -12,7 +12,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'faker'
-gem 'acts-as-taggable-on'
 gem 'simple_form'
 gem "simple_calendar"
 gem 'geocoder'
@@ -21,6 +20,8 @@ gem 'jquery-ui-rails'
 gem 'state_machines-activerecord'
 gem 'draper', github: 'audionerd/draper', branch: 'rails5'
 gem 'activemodel-serializers-xml'
+gem 'jquery-datatables-rails'
+gem 'jquery-minicolors-rails'
 
 gem 'sass'
 
@@ -66,4 +67,3 @@ group :development, :test do
   gem 'spring'
   gem 'sqlite3'
 end
-

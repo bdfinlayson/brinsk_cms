@@ -6,9 +6,25 @@
     <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
     <nav role="navigation">
       <ul id="js-navigation-menu" class="navigation-menu show">
-        <li class="nav-link"><%= link_to "Contacts", root_path %></li>
-        <li class="nav-link"><%= link_to 'Projects', projects_path(current_user) %></li>
-        <li class="nav-link"><%= link_to 'Planning Board', tasks_path %></li>
+        <li class="nav-link"><%= link_to "Contacts", root_path, data: { turbolinks: false }  %></li>
+        <li class="nav-link"><%= link_to 'Projects', projects_path(current_user), data: { turbolinks: false }  %></li>
+        <li class="nav-link"><%= link_to 'Planning Board', tasks_path, data: { turbolinks: false }  %></li>
+         <li id="js-navigation-more" class="nav-link more"><a href="javascript:void(0)">Admin</a>
+          <ul class="submenu">
+            <li><%= link_to 'Tags', tags_path, data: { turbolinks: false }  %></li>
+            <li class="more"><a href="javascript:void(0)">Stats</a>
+              <ul class="submenu">
+                <li><a href="javascript:void(0)">Task Activity</a></li>
+                <li><a href="javascript:void(0)">Contact Activity</a></li>
+              </ul>
+            </li>
+            <li class="more"><a href="javascript:void(0)">Reviews</a>
+              <ul class="submenu">
+                <li><a href="javascript:void(0)">Something here?</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
     </nav>
     <div class="navigation-tools">
       <div class="search-bar">

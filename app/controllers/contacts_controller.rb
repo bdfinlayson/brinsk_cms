@@ -3,17 +3,11 @@ class ContactsController < ApplicationController
   def index
     @user = current_user
     @contacts = current_user.contacts.all
-    @search = Contact.search(params[:search])
-    @contacts = @search.select { |contact| contact[:user_id] == current_user.id } unless @search.empty?
   end
 
   def show
     @contact = Contact.find(params[:id])
-    @notes = @contact.notes.all
-    @search = Note.search(params[:search])
-    @notes = @search.select { |note| note[:contact_id] == @contact.id } unless @search.empty?
-    @tasks = @contact.tasks.all
-    @projects = @contact.projects.all
+    @notes = Note.where(contact_id: @contact.id)
   end
 
   def email_contact

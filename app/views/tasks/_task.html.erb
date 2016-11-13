@@ -5,4 +5,5 @@
   <div class='card-description'>
     <%= task.description %>
   </div>
+  <%= render partial: 'tags/tag_indicator', collection: task.tags, as: :tag %>
 </li>

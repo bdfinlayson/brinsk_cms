@@ -8,8 +8,9 @@ class Project < ActiveRecord::Base
   # validates :description, presence: true, length: { maximum: 300 }
   # validates :start_date, presence: true
   # validates :end_date, presence: true
-  acts_as_taggable
-
+  has_many :taggings, as: :taggable
+  has_many :tags, through: :taggings, as: :taggable
+  
   def self.search(search)
     if search
       where('name like ? or description like ?', "%#{search}%", "%#{search}%")

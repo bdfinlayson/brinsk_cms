@@ -10,19 +10,11 @@ class Contact < ActiveRecord::Base
   has_many :notes, dependent: :destroy
   has_many :projects, dependent: :destroy
   has_many :tasks, :as => :taskable
-  acts_as_taggable
+  has_many :taggings, as: :taggable, dependent: :destroy
+  has_many :tags, through: :taggings, as: :taggable
 
   geocoded_by :street1
   after_validation :geocode
-
-  def self.search(search)
-    if search
-      where('first_name like ? or last_name like ? or street1 like ? or email like ? or background like ?', "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%")
-    else
-      []
-    end
-  end
-
 
 
   def full_address

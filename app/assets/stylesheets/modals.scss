@@ -1,2 +1,3 @@
 .modal-window { padding-top: 2em !important; }
-.modal-inner { width: 75% !important; }
+.modal-inner { max-width: 500px !important; min-width: 400px !important; }
+.empty-modal { border: none !important; }
