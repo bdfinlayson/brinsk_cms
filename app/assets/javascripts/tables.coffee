@@ -1,2 +1,2 @@
 $ ->
-  $('.dataTable').dataTable( aaSorting: []);
+  $('.dataTable').dataTable();
