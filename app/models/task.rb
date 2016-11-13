@@ -14,6 +14,9 @@ class Task < ActiveRecord::Base
 
   state_machine :initial => :inbox do
 
+    after_transition any => :working, do: :update_started_at
+    after_transition any => :completed, do: :update_completed_at
+
     event :working do
       transition [:inbox, :completed] => :working
     end
@@ -27,14 +30,13 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def self.search(search)
-    if search
-      where('name like ? or description like ? or taskable_type like ?', "%#{search}%", "%#{search}%", "%#{search}%")
-    else
-      []
-    end
+  def update_started_at
+    update(started_at: Time.current)
   end
 
+  def update_completed_at
+    update(completed_at: Time.current)
+  end
 
   def due_date_cannot_be_in_the_past
     if due.present? && due < Date.today

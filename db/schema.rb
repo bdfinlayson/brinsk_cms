@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112173805) do
+ActiveRecord::Schema.define(version: 20161112234611) do
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "user_id"
@@ -57,16 +57,6 @@ ActiveRecord::Schema.define(version: 20161112173805) do
     t.datetime "completed_at"
   end
 
-  create_table "taggings", force: :cascade do |t|
-    t.string   "taggable_type"
-    t.integer  "taggable_id"
-    t.integer  "tag_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -89,6 +79,7 @@ ActiveRecord::Schema.define(version: 20161112173805) do
     t.integer  "project_id"
     t.string   "state"
     t.integer  "position"
+    t.datetime "started_at"
     t.index ["position"], name: "index_tasks_on_position"
     t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id"
   end

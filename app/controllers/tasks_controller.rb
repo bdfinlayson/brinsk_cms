@@ -21,6 +21,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     destroy_and_create_taggings
     @task.update_attributes!(task_params)
+    @task.send(task_params[:state]) if task_params[:state].present?
     @task.save
     redirect_to tasks_path
   end
@@ -29,7 +30,8 @@ class TasksController < ApplicationController
     tasks = task_params[:ids].zip task_params[:positions]
     tasks.each do |task|
       t = Task.find task[0]
-      t.update(position: task[1], state: task_params[:state])
+      t.update(position: task[1])
+      t.send(task_params[:state])
     end
     render json: {}
   end
@@ -41,7 +43,7 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:state, :position, :name, :description, ids: [], positions: [])
+      params.require(:task).permit(:state, :position, :name, :description, :moved_task_id, ids: [], positions: [])
     end
 
     def tag_params
