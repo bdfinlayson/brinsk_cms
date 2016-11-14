@@ -50,6 +50,8 @@
       }
       .card-description {
         padding: 5px;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
    }
 }
