@@ -27,16 +27,20 @@
           border: solid 1px black;
           height: 7em;
           margin: 10px 0;
+          box-shadow: 1px 4px 10px -6px;
+        }
+        .ui-sortable-helper {
+          transform: rotate(5deg);
         }
       }
   }
 
-  .task
-  {
+  .task {
       background: #fff;
       border: solid 1px #ccc;
       padding: 10px;
-      margin-top: 5px;
+      margin-top: 10px;
+      box-shadow: 1px 4px 10px -6px;
       &:hover { cursor: pointer; background: #f0f0f7;}
       .card-title {
         text-align: left;
@@ -47,5 +51,5 @@
       .card-description {
         padding: 5px;
       }
-  }
+   }
 }
