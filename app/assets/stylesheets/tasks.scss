@@ -21,6 +21,13 @@
 
       ul {
         height: 100vh;
+
+        .task-placeholder {
+          background: lightgrey;
+          border: solid 1px black;
+          height: 7em;
+          margin: 10px 0;
+        }
       }
   }
 
@@ -30,7 +37,7 @@
       border: solid 1px #ccc;
       padding: 10px;
       margin-top: 5px;
-      &:hover { cursor: pointer; }
+      &:hover { cursor: pointer; background: #f0f0f7;}
       .card-title {
         text-align: left;
         padding: 5px;

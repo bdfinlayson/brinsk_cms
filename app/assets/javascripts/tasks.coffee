@@ -12,6 +12,7 @@ $ ->
 
   $('.task-state-well > ul').sortable
     connectWith: 'ul'
+    placeholder: "task-placeholder"
     stop: (ev, ui) ->
       id = ui.item.data('id')
       state = ev.toElement.closest('ul').id
