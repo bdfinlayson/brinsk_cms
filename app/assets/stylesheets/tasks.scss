@@ -52,6 +52,8 @@
         padding: 5px;
         text-overflow: ellipsis;
         overflow: hidden;
+        max-height: 50px;
+        margin-bottom: 10px;
       }
    }
 }
