@@ -19,6 +19,40 @@
     padding: 0 10px;
     max-width: 30%;
 
+    .well-header {
+      display: flex;
+      justify-content: space-between;
+
+      .well-menu {
+        width: 35px;
+        text-align: center;
+
+        &:before {
+          content: '. . .';
+          width: 40px;
+          position: absolute;
+          right: 30px;
+          font-weight: bold;
+        }
+        &:hover {
+          cursor: pointer;
+          .menu-items {
+            display: block;
+            position: absolute;
+            right: 30px;
+            top: 175px;
+            border: 1px slategrey solid;
+            background: white;
+            .menu-header { padding: 0 10px; color: lightgrey; border-bottom: solid; }
+            .menu-item:hover { background: #f0f0f7; cursor: pointer; }
+          }
+        }
+        .menu-items {
+          display: none;
+        }
+      }
+    }
+
       ul {
         height: 100vh;
 

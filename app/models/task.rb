@@ -5,7 +5,7 @@ class Task < ActiveRecord::Base
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, as: :taggable
 
-  default_scope -> { order(position: :asc) }
+  default_scope -> { order(position: :asc).where.not(state: 'archived') }
 
   validates :name, presence: true, length: { maximum: 50 }
   # validate :due_date_cannot_be_in_the_past
@@ -17,6 +17,10 @@ class Task < ActiveRecord::Base
     after_transition any => :working, do: :update_started_at
     after_transition any => :completed, do: :update_completed_at
 
+    event :inbox do
+      transition [:working, :completed] => :inbox
+    end
+
     event :working do
       transition [:inbox, :completed] => :working
     end
@@ -25,8 +29,8 @@ class Task < ActiveRecord::Base
       transition [:inbox, :working] => :completed
     end
 
-    event :inbox do
-      transition [:working, :completed] => :inbox
+    event :archived do
+      transition [:completed] => :archived
     end
   end
 

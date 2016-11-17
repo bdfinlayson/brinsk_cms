@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :tasks, except: [:show] do
     collection do
       patch :update_batch
+      patch :archive_batch
     end
   end
 

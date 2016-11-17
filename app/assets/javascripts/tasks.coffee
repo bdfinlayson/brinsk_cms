@@ -1,4 +1,18 @@
 $ ->
+  $('#archive-all').on 'click', ->
+    if confirm("Are you sure?")
+      ids = []
+      $('#completed').find('li').each (i, e) ->
+        ids.push($(e).data('id'))
+      $.ajax
+        url: "/tasks/archive_batch"
+        method: 'PATCH'
+        data:
+          task:
+            ids: ids
+      console.log "archived tasks: #{ids}"
+      $('#completed').empty()
+
 
   $('.task').on 'click', ->
     console.log 'clicked task:', @

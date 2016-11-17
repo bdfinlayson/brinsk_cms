@@ -18,7 +18,15 @@
     </ul>
   </div>
   <div class='task-state-well'>
-    <h1>Completed</h1>
+    <div class='well-header'>
+      <h1>Completed</h1>
+      <div class='well-menu'>
+        <div class='menu-items'>
+          <div class='menu-header'>List Actions</div>
+          <div class='menu-item' id='archive-all'>Archive All</div>
+        </div>
+      </div>
+    </div>
     <ul id="completed">
       <%= render partial: 'task', collection: @user.completed_tasks, as: :task %>
     </ul>

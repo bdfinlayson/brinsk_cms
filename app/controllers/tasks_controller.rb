@@ -36,6 +36,15 @@ class TasksController < ApplicationController
     render json: {}
   end
 
+  def archive_batch
+    tasks = task_params[:ids]
+    tasks.each do |task_id|
+      t = Task.find task_id
+      t.archived
+    end
+    render json: {}
+  end
+
   def destroy
     Task.find(params[:id]).destroy
     redirect_to tasks_path, notice: 'Task destroyed!'
