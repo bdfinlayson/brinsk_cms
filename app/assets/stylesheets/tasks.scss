@@ -5,7 +5,9 @@
   h1 { width: 130px }
   .modal {
     border: solid 1px grey;
+    border-radius: 3px;
     padding: 5px;
+    box-shadow: 1px 4px 10px -7px;
   }
 }
 
@@ -41,7 +43,8 @@
             position: absolute;
             right: 30px;
             top: 175px;
-            border: 1px slategrey solid;
+            border: 1px lightgrey solid;
+            box-shadow: 1px 4px 10px -6px;
             background: white;
             .menu-header { padding: 0 10px; color: lightgrey; border-bottom: solid; }
             .menu-item:hover { background: #f0f0f7; cursor: pointer; }
@@ -72,6 +75,7 @@
   .task {
       background: #fff;
       border: solid 1px #ccc;
+      border-radius: 3px;
       padding: 10px;
       margin-top: 10px;
       box-shadow: 1px 4px 10px -6px;
