@@ -1,3 +1,5 @@
+<%= provide(:title, 'Tasks') %>
+
 <div id='tasks-header' class='page-header'>
   <h1>Planning Board</h1>
   <%= render partial: 'shared/modal', locals: { resource: '+ Task', resource_path: 'tasks/task_form' } %>
