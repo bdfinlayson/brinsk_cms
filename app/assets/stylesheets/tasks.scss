@@ -7,6 +7,10 @@
     flex-grow: 1;
     padding: 0 10px;
     max-width: 30%;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
 
     .well-header {
       display: flex;
@@ -44,7 +48,8 @@
     }
 
       ul {
-        height: 100vh;
+        height: 70vh;
+        overflow-y: scroll;
 
         .task-placeholder {
           background: lightgrey;

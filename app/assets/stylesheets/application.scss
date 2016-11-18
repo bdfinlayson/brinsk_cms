@@ -22,6 +22,8 @@
 @import 'tasks';
 @import 'tags';
 
+body { overflow: hidden; }
+
 .page-header {
   display: flex;
   padding-bottom: 10px;
