@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(version: 20161112234611) do
     t.string   "name"
     t.text     "description"
     t.datetime "due"
-    t.integer  "taskable_id"
     t.string   "taskable_type"
+    t.integer  "taskable_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.datetime "completed_at"

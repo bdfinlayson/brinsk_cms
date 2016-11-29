@@ -50,17 +50,23 @@ body { overflow: hidden; }
 }
 
 .content-wrapper {
-  padding: 0 25px;
+  padding: 10px;
 }
 
 .notice-wrapper {
+  position: absolute;
+  bottom: 22px;
+  width: 300px;
+  right: 40px;
   padding: 15px;
   text-align:center;
+  z-index: 99999;
   p.notice {
     background-color:#e5edf8;
     border-radius:5%;
   }
   p.alert {
     background-color: #fff6bf;
+    border-radius:5%;
   }
 }

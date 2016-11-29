@@ -1,6 +1,6 @@
 $ ->
   $('.dataTable').dataTable
     aaSorting: []
-    scrollY: '55vh'
+    scrollY: '60vh'
     paging: false
     scrollCollapse: true
