@@ -1,6 +1,6 @@
 $ ->
   $('.dataTable').dataTable
     aaSorting: []
-    scrollY: $(window).height() * 70 / 100
+    scrollY: ($('.content-wrapper').height() - 155) * 70 / 100
     paging: false
-    scrollCollapse: true
+    scrollCollapse: false
