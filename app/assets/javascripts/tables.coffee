@@ -1,6 +1,6 @@
 $ ->
   $('.dataTable').dataTable
     aaSorting: []
-    scrollY: '60vh'
+    scrollY: $(window).height() * 70 / 100
     paging: false
     scrollCollapse: true
