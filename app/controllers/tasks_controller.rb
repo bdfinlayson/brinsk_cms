@@ -3,7 +3,7 @@ class TasksController < ApplicationController
     @inbox_tasks = current_user.tasks.where(state: 'inbox')
     @working_tasks = current_user.tasks.where(state: 'working')
     @completed_tasks = current_user.tasks.where(state: 'completed')
-    @archived_tasks = current_user.tasks.where(state: 'archived').unscoped#.where(completed_at: 6.months.ago...Time.now)
+    @archived_tasks = current_user.tasks.unscoped.where(state: 'archived')#.where(completed_at: 6.months.ago...Time.now)
     @tags = current_user.tags
     @task = Task.new
   end
