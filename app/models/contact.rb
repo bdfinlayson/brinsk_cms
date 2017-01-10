@@ -13,10 +13,6 @@ class Contact < ActiveRecord::Base
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, as: :taggable
 
-  geocoded_by :street1
-  after_validation :geocode
-
-
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"
   end

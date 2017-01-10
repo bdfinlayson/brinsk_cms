@@ -9,8 +9,8 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Contact Info</th>
-      <th>Activity</th>
+      <th>Notes</th>
+      <th>Tasks</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -23,32 +23,10 @@
           <%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact), data: { turbolinks: false }  %>
         </td>
         <td>
-          <table>
-            <thead>
-              <tr>
-                <th>Info</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><%= contact.phone %></td></tr>
-              <tr><td><%= contact.email %></td></tr>
-              <tr><td><%= contact.street1 %></td></tr>
-            </tbody>
-          </table>
+          <%= pluralize(contact.notes.count, 'note') %>
         </td>
         <td>
-          <table>
-            <thead>
-              <tr>
-                <th>Notes</th>
-                <th>Tasks</th>
-                <th>Meetings</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><%= pluralize(contact.notes.count, 'note') %></td><td> <%= pluralize(contact.tasks.count, 'task') %></td></tr>
-            </tbody>
-          </table>
+          <%= pluralize(contact.tasks.count, 'task') %>
         </td>
         <td class='index-actions'>
         <p><%= link_to 'Edit', edit_contact_path(contact), data: { turbolinks: false }  %></p>

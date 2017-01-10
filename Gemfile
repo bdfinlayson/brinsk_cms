@@ -14,7 +14,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'faker'
 gem 'simple_form'
 gem "simple_calendar"
-gem 'geocoder'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails'
 gem 'state_machines-activerecord'
