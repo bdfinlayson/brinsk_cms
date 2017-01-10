@@ -1,36 +1,59 @@
 <%= provide(:title, 'Tasks') %>
+<% if params[:archived] == 'true' %>
+  <h1>Archived Tasks</h1>
+  <%= link_to('View Planning Board', tasks_path, data: { turbolinks: false } ) %>
+  <table class="tables dataTable">
+    <thead>
+      <tr>
+        <th>Completed At</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'archived_task', collection: @archived_tasks, as: :task %>
+    </tbody>
+  </table>
+<% else %>
+  <div id='tasks-header' class='page-header'>
+    <div>
+      <h1>Planning Board</h1>
+      <%= link_to('View Archive', tasks_path(archived: true), data: { turbolinks: false } ) %>
+      <%= render partial: 'shared/empty_modal', locals: { resource: 'edit-task' } %>
+    </div>
+    <%= render partial: 'shared/modal', locals: { resource: '+ Task', resource_path: 'tasks/task_form' } %>
 
-<div id='tasks-header' class='page-header'>
-  <h1>Planning Board</h1>
-  <%= render partial: 'shared/modal', locals: { resource: '+ Task', resource_path: 'tasks/task_form' } %>
-  <%= render partial: 'shared/empty_modal', locals: { resource: 'edit-task' } %>
-</div>
+  </div>
 
-<div id='planning-board'>
-  <div class='task-state-well'>
-    <h1>Inbox</h1>
-    <ul id='inbox'>
-      <%= render partial: 'task', collection: @user.inbox_tasks, as: :task %>
-    </ul>
-  </div>
-  <div class='task-state-well'>
-    <h1>Working</h1>
-    <ul id='working'>
-      <%= render partial: 'task', collection: @user.working_tasks, as: :task %>
-    </ul>
-  </div>
-  <div class='task-state-well'>
-    <div class='well-header'>
-      <h1>Completed</h1>
-      <div class='well-menu'>
-        <div class='menu-items'>
-          <div class='menu-header'>List Actions</div>
-          <div class='menu-item' id='archive-all'>Archive All</div>
+
+  <div id='planning-board'>
+    <div class='task-state-well'>
+      <h1>Inbox</h1>
+      <ul id='inbox'>
+        <%= render partial: 'task', collection: @inbox_tasks, as: :task %>
+      </ul>
+    </div>
+    <div class='task-state-well'>
+      <h1>Working</h1>
+      <ul id='working'>
+        <%= render partial: 'task', collection: @working_tasks, as: :task %>
+      </ul>
+    </div>
+    <div class='task-state-well'>
+      <div class='well-header'>
+        <h1>Completed</h1>
+        <div class='well-menu'>
+          <div class='menu-items'>
+            <div class='menu-header'>List Actions</div>
+            <div class='menu-item' id='archive-all'>Archive All</div>
+            <div class='menu-item'><%= link_to 'View Archive', tasks_path(archived: true), data: { turbolinks: false } %></div>
+          </div>
         </div>
       </div>
+      <ul id="completed">
+        <%= render partial: 'task', collection: @completed_tasks, as: :task %>
+      </ul>
     </div>
-    <ul id="completed">
-      <%= render partial: 'task', collection: @user.completed_tasks, as: :task %>
-    </ul>
   </div>
-</div>
+<% end %>

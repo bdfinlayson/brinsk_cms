@@ -29,11 +29,13 @@ body { overflow: hidden; }
   padding-bottom: 10px;
   align-items: baseline;
   h1 { width: 130px }
+  justify-content: space-between;
   .modal {
     border: solid 1px grey;
     border-radius: 3px;
-    padding: 5px;
     box-shadow: 1px 4px 10px -7px;
+    width: 125px;
+    text-align: center;
   }
 }
 
