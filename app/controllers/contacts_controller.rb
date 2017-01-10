@@ -2,7 +2,7 @@ class ContactsController < ApplicationController
 
   def index
     @user = current_user
-    @contacts = current_user.contacts.all
+    @contacts = current_user.contacts.order(last_name: 'asc')
     @contact = Contact.new
   end
 
