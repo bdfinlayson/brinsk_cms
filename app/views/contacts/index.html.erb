@@ -23,10 +23,10 @@
           <%= link_to "#{contact.first_name} #{contact.last_name}", contact_path(contact), data: { turbolinks: false }  %>
         </td>
         <td>
-          <%= pluralize(contact.notes.count, 'note') %>
+          <%= contact.notes.count %>
         </td>
         <td>
-          <%= pluralize(contact.tasks.count, 'task') %>
+          <%= contact.tasks.count %>
         </td>
         <td class='index-actions'>
         <p><%= link_to 'Edit', edit_contact_path(contact), data: { turbolinks: false }  %></p>
