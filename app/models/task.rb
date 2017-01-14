@@ -5,7 +5,10 @@ class Task < ActiveRecord::Base
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, as: :taggable
 
-  default_scope -> { order(position: :asc).where.not(state: 'archived') }
+  default_scope -> { order(position: :asc) }
+  scope :active, -> { where.not(state: ['completed', 'archived']) }
+  scope :completed, -> { where(state: ['completed', 'archived']) }
+  scope :archived, -> { where(state: 'archived') }
 
   validates :name, presence: true, length: { maximum: 50 }
   # validate :due_date_cannot_be_in_the_past

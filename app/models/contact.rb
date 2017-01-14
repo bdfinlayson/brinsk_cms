@@ -9,7 +9,7 @@ class Contact < ActiveRecord::Base
   before_save { self.email = email.downcase }
   has_many :notes, dependent: :destroy
   has_many :projects, dependent: :destroy
-  has_many :tasks, :as => :taskable
+  has_many :tasks, through: :tags, source: 'tasks'
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, as: :taggable
 

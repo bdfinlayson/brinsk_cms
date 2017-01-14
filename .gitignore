@@ -18,3 +18,5 @@
 
 # Ignore all solar search files
 /solr/*
+
+latest.dump

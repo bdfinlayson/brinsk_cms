@@ -10,7 +10,8 @@
     <tr>
       <th>Name</th>
       <th>Notes</th>
-      <th>Tasks</th>
+      <th>Active Tasks</th>
+      <th>Completed Tasks</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -26,7 +27,10 @@
           <%= contact.notes.count %>
         </td>
         <td>
-          <%= contact.tasks.count %>
+          <%= contact.tasks.active.count %>
+        </td>
+        <td>
+          <%= contact.tasks.completed.count %>
         </td>
         <td class='index-actions'>
         <p><%= link_to 'Edit', edit_contact_path(contact), data: { turbolinks: false }  %></p>
