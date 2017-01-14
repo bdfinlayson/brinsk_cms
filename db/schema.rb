@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20161112234611) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "contacts", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "first_name"
@@ -63,8 +66,8 @@ ActiveRecord::Schema.define(version: 20161112234611) do
     t.integer  "tag_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
   end
 
   create_table "tags", force: :cascade do |t|
@@ -73,7 +76,7 @@ ActiveRecord::Schema.define(version: 20161112234611) do
     t.string   "color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tags_on_user_id"
+    t.index ["user_id"], name: "index_tags_on_user_id", using: :btree
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -90,8 +93,8 @@ ActiveRecord::Schema.define(version: 20161112234611) do
     t.string   "state"
     t.integer  "position"
     t.datetime "started_at"
-    t.index ["position"], name: "index_tasks_on_position"
-    t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id"
+    t.index ["position"], name: "index_tasks_on_position", using: :btree
+    t.index ["taskable_type", "taskable_id"], name: "index_tasks_on_taskable_type_and_taskable_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,8 +114,8 @@ ActiveRecord::Schema.define(version: 20161112234611) do
     t.string   "last_name"
     t.float    "latitude"
     t.float    "longitude"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end

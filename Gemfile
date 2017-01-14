@@ -3,6 +3,7 @@ ruby '2.3.1'
 
 
 gem 'rails', '5.0.0.1'
+gem 'pg'
 
 gem 'devise'
 gem 'sass-rails', '~> 5.0'
@@ -30,7 +31,6 @@ gem 'neat'
 gem 'refills'
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
@@ -64,5 +64,4 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails'
   gem 'spring'
-  gem 'sqlite3'
 end
