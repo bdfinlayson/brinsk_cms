@@ -2,8 +2,12 @@ class ContactsController < ApplicationController
 
   def index
     @user = current_user
-    @contacts = current_user.contacts.order(last_name: 'asc')
     @contact = Contact.new
+    if params[:lead_team]
+      @contacts = current_user.contacts.lead_team.order(last_name: 'asc')
+    else
+      @contacts = current_user.contacts.order(last_name: 'asc')
+    end
   end
 
   def show
@@ -54,7 +58,7 @@ class ContactsController < ApplicationController
   private
 
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :email, :company_name, :phone, :alt_email, :background, :street1, :title)
+    params.require(:contact).permit(:first_name, :last_name, :lead_team, :email, :company_name, :phone, :alt_email, :background, :street1, :title)
   end
 
 end
