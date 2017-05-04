@@ -12,6 +12,7 @@ class Contact < ActiveRecord::Base
   has_many :tasks, :as => :taskable
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, as: :taggable
+  scope :lead_team, -> { where(lead_team: true) }
 
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"
