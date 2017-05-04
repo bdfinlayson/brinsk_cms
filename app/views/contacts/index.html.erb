@@ -3,9 +3,9 @@
 <div class='page-header'>
   <h1>Contacts (<%= @contacts.count %>)</h1>
   <% if params[:lead_team] %>
-    <%= link_to 'View All', root_path %>
+    <%= link_to 'View All', root_path, data: { turbolinks: false } %>
   <% else %>
-    <%= link_to 'View Lead Team', root_path(lead_team: true) %>
+    <%= link_to 'View Lead Team', root_path(lead_team: true), data: { turbolinks: false } %>
   <% end %>
   <%= render partial: 'shared/modal', locals: { resource: '+ Contact', resource_path: 'contacts/contact_form' } %>
 </div>
