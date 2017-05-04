@@ -20,6 +20,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root "contacts#index", params: {lead_team: true}
+  root "contacts#index"
 
 end
