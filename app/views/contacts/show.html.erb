@@ -5,6 +5,7 @@
       <div class='name-actions'>
         <%= render partial: 'shared/modal', locals: { resource: @contact.full_name, resource_path: 'contacts/info' } %>
         <%= link_to 'Edit', edit_contact_path(@contact) %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
+        <%= link_to '| Retros', new_retrospective_path(auth_token: @contact.auth_token) if @contact.lead_team? && @contact.auth_token %>
       </div>
       <div class='modals-search'>
         <%= render partial: 'shared/modal', locals: { resource: '+ Note', resource_path: 'shared/note_form' } %>
