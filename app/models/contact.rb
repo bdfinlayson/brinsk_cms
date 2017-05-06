@@ -20,9 +20,9 @@ class Contact < ActiveRecord::Base
 
   def generate_auth_token
     if lead_team?
-      self.auth_token = SecureRandom.base58(48)
+      self.update(auth_token: SecureRandom.base58(48))
     else
-      self.auth_token = nil
+      self.update(auth_token: nil)
     end
   end
 
