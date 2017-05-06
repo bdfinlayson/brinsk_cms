@@ -1,6 +1,4 @@
 class Contact < ActiveRecord::Base
-  before_save :generate_auth_token
-
   belongs_to :user
   validates :first_name, presence: true, length: { maximum: 15 }
   validates :last_name, presence: true, length: { maximum: 25 }
