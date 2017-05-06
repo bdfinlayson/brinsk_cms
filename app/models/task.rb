@@ -7,6 +7,8 @@ class Task < ActiveRecord::Base
 
   default_scope -> { order(position: :asc).where.not(state: 'archived') }
 
+  scope :working, -> { where(state: 'working') }
+
   validates :name, presence: true, length: { maximum: 50 }
   # validate :due_date_cannot_be_in_the_past
 

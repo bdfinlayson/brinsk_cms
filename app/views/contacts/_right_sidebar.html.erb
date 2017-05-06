@@ -1,0 +1,25 @@
+<div class='right-sidebar'>
+  <h1><u>Recent Status Updates</u></h1>
+  <div class='bottom-right-pane'>
+    <% if @retros.any? %>
+      <% @retros.each do |retro| %>
+        <div class="expander">
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= @retro.created_at.strftime('%m-%d-%Y') %> - <%= @retro.contact.full_name %></a>
+          <div class="expander-content">
+            <h6>What Has Gone Well</h6>
+            <p><%= @retro.what_has_gone_well %><p>
+
+            <h6>What Has Gone Poorly</h6>
+            <p><%= @retro.what_has_gone_poorly %><p>
+
+            <h6>How Are Your Goals</h6>
+            <p><%= @retro.how_are_your_goals %><p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <i>No previous status updates</i>
+    <% end %>
+  </div>
+
+</div>

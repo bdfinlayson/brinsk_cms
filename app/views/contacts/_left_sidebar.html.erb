@@ -1,0 +1,18 @@
+<div class='left-sidebar'>
+  <h1><u>Current Tasks</u></h1>
+  <div class='bottom-right-pane'>
+    <% if @tasks.any? %>
+      <% @tasks.each do |task| %>
+        <div class="expander">
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= task.name %></a>
+          <div class="expander-content">
+            <p><%= task.description %><p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <i>No current_tasks</i>
+    <% end %>
+  </div>
+
+</div>

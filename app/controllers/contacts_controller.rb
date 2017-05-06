@@ -8,6 +8,8 @@ class ContactsController < ApplicationController
     else
       @contacts = current_user.contacts.order(last_name: 'asc')
     end
+    @tasks = current_user.tasks.working
+    @retros = Retrospective.where(contact_id: @contacts.ids).last(10)
   end
 
   def show
