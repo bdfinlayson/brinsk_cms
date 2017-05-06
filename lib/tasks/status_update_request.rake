@@ -5,11 +5,11 @@ namespace :email do
     require 'sendinblue'
     m = Sendinblue::Mailin.new("https://api.sendinblue.com/v2.0", ENV['SENDINBLUE_API_KEY'])
 
-    Contact.lead_team.each do |developer|
-      sleep 1
+    user = User.find_by(email: 'bryan.finlayson@metova.com')
 
+    user.contacts.lead_team.each do |developer|
       next if developer.has_submitted_weekly_status_update?
-
+      developer.generate_auth_token
 
       lead_email = developer.user.email
       developer_email = 'bryan.finlayson@metova.com'#developer.email
@@ -23,8 +23,8 @@ namespace :email do
       }
 
       result = m.send_email(data)
-
       puts result
+      sleep 1
     end
   end
 end
