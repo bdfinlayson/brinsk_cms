@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'retrospectives/new'
+
+  get 'retrospectives/create'
+
+  get 'retrospectives/index'
+
   devise_for :users
   resources :contacts do
     resources :notes
