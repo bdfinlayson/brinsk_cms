@@ -12,7 +12,7 @@ namespace :email do
       developer.generate_auth_token
 
       lead_email = developer.user.email
-      developer_email = 'bryan.finlayson@metova.com'#developer.email
+      developer_email = developer.email
 
       data = { "to" => { developer_email => developer.full_name },
         "from" => [lead_email],
