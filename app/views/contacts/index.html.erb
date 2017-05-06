@@ -16,6 +16,7 @@
       <th>Name</th>
       <th>Notes</th>
       <th>Tasks</th>
+      <th>Submitted Weekly <br> Status Update</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -32,6 +33,9 @@
         </td>
         <td>
           <%= contact.tasks.count %>
+        </td>
+        <td>
+          <%= contact.lead_team? ? contact.has_submitted_weekly_status_update? : 'N/A' %>
         </td>
         <td class='index-actions'>
         <p><%= link_to 'Edit', edit_contact_path(contact), data: { turbolinks: false }  %></p>

@@ -26,6 +26,10 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def has_submitted_weekly_status_update?
+    retrospectives.where(created_at: Time.now.beginning_of_week...Time.now.end_of_week).any?
+  end
+
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"
   end
