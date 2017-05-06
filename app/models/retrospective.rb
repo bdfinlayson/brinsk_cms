@@ -1,0 +1,2 @@
+class Retrospective < ApplicationRecord
+end

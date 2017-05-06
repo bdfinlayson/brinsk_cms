@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170504143038) do
+ActiveRecord::Schema.define(version: 20170506022856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20170504143038) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "lead_team"
+    t.string   "auth_token"
+    t.index ["auth_token"], name: "index_contacts_on_auth_token", using: :btree
     t.index ["lead_team"], name: "index_contacts_on_lead_team", using: :btree
   end
 
@@ -60,6 +62,18 @@ ActiveRecord::Schema.define(version: 20170504143038) do
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.datetime "completed_at"
+  end
+
+  create_table "retrospectives", force: :cascade do |t|
+    t.text     "what_has_gone_well"
+    t.text     "what_has_gone_poorly"
+    t.text     "how_are_your_goals"
+    t.integer  "user_id"
+    t.integer  "contact_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["contact_id"], name: "index_retrospectives_on_contact_id", using: :btree
+    t.index ["user_id"], name: "index_retrospectives_on_user_id", using: :btree
   end
 
   create_table "taggings", force: :cascade do |t|
