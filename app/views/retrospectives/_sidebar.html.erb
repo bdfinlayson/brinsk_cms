@@ -1,0 +1,39 @@
+<div class='right-sidebar'>
+  <h1><u>Current Goals</u></h1>
+  <div class='top-right-pane'>
+    <% goals = @contact.goals %>
+    <% if goals.any? %>
+      <ul>
+        <% goals.each do |goal| %>
+          <li type='circle'><%= goal.objective %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <i>No current goals</i>
+    <% end %>
+  </div>
+
+  <h1><u>Previous Status Updates</u></h1>
+  <div class='bottom-right-pane'>
+    <% retros = @contact.retrospectives %>
+    <% if retros.any? %>
+      <% retros.each do |retro| %>
+        <div class="expander">
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= retro.created_at.strftime('%m-%d-%Y') %></a>
+          <div class="expander-content">
+            <h6>What Has Gone Well</h6>
+            <p><%= retro.what_has_gone_well %><p>
+
+            <h6>What Has Gone Poorly</h6>
+            <p><%= retro.what_has_gone_poorly %><p>
+
+            <h6>How Are Your Goals</h6>
+            <p><%= retro.how_are_your_goals %><p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <i>No previous status updates</i>
+    <% end %>
+  </div>
+</div>

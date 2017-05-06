@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  before_save :generate_auth_token
+
   belongs_to :user
   validates :first_name, presence: true, length: { maximum: 15 }
   validates :last_name, presence: true, length: { maximum: 25 }
@@ -12,7 +14,21 @@ class Contact < ActiveRecord::Base
   has_many :tasks, :as => :taskable
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings, as: :taggable
+  has_many :goals
+  has_many :retrospectives
   scope :lead_team, -> { where(lead_team: true) }
+
+  def generate_auth_token
+    if lead_team?
+      self.auth_token = SecureRandom.base58(48)
+    else
+      self.auth_token = nil
+    end
+  end
+
+  def has_submitted_weekly_status_update?
+    retrospectives.where(created_at: Time.now.beginning_of_week...Time.now.end_of_week).any?
+  end
 
   def full_address
     "#{street1}, #{street2 unless blank?}, #{city}, #{state} #{zipcode}"
