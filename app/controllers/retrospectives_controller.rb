@@ -7,8 +7,12 @@ class RetrospectivesController < ApplicationController
   end
 
   def create
-    Retrospective.create(retrospective_params)
-    redirect_to thank_you_retrospectives_path
+    retro = Retrospective.create(retrospective_params)
+    if retro.persisted?
+      redirect_to thank_you_retrospectives_path
+    else
+      redirect_to error_retrospectives_path
+    end
   end
 
   def index

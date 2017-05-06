@@ -32,6 +32,12 @@ RSpec.describe RetrospectivesController, type: :controller do
       expect(response).to have_http_status(:redirect)
       expect(response).to redirect_to error_retrospectives_path
     end
+
+    it 'redirects to error with missing params' do
+      get :create, retrospective: { what_has_gone_well: '', what_has_gone_poorly: '', how_are_your_goals: 'asdgas'}, auth_token: contact.auth_token
+      expect(response).to have_http_status(:redirect)
+      expect(response).to redirect_to error_retrospectives_path
+    end
   end
 
   describe "GET #index" do
