@@ -1,0 +1,29 @@
+<div class='right-sidebar'>
+  <h1><u>Current Goals</u></h1>
+  <div class='top-right-pane'>
+    <ul>
+      <% @contact.goals.each do |goal| %>
+        <li type='circle'><%= goal.objective %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <h1><u>Previous Status Updates</u></h1>
+  <div class='bottom-right-pane'>
+    <% @contact.retrospectives.each do |retrospective| %>
+      <div class="expander">
+        <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= retrospective.created_at.strftime('%m-%d-%Y') %></a>
+        <div class="expander-content">
+          <h6>What Has Gone Well</h6>
+          <p><%= retrospective.what_has_gone_well %><p>
+
+          <h6>What Has Gone Poorly</h6>
+          <p><%= retrospective.what_has_gone_poorly %><p>
+
+          <h6>How Are Your Goals</h6>
+          <p><%= retrospective.how_are_your_goals %><p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

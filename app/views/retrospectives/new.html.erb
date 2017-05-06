@@ -1,2 +1,21 @@
-<h1>Retrospectives#new</h1>
-<p>Find me in app/views/retrospectives/new.html.erb</p>
+
+<div class='container'>
+  <div class='main-content'>
+    <h1><u><%= @contact.full_name.titleize %> Status Update</u></h1>
+    <%= form_for @retrospective, method: :post, url: retrospectives_path(auth_token: @contact.auth_token) do |f| %>
+      <%= f.label :what_has_gone_well %>
+      <%= f.text_area :what_has_gone_well %>
+
+      <%= f.label :what_has_gone_poorly %>
+      <%= f.text_area :what_has_gone_poorly %>
+
+      <%= f.label :how_are_your_goals %>
+      <%= f.text_area :how_are_your_goals %>
+
+      <%= f.submit 'Submit Status Update' %>
+
+    <% end %>
+  </div>
+
+  <%= render 'sidebar' %>
+</div>

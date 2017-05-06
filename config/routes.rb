@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
 
-  get 'retrospectives/new'
-
-  get 'retrospectives/create'
-
-  get 'retrospectives/index'
-
   devise_for :users
   resources :contacts do
     resources :notes
+  end
+
+  resources :retrospectives, only: [:new, :create, :index] do
+    collection do
+      get :thank_you
+      get :error
+    end
   end
 
   resources :tags, only: [:index, :edit, :create, :update, :destroy]
