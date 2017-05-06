@@ -2,6 +2,7 @@ namespace :email do
   desc 'Emails status update requests to lead team members'
 
   task status_update_request: :environment do
+    return unless (Time.current.monday? || Time.current.thursday?)
     require 'sendinblue'
     m = Sendinblue::Mailin.new("https://api.sendinblue.com/v2.0", ENV['SENDINBLUE_API_KEY'])
 

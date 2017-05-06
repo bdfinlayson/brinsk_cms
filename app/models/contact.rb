@@ -19,7 +19,7 @@ class Contact < ActiveRecord::Base
   scope :lead_team, -> { where(lead_team: true) }
 
   def generate_auth_token
-    if lead_team?
+    if self.changes[:lead_team].try(:last)
       self.auth_token = SecureRandom.base58(48)
     else
       self.auth_token = nil
