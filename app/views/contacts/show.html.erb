@@ -11,33 +11,38 @@
         <%= render partial: 'shared/modal', locals: { resource: '+ Note', resource_path: 'shared/note_form' } %>
       </div>
     </div>
-    <table class='dataTable'>
-      <thead>
-        <tr>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @notes.each do |note| %>
+
+    <div class='container'>
+      <table class='dataTable'>
+        <thead>
           <tr>
-            <td>
-              <div class='note-header'>
-                <div class='note-info'>
-                  <div class='note-date'><%= note.created_at.to_date %></div>
-                  <div class='note-title'><%= note.subject %></div>
-                </div>
-                <div class='note-actions'>
-                  <%= link_to 'Edit', edit_note_path(note) %>
-                  <div class='divider'>|</div>
-                  <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-                </div>
-              </div>
-              <br />
-              <%= note.content %>
-            </td>
+            <th></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @notes.each do |note| %>
+            <tr>
+              <td>
+                <div class='note-header'>
+                  <div class='note-info'>
+                    <div class='note-date'><%= note.created_at.to_date %></div>
+                    <div class='note-title'><%= note.subject %></div>
+                  </div>
+                  <div class='note-actions'>
+                    <%= link_to 'Edit', edit_note_path(note) %>
+                    <div class='divider'>|</div>
+                    <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
+                  </div>
+                </div>
+                <br />
+                <%= note.content %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= render 'retrospectives/sidebar' %>
+
+    </div>
   </div>
 </div>

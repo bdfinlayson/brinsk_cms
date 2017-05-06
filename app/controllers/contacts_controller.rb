@@ -43,7 +43,7 @@ class ContactsController < ApplicationController
     @contact = current_user.contacts.find(params[:id])
 
     if @contact.update(contact_params)
-      redirect_to root_path, notice: 'Contact updated!'
+      redirect_to contact_path(@contact), notice: 'Contact updated!'
     else
       render 'edit'
     end

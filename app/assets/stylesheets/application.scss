@@ -74,3 +74,16 @@ body { overflow: hidden; }
     border-radius:5%;
   }
 }
+
+.dataTables_wrapper {
+  width: 60%;
+
+  table {
+    display: block;
+    width: 60%;
+  }
+
+  td {
+    padding: 8px 0;
+  }
+}
