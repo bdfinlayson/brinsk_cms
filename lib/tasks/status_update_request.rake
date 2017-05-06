@@ -9,7 +9,6 @@ namespace :email do
 
     user.contacts.lead_team.each do |developer|
       next if developer.has_submitted_weekly_status_update?
-      developer.generate_auth_token
 
       lead_email = developer.user.email
       developer_email = developer.email
