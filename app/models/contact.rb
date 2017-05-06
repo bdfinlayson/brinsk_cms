@@ -1,4 +1,6 @@
 class Contact < ActiveRecord::Base
+  before_save :generate_auth_token
+
   belongs_to :user
   validates :first_name, presence: true, length: { maximum: 15 }
   validates :last_name, presence: true, length: { maximum: 25 }
@@ -18,9 +20,9 @@ class Contact < ActiveRecord::Base
 
   def generate_auth_token
     if lead_team?
-      self.update(auth_token: SecureRandom.base58(48))
+      self.auth_token = SecureRandom.base58(48)
     else
-      self.update(auth_token: nil)
+      self.auth_token = nil
     end
   end
 
