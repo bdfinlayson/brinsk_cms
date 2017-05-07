@@ -76,14 +76,13 @@ body { overflow: hidden; }
 }
 
 .dataTables_wrapper {
-  width: 60%;
-
-  table {
-    display: block;
-  }
-
+  flex: 6;
   td {
     padding: 8px 0;
+  }
+
+  .dataTables_scrollHeadInner {
+    width: 100% !important;
   }
 }
 
