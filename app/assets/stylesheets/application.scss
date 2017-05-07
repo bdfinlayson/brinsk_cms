@@ -89,4 +89,9 @@ body { overflow: hidden; }
 
 table {
   display: table !important;
+  width: 100% !important;
+}
+
+tbody, thead, th, tr, td {
+  width: 100% !important;
 }
