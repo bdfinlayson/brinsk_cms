@@ -5,3 +5,5 @@ $ ->
     paging: false
     scrollCollapse: false
     responsive: true
+    bInfo: false
+    orderClasses: true

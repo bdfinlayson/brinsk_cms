@@ -2,7 +2,7 @@
   <h1>Tags (<%= @tags.count %>)</h1>
   <%= render partial: 'shared/modal', locals: { resource: '+ Tag', resource_path: 'tags/tag_form' } %>
 </div>
-<table class='dataTable'>
+<table class='dataTable stripe hover order-column compact'>
   <thead>
     <tr>
       <th>Tag Name</th>
