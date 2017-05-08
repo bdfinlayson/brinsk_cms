@@ -17,4 +17,9 @@ class User < ActiveRecord::Base
   has_many :tasks
   has_many :tags
   has_many :taggings, through: :tags
+
+
+  def admin?
+    role == 'admin'
+  end
 end
