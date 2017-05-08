@@ -4,7 +4,7 @@
     <% if @retros.any? %>
       <% @retros.each do |retro| %>
         <div class="expander">
-          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= retro.created_at.strftime('%m-%d-%Y') %> - <%= @retro.contact.full_name %></a>
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= retro.created_at.strftime('%m-%d-%Y') %> - <%= retro.contact.full_name %></a>
           <div class="expander-content">
             <h6>What Has Gone Well</h6>
             <p><%= retro.what_has_gone_well %><p>
