@@ -38,4 +38,22 @@ class Contact < ActiveRecord::Base
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def send_status_update_request
+    next if has_submitted_weekly_status_update?
+
+    lead_email = self.user.email
+    developer_email = email
+
+    data = { "to" => { developer_email => full_name },
+      "from" => [lead_email],
+      "replyto" => [lead_email],
+      "subject" => "Weekly Developer Status Update",
+      "text" => "Hi, #{first_name}. Please give me a short update on what you've done this week and how you're progressing on your goals no later than noon Friday. Thanks so much! #{Rails.application.routes.url_helpers.new_retrospective_url(host: 'brinsk.herokuapp.com', auth_token: developer.auth_token)}",
+      "headers" => {"Content-Type"=> "text/html;charset=iso-8859-1"}
+    }
+
+    result = m.send_email(data)
+    puts result
+  end
 end
