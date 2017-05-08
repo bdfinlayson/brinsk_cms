@@ -2,6 +2,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :contacts do
+    member do
+      post :send_status_update_request
+    end
     resources :notes
   end
 

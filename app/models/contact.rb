@@ -40,7 +40,11 @@ class Contact < ActiveRecord::Base
   end
 
   def send_status_update_request
+    return if !lead_team?
     return if has_submitted_weekly_status_update?
+
+    require 'sendinblue'
+    m = Sendinblue::Mailin.new("https://api.sendinblue.com/v2.0", Rails.env == 'production' ? ENV['SENDINBLUE_API_KEY'] : Rails.application.secrets['SENDINBLUE_API_KEY'])
 
     lead_email = self.user.email
     developer_email = email
@@ -49,11 +53,12 @@ class Contact < ActiveRecord::Base
       "from" => [lead_email],
       "replyto" => [lead_email],
       "subject" => "Weekly Developer Status Update",
-      "text" => "Hi, #{first_name}. Please give me a short update on what you've done this week and how you're progressing on your goals no later than noon Friday. Thanks so much! #{Rails.application.routes.url_helpers.new_retrospective_url(host: 'brinsk.herokuapp.com', auth_token: developer.auth_token)}",
+      "text" => "Hi, #{first_name}. Please give me a short update on what you've done this week and how you're progressing on your goals no later than noon Friday. Thanks so much! #{Rails.application.routes.url_helpers.new_retrospective_url(host: 'brinsk.herokuapp.com', auth_token: auth_token)}",
       "headers" => {"Content-Type"=> "text/html;charset=iso-8859-1"}
     }
 
     result = m.send_email(data)
     puts result
+    true if result['code'] == 'success'
   end
 end

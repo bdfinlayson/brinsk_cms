@@ -3,8 +3,6 @@ namespace :email do
 
   task status_update_request: :environment do
     return unless (Time.current.monday? || Time.current.thursday?)
-    require 'sendinblue'
-    m = Sendinblue::Mailin.new("https://api.sendinblue.com/v2.0", ENV['SENDINBLUE_API_KEY'])
 
     user = User.find_by(email: 'bryan.finlayson@metova.com')
 

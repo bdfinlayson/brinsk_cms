@@ -18,10 +18,13 @@ class ContactsController < ApplicationController
     @notes = Note.where(contact_id: @contact.id)
   end
 
-  def email_contact
+  def send_status_update_request
     @contact = Contact.find(params[:id])
-    Email.email_contact(@contact, params[:name], params[:email]).deliver
-    redirect_to @contact, :notice => 'Successfully sent a message!'
+    if @contact.send_status_update_request
+      redirect_to @contact, :notice => 'Emailed reminder'
+    else
+      redirect_to @contact, :alert => 'Unable to send email'
+    end
   end
 
   def new
