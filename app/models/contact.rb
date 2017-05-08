@@ -40,7 +40,7 @@ class Contact < ActiveRecord::Base
   end
 
   def send_status_update_request
-    next if has_submitted_weekly_status_update?
+    return if has_submitted_weekly_status_update?
 
     lead_email = self.user.email
     developer_email = email
