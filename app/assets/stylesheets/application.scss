@@ -84,6 +84,10 @@ body { overflow: hidden; }
   .dataTables_scrollHeadInner {
     width: 100% !important;
   }
+
+  .dataTables_scrollBody {
+    height: calc(100vh - 222px) !important;
+  }
 }
 
 table {
