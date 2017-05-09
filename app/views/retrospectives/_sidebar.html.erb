@@ -16,7 +16,7 @@
   <h1><u>Status Updates</u>
     <% if (current_user && current_user.admin?) && (@contact.lead_team? && @contact.auth_token) %>
       <%= link_to send_status_update_request_contact_path(@contact), method: :post, data: { confirm: "Are you sure you want to email #{@contact.first_name} a status update request?" } do %>
-        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+        <i class="fa fa-envelope-o" aria-hidden="true"> Resend</i>
       <% end %>
     <% end %>
   </h1>

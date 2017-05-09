@@ -15,6 +15,11 @@
   }
 }
 
+.left-container {
+  flex: 5;
+  flex-direction: column;
+}
+
 .note-header {
   .note-info {
     display: flex;

@@ -4,43 +4,71 @@
       <%= gravatar_for @contact %>
       <div class='name-actions'>
         <%= render partial: 'shared/modal', locals: { resource: @contact.full_name, resource_path: 'contacts/info' } %>
-        <%= link_to 'Edit', edit_contact_path(@contact), data: { turbolinks: false } %> | <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
-        <%= link_to '| Retros', new_retrospective_path(auth_token: @contact.auth_token), data: { turbolinks: false } if @contact.lead_team? && @contact.auth_token %>
       </div>
-      <div class='modals-search'>
-        <%= render partial: 'shared/modal', locals: { resource: '+ Note', resource_path: 'shared/note_form' } %>
+      <div>
+        <%= link_to edit_contact_path(@contact), data: { turbolinks: false } do %>
+          <i class="fa fa-pencil" aria-hidden="true"> Edit</i>
+        <% end %>
+        |
+        <%= link_to contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } do %>
+          <i class="fa fa-trash" aria-hidden="true"> Delete</i>
+        <% end %>
+
+        <% if @contact.lead_team? && @contact.auth_token %>
+            |
+          <%= link_to new_retrospective_path(auth_token: @contact.auth_token), data: { turbolinks: false } do %>
+            <i class="fa fa-address-card-o" aria-hidden="true"> Retros</i>
+          <% end %>
+        <% end %>
       </div>
     </div>
 
     <div class='container'>
-      <table class='dataTable stripe hover order-column compact'>
-        <thead>
-          <tr>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @notes.each do |note| %>
+      <div class='left-container'>
+        <div class="expander">
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            New Note
+          </a>
+          <div class="expander-content">
+            <%= render 'shared/note_form' %>
+          </div>
+        </div>
+
+        <table class='dataTable stripe hover order-column compact'>
+          <thead>
             <tr>
-              <td>
-                <div class='note-header'>
-                  <div class='note-info'>
-                    <div class='note-date'><%= note.created_at.to_date %></div>
-                    <div class='note-title'><%= note.subject %></div>
-                  </div>
-                  <div class='note-actions'>
-                    <%= link_to 'Edit', edit_note_path(note) %>
-                    <div class='divider'>|</div>
-                    <%= link_to 'Delete', note_path(note), method: :delete, data: { confirm: 'Are you sure?' } %>
-                  </div>
-                </div>
-                <br />
-                <%= note.content %>
-              </td>
+              <th></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @notes.each do |note| %>
+              <tr>
+                <td>
+                  <div class='note-header'>
+                    <div class='note-info'>
+                      <div class='note-date'><%= note.created_at.to_date %></div>
+                      <div class='note-title'><%= note.subject %></div>
+                    </div>
+                    <div class='note-actions'>
+                      <%= link_to edit_note_path(note), data: { turbolinks: false } do %>
+                        <i class="fa fa-pencil" aria-hidden="true"> Edit</i>
+                      <% end %>
+                      <div class='divider'>|</div>
+                      <%= link_to note_path(note), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                        <i class="fa fa-trash" aria-hidden="true"> Delete</i>
+                      <% end %>
+                    </div>
+                  </div>
+                  <br />
+                  <%= note.content %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
       <%= render 'retrospectives/sidebar' %>
 
     </div>
