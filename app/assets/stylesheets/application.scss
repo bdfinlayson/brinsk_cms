@@ -98,3 +98,8 @@ table {
 tbody, thead, th, tr, td {
   width: 100% !important;
 }
+
+textarea {
+  height: 6em;
+  resize: vertical;
+}

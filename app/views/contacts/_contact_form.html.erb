@@ -2,10 +2,19 @@
 <div class='outer-container'>
   <%= simple_form_for(@contact) do |f| %>
     <% if @contact.id == nil %>
-      <p id='form_header'>Add New Contact</p>
+      <div id='form_header'>Add New Contact</div>
     <% else %>
-      <p id='form_header'>Edit Contact</p>
+      <div id='form_header'>Edit Contact</div>
     <% end %>
+    <div class='form_buttons'>
+      <% if @contact.id == nil %>
+        <%= link_to 'Cancel', root_path %>
+      <% else %>
+        <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
+        |
+        <%= link_to 'Cancel', contact_path(@contact), data: { turbolinks: false } %>
+      <% end %>
+    </div>
     <%= f.input :first_name, placeholder: "First Name" %>
     <%= f.input :last_name, placeholder: "Last Name" %>
     <%= f.label :lead_team %>
@@ -15,13 +24,5 @@
     <%= f.input :background, label: 'Background', placeholder: "Background information about the contact" %>
     <%# <%= f.input :first_met, placeholder: "Date first met" %1> %>
     <%= f.button :submit %>
-    <div class='form_buttons'>
-      <% if @contact.id == nil %>
-        <%= link_to 'Cancel', root_path %>
-      <% else %>
-        <%= link_to 'Delete', contact_path(@contact), method: :delete, data: { confirm: "Are you sure?" } %>
-        <%= link_to 'Cancel', contact_path(@contact) %>
-      <% end %>
-    </div>
   <% end %>
 </div>

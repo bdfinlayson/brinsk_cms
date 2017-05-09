@@ -4,6 +4,7 @@
       <%= gravatar_for @contact %>
       <div class='name-actions'>
         <%= render partial: 'shared/modal', locals: { resource: @contact.full_name, resource_path: 'contacts/info' } %>
+        <%= @contact.title %>
       </div>
       <div>
         <%= link_to edit_contact_path(@contact), data: { turbolinks: false } do %>
