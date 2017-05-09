@@ -1,3 +1,4 @@
 .modal-window { padding-top: 2em !important; }
 .modal-inner { max-width: 500px !important; min-width: 400px !important; }
 .empty-modal { border: none !important; }
+.modal { &:hover { color: grey } }
