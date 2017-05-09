@@ -22,6 +22,7 @@ class Contact < ActiveRecord::Base
     if self.changes[:lead_team].try(:last) || (self.lead_team? && self.auth_token.nil?)
       self.auth_token = SecureRandom.base58(48)
     else
+      return if self.lead_team?
       self.auth_token = nil
     end
   end
