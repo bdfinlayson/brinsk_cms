@@ -44,6 +44,12 @@ class Contact < ActiveRecord::Base
     return if !lead_team?
     return if has_submitted_weekly_status_update?
 
+    if Time.current.monday?
+      @message =  "Hi, #{first_name}. Please give me a short update on what you've done this week and how you're progressing on your goals no later than noon Friday. Thanks so much! #{Rails.application.routes.url_helpers.new_retrospective_url(host: 'brinsk.herokuapp.com', auth_token: auth_token)}"
+    else
+      @message = "Hi, #{first_name}. This is just a friendly reminder to please give me a short update on what you've done this week and how you're progressing on your goals no later than noon Friday. Thanks so much! #{Rails.application.routes.url_helpers.new_retrospective_url(host: 'brinsk.herokuapp.com', auth_token: auth_token)}"
+    end
+
     require 'sendinblue'
     m = Sendinblue::Mailin.new("https://api.sendinblue.com/v2.0", Rails.env == 'production' ? ENV['SENDINBLUE_API_KEY'] : Rails.application.secrets['SENDINBLUE_API_KEY'])
 
@@ -54,7 +60,7 @@ class Contact < ActiveRecord::Base
       "from" => [lead_email],
       "replyto" => [lead_email],
       "subject" => "Weekly Developer Status Update",
-      "text" => "Hi, #{first_name}. Please give me a short update on what you've done this week and how you're progressing on your goals no later than noon Friday. Thanks so much! #{Rails.application.routes.url_helpers.new_retrospective_url(host: 'brinsk.herokuapp.com', auth_token: auth_token)}",
+      "text" => @message,
       "headers" => {"Content-Type"=> "text/html;charset=iso-8859-1"}
     }
 
