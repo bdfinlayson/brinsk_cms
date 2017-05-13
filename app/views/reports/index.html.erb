@@ -1,3 +1,4 @@
+<div class='scroll-wrapper'>
   <% @contacts.each do |c| %>
     </br>
     <h4><%= c.full_name %></h4>
@@ -7,3 +8,4 @@
       <li><b><i>GOALS:</b></i> <%= c.most_recent_retro.how_are_your_goals %></li>
     </ul>
   <% end %>
+</div>

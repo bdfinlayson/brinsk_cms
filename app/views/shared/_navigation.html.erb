@@ -4,7 +4,7 @@
       <%= image_tag 'logo.png' %>
     <% end %>
     <% if user_signed_in? %>
-    
+
       <a href="javascript:void(0)" class="navigation-menu-button" id="js-mobile-menu">MENU</a>
       <nav role="navigation">
 
@@ -20,9 +20,9 @@
                   <li><a href="javascript:void(0)">Contact Activity</a></li>
                 </ul>
               </li>
-              <li class="more"><a href="javascript:void(0)">Reviews</a>
+              <li class="more"><a href="javascript:void(0)">Reports</a>
                 <ul class="submenu">
-                  <li><a href="javascript:void(0)">Something here?</a></li>
+                  <li><%= link_to 'Weekly Report', reports_path, data: { turbolinks: false } %></li>
                 </ul>
               </li>
             </ul>

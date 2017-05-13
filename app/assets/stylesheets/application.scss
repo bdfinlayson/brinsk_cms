@@ -25,6 +25,11 @@
 
 body { overflow: hidden; height: 100vh; }
 
+.scroll-wrapper {
+  overflow-y: auto;
+  height: calc(100vh - 100px);
+}
+
 .page-header {
   display: flex;
   padding-bottom: 10px;

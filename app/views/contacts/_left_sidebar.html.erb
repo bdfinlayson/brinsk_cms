@@ -1,6 +1,6 @@
 <div class='left-sidebar'>
   <h1><u>Current Tasks</u></h1>
-  <div class='bottom-right-pane'>
+  <div class='bottom-left-pane'>
     <% if @working_tasks.any? %>
       <% @working_tasks.each do |task| %>
         <div class="expander">
@@ -15,7 +15,7 @@
     <% end %>
   </div>
   <h1><u>To Do</u></h1>
-  <div class='bottom-right-pane'>
+  <div class='bottom-left-pane'>
     <% if @inbox_tasks.any? %>
       <% @inbox_tasks.each do |task| %>
         <div class="expander">
