@@ -16,12 +16,16 @@
 .left-sidebar {
   flex: 3;
   border-right: solid 1px black;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .right-sidebar {
   flex: 3;
   border-left: solid black 1px;
   padding-left: 20px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
 
   .top-right-pane {
     padding-bottom: 10px;
@@ -34,7 +38,7 @@
 
   .bottom-right-pane {
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: visible;
   }
 }
 
@@ -85,7 +89,7 @@
   }
 
   .expander-content {
-    overflow-y: scroll;
+    overflow-y: auto;
     max-height: 350px;
   }
 

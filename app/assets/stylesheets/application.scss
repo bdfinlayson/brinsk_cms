@@ -23,7 +23,7 @@
 @import 'tags';
 @import 'retrospectives';
 
-body { overflow: hidden; }
+body { overflow: hidden; height: 100vh; }
 
 .page-header {
   display: flex;
@@ -54,7 +54,7 @@ body { overflow: hidden; }
 
 .content-wrapper {
   padding: 10px;
-  height: 100vh;
+  height: calc(100vh - 45px);
 }
 
 .notice-wrapper {
@@ -86,7 +86,7 @@ body { overflow: hidden; }
   }
 
   .dataTables_scrollBody {
-    height: calc(100vh - 222px) !important;
+    height: calc(100vh - 220px) !important;
   }
 }
 

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :notes
   end
 
+  resources :reports, only: [:create, :index, :show]
+
   resources :retrospectives, only: [:new, :create, :index] do
     collection do
       get :thank_you

@@ -1,0 +1,9 @@
+  <% @contacts.each do |c| %>
+    </br>
+    <h4><%= c.full_name %></h4>
+    <ul>
+      <li><b><i>WHGW:</b></i> <%= c.most_recent_retro.what_has_gone_well %></li>
+      <li><b><i>WHGP:</b></i> <%= c.most_recent_retro.what_has_gone_poorly %></li>
+      <li><b><i>GOALS:</b></i> <%= c.most_recent_retro.how_are_your_goals %></li>
+    </ul>
+  <% end %>

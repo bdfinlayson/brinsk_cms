@@ -27,6 +27,10 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def most_recent_retro
+    retrospectives.last
+  end
+
   def has_submitted_weekly_status_update?
     retrospectives.where(created_at: Time.now.beginning_of_week...Time.now.end_of_week).any?
   end
