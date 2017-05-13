@@ -45,8 +45,24 @@
             <%= contact.lead_team? ? contact.has_submitted_weekly_status_update? : 'N/A' %>
           </td>
           <td class='index-actions'>
-          <p><%= link_to 'Edit', edit_contact_path(contact), data: { turbolinks: false }  %></p>
-          <p><%= link_to 'Delete', contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' } %></p></td>
+            <p>
+              <%= link_to edit_contact_path(contact), data: { turbolinks: false } do  %>
+                <i class="fa fa-pencil" aria-hidden="true"> Edit</i>
+              <% end %>
+            </p>
+            <p>
+              <%= link_to contact_path(contact), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <i class="fa fa-trash" aria-hidden="true"> Delete</i>
+              <% end %>
+            </p>
+            <% if contact.lead_team? && contact.auth_token %>
+              <p>
+                <%= link_to new_retrospective_path(auth_token: contact.auth_token), data: { turbolinks: false } do %>
+                  <i class="fa fa-address-card-o" aria-hidden="true"> Retros</i>
+                <% end %>
+              <p>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
