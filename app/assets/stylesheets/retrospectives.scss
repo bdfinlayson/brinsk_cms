@@ -17,7 +17,6 @@
   flex: 3;
   border-right: solid 1px black;
   height: calc(100vh - 120px);
-  overflow-y: auto;
 }
 
 .right-sidebar {
@@ -25,7 +24,6 @@
   border-left: solid black 1px;
   padding-left: 20px;
   height: calc(100vh - 120px);
-  overflow-y: auto;
 
   .top-right-pane {
     padding-bottom: 10px;
@@ -37,8 +35,13 @@
   }
 
   .bottom-right-pane {
-    height: 100vh;
-    overflow-y: visible;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+
+  .bottom-right-pane-retro {
+    overflow-y: auto;
+    max-height: 50%;
   }
 }
 
@@ -90,7 +93,7 @@
 
   .expander-content {
     overflow-y: auto;
-    max-height: 350px;
+    max-height: 150vh;
   }
 
   .expander-content p {
