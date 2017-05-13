@@ -1,6 +1,8 @@
 <div class='right-sidebar'>
   <h1><u>Recent Status Updates</u></h1>
-  <h1><i><%= (@retros_for_week.count / current_user.contacts.lead_team.count * 100).to_i %>% Reporting for Week </i></h1>
+  <% if @contacts.lead_team.any? %>
+    <h1><i><%= (@retros_for_week.count / @contacts.lead_team.count * 100).to_i %>% Reporting for Week </i></h1>
+  <% end %>
   <div class='bottom-right-pane'>
     <% if @retros_for_week.any? %>
       <% @retros_for_week.each do |retro| %>
