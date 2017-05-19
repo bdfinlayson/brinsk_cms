@@ -1,7 +1,8 @@
 <%= simple_form_for ([@contact, @contact.notes.build]) do |f| %>
-  <%# <%= render 'shared/error_messages', object: f.object %1> %>
   <%= f.input :subject, placeholder: "Subject" %>
   <%= f.label :content %>
-  <%= f.text_area :content, placeholder: "Note content..." %>
+  <%= f.text_area :content, placeholder: "Note content...", class: 'tinymce' %>
   <%= f.button :submit %>
 <% end %>
+
+<%= tinymce %>

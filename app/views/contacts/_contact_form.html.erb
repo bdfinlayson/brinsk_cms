@@ -23,8 +23,10 @@
     <%= f.check_box :lead_team %>
     <%= f.input :title, placeholder: "Title" %>
     <%= f.input :email, placeholder: "Email", required: true %>
-    <%= f.input :background, label: 'Background', placeholder: "Background information about the contact" %>
+    <%= f.text_area :background, label: 'Background', placeholder: "Background information about the contact", class: 'tinymce' %>
     <%# <%= f.input :first_met, placeholder: "Date first met" %1> %>
     <%= f.button :submit %>
   <% end %>
 </div>
+
+<%= tinymce %>

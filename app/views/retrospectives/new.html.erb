@@ -4,13 +4,13 @@
     <h1><u><%= @contact.full_name.titleize %> New Status Update</u></h1>
     <%= form_for @retrospective, method: :post, url: retrospectives_path(auth_token: @contact.auth_token) do |f| %>
       <%= f.label :what_has_gone_well %>
-      <%= f.text_area :what_has_gone_well, required: true %>
+      <%= f.text_area :what_has_gone_well, required: true, class: 'tinymce' %>
 
       <%= f.label :what_has_gone_poorly %>
-      <%= f.text_area :what_has_gone_poorly, required: true %>
+      <%= f.text_area :what_has_gone_poorly, required: true, class: 'tinymce' %>
 
       <%= f.label :how_are_your_goals %>
-      <%= f.text_area :how_are_your_goals, required: true %>
+      <%= f.text_area :how_are_your_goals, required: true, class: 'tinymce' %>
 
       <%= f.submit 'Submit Status Update' %>
 
@@ -19,3 +19,5 @@
 
   <%= render 'sidebar' %>
 </div>
+
+<%= tinymce %>

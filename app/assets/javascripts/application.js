@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require dataTables/jquery.dataTables
 //= require jquery.minicolors
+//= require tinymce-jquery
 //= require_tree .
