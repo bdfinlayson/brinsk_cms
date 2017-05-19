@@ -1,5 +1,5 @@
 <div class='right-sidebar'>
-  <h1><u>Recent Status Updates</u></h1>
+  <h1><u>Team Status Updates</u></h1>
   <% if @contacts.lead_team.any? %>
     <h1><i><%= (@retros_for_week.count.to_f / @contacts.lead_team.count.to_f * 100).to_i %>% Reporting for Week </i></h1>
   <% end %>
