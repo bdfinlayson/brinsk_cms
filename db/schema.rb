@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508224713) do
+ActiveRecord::Schema.define(version: 20170519151055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20170508224713) do
     t.string   "title"
     t.text     "background"
     t.datetime "first_met"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "street1"
     t.string   "street2"
     t.string   "city"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20170508224713) do
     t.float    "longitude"
     t.boolean  "lead_team"
     t.string   "auth_token"
+    t.boolean  "active",       default: true
+    t.index ["active"], name: "index_contacts_on_active", using: :btree
     t.index ["auth_token"], name: "index_contacts_on_auth_token", using: :btree
     t.index ["lead_team"], name: "index_contacts_on_lead_team", using: :btree
   end

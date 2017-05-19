@@ -5,8 +5,10 @@ class ContactsController < ApplicationController
     @contact = Contact.new
     if params[:lead_team]
       @contacts = current_user.contacts.lead_team.order(last_name: 'asc')
+    elsif params[:inactive]
+      @contacts = current_user.contacts.inactive.order(last_name: 'asc')
     else
-      @contacts = current_user.contacts.order(last_name: 'asc')
+      @contacts = current_user.contacts.active.order(last_name: 'asc')
     end
     @working_tasks = current_user.tasks.working
     @inbox_tasks = current_user.tasks.inbox
@@ -64,7 +66,7 @@ class ContactsController < ApplicationController
   private
 
   def contact_params
-    params.require(:contact).permit(:first_name, :last_name, :lead_team, :email, :company_name, :phone, :alt_email, :background, :street1, :title)
+    params.require(:contact).permit(:first_name, :last_name, :active, :lead_team, :email, :company_name, :phone, :alt_email, :background, :street1, :title)
   end
 
 end

@@ -17,6 +17,8 @@ class Contact < ActiveRecord::Base
   has_many :goals
   has_many :retrospectives
   scope :lead_team, -> { where(lead_team: true) }
+  scope :active, -> { where(active: true) }
+  scope :inactive, -> { where(active: false) }
 
   def generate_auth_token
     if self.changes[:lead_team].try(:last) || (self.lead_team? && self.auth_token.nil?)

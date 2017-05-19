@@ -3,8 +3,13 @@
 <div class='page-header'>
   <h1>Contacts (<%= @contacts.count %>)</h1>
   <% if params[:lead_team] %>
+    <%= link_to 'View Inactive', root_path(active: false), data: { turbolinks: false } %>
     <%= link_to 'View All', root_path, data: { turbolinks: false } %>
+  <% elsif params[:inactive] %>
+    <%= link_to 'View Active', root_path, data: { turbolinks: false } %>
+    <%= link_to 'View Lead Team', root_path(lead_team: true), data: { turbolinks: false } %>
   <% else %>
+    <%= link_to 'View Inactive', root_path(inactive: true), data: { turbolinks: false } %>
     <%= link_to 'View Lead Team', root_path(lead_team: true), data: { turbolinks: false } %>
   <% end %>
   <%= render partial: 'shared/modal', locals: { resource: '+ Contact', resource_path: 'contacts/contact_form' } %>
