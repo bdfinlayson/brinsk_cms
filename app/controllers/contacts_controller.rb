@@ -10,7 +10,7 @@ class ContactsController < ApplicationController
     end
     @working_tasks = current_user.tasks.working
     @inbox_tasks = current_user.tasks.inbox
-    @retros_for_week = Retrospective.where(contact_id: @contacts.ids, created_at: Time.now.beginning_of_week..Time.now.end_of_week)
+    @retros_for_week = Retrospective.where(contact_id: @contacts.lead_team.ids, created_at: Time.now.beginning_of_week..Time.now.end_of_week)
   end
 
   def show
