@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519151055) do
+ActiveRecord::Schema.define(version: 20170525233549) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,9 +47,10 @@ ActiveRecord::Schema.define(version: 20170519151055) do
   create_table "goals", force: :cascade do |t|
     t.text     "objective"
     t.integer  "contact_id"
-    t.boolean  "current"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "current",    default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "achieved",   default: false
     t.index ["contact_id"], name: "index_goals_on_contact_id", using: :btree
     t.index ["objective"], name: "index_goals_on_objective", using: :btree
   end

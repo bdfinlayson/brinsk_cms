@@ -1,11 +1,35 @@
 <div class='right-sidebar'>
   <h1><u>Current Goals</u></h1>
+  <% if signed_in? %>
+    <div class="expander">
+      <a href="javascript:void(0)" class="expander-trigger expander-hidden">
+        <i class="fa fa-bullseye" aria-hidden="true"></i>
+        New Goal
+      </a>
+      <div class="expander-content">
+        <%= render 'goals/form' %>
+      </div>
+    </div>
+  <% end %>
+
   <div class='top-right-pane'>
-    <% goals = @contact.goals %>
+    <% goals = @contact.goals.current_goals.order(achieved: :desc) %>
     <% if goals.any? %>
       <ul>
         <% goals.each do |goal| %>
-          <li type='circle'><%= goal.objective %></li>
+          <li>
+            <% if goal.achieved? %>
+              <i class='fa fa-check' style='color:forestgreen;'></i>
+            <% else %>
+              <i class='fa fa-times' style='color:red;'></i>
+            <% end %>
+            <%= goal.objective %>
+            <% if signed_in? %>
+              <%= link_to edit_goal_path(goal), data: { turbolinks: false } do  %>
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              <% end %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     <% else %>

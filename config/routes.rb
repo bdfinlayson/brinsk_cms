@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     resources :notes
   end
+  resources :goals
 
   resources :reports, only: [:create, :index, :show]
 

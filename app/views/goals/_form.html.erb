@@ -1,0 +1,12 @@
+<%= simple_form_for (@goal || Goal.new(contact: @contact)) do |f| %>
+  <%= f.input :objective, placeholder: "Objective" %>
+  <% if @goal %>
+    <%= f.label 'Current Goal?' %>
+    <%= f.check_box :current %>
+    <%= f.label 'Achieved Goal?' %>
+    <%= f.check_box :achieved %>
+  <% end %>
+  <br>
+  <%= f.input :contact_id, as: :hidden %>
+  <%= f.button :submit %>
+<% end %>
