@@ -13,7 +13,7 @@
   <% end %>
 
   <div class='top-right-pane'>
-    <% goals = @contact.goals.current_goals.order(achieved: :desc) %>
+    <% goals = @contact.goals.current.order(achieved: :desc) %>
     <% if goals.any? %>
       <ul>
         <% goals.each do |goal| %>

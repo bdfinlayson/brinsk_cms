@@ -25,6 +25,7 @@
         <th>Notes</th>
         <th>Retros</th>
         <th>Tasks</th>
+        <th>Goals</th>
         <th>Submitted Update</th>
         <th>Actions</th>
       </tr>
@@ -46,6 +47,8 @@
           <td>
             <%= contact.tasks.count %>
           </td>
+          <td>
+            <%= contact.goals.achieved.count %> / <%= contact.goals.current.count %>
           <td>
             <%= contact.lead_team? ? contact.has_submitted_weekly_status_update? : 'N/A' %>
           </td>
