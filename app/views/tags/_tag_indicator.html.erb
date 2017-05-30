@@ -1,5 +1,6 @@
-<div class='tag-indicator' style='background:<%= tag.color %>'>
+<div class='tag-indicator'>
+  <%= gravatar_for contact %>
   <div class='identifier'>
-    <%= tag.name %>
+    <%= contact.full_name %>
   </div>
 </div>

@@ -1,9 +1,9 @@
 <li data-id='<%= task.id %>' data-position='<%= task.position %>' class="task">
   <div class='card-title'>
     <%= task.name %>
+    <%= render(partial: 'tags/tag_indicator', locals: { contact: task.contact }) if task.contact %>
   </div>
   <div class='card-description'>
     <%= task.description %>
   </div>
-  <%= render partial: 'tags/tag_indicator', collection: task.tags, as: :tag %>
 </li>

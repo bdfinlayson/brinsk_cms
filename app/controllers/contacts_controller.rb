@@ -13,10 +13,14 @@ class ContactsController < ApplicationController
     @working_tasks = current_user.tasks.working
     @inbox_tasks = current_user.tasks.inbox
     @retros_for_week = Retrospective.where(contact_id: @contacts.lead_team.ids, created_at: Time.now.beginning_of_week..Time.now.end_of_week)
+    @task = Task.new
   end
 
   def show
     @contact = Contact.find(params[:id])
+    @task = Task.new(contact: @contact)
+    @working_tasks = @contact.tasks.working
+    @inbox_tasks = @contact.tasks.inbox
     @notes = Note.where(contact_id: @contact.id)
   end
 

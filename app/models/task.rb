@@ -2,8 +2,8 @@ class Task < ActiveRecord::Base
   belongs_to :taskable, polymorphic:true
   belongs_to :user
   validates :user_id, presence: true
-  has_many :taggings, as: :taggable, dependent: :destroy
-  has_many :tags, through: :taggings, as: :taggable
+
+  belongs_to :contact
 
   default_scope -> { order(position: :asc).where.not(state: 'archived') }
 

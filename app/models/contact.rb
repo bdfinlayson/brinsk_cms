@@ -11,9 +11,7 @@ class Contact < ActiveRecord::Base
   before_save { self.email = email.downcase }
   has_many :notes, dependent: :destroy
   has_many :projects, dependent: :destroy
-  has_many :tasks, :as => :taskable
-  has_many :taggings, as: :taggable, dependent: :destroy
-  has_many :tags, through: :taggings, as: :taggable
+  has_many :tasks
   has_many :goals
   has_many :retrospectives
   scope :lead_team, -> { where(lead_team: true) }

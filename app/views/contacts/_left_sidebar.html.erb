@@ -1,10 +1,24 @@
 <div class='left-sidebar'>
   <h1><u>Current Tasks</u></h1>
+
+  <div class="expander">
+    <a href="javascript:void(0)" class="expander-trigger expander-hidden">
+      <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+      New Task
+    </a>
+    <div class="expander-content">
+      <%= render 'tasks/task_form' %>
+    </div>
+  </div>
+
   <div class='bottom-left-pane'>
     <% if @working_tasks.any? %>
       <% @working_tasks.each do |task| %>
         <div class="expander">
-          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= task.name %></a>
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden">
+            <%= render(partial: 'tags/tag_indicator', locals: { contact: task.contact }) if task.contact  %>
+            <%= task.name %>
+          </a>
           <div class="expander-content">
             <p><%= task.description %><p>
           </div>
@@ -19,7 +33,10 @@
     <% if @inbox_tasks.any? %>
       <% @inbox_tasks.each do |task| %>
         <div class="expander">
-          <a href="javascript:void(0)" class="expander-trigger expander-hidden"><%= task.name %></a>
+          <a href="javascript:void(0)" class="expander-trigger expander-hidden">
+            <%= render(partial: 'tags/tag_indicator', locals: { contact: task.contact }) if task.contact  %>
+            <%= task.name %>
+          </a>
           <div class="expander-content">
             <p><%= task.description %><p>
           </div>

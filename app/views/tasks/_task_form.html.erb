@@ -4,9 +4,13 @@
     <%= f.input :name, placeholder: "Name" %>
     <%= f.label :description %>
     <%= f.text_area :description, placeholder: "Describe your task..." %>
-    <%= f.fields_for 'tags' do |t| %>
-      <%= t.collection_select(:ids, @tags, :id, :name, { selected: @task.tags.pluck(:id) }, { multiple: true }) %>
+    <% if @contacts %>
+      <%= f.input(:contact_id, collection: @contacts, label_method: :full_name, value_method: :id, selected: @task.contact.try(:id)) %>
+    <% else %>
+      <%= f.input :contact_id, as: :hidden %>
     <% end %>
     <%= f.button :submit %>
   <% end %>
 </div>
+
+

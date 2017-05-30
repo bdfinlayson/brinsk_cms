@@ -2,5 +2,5 @@
   <td><%= task.completed_at.strftime('%Y-%m-%d') %></td>
   <td><%= task.name %></td>
   <td><%= task.description %></td>
-  <td><%= render partial: 'tags/tag_indicator', collection: task.tags, as: :tag %></td>
+  <td><%= render(partial: 'tags/tag_indicator', locals: { contact: task.contact }) if task.contact  %></td>
 </tr>

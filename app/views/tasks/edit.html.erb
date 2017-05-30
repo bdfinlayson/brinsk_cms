@@ -1,9 +1,7 @@
 <%= simple_form_for (@task) do |f| %>
   <%= f.input :name, placeholder: "Name", label: false %>
   <%= f.text_area :description, placeholder: "Describe your task..." %>
-  <%= f.fields_for 'tags' do |t| %>
-    <%= t.collection_select(:ids, @tags, :id, :name, { selected: @task.tags.pluck(:id) }, { multiple: true }) %>
-  <% end %>
+  <%= f.association(:contact, collection: @contacts, value_method: :id, label_method: :full_name, selected: @task.contact.try(:id)) %>
   <%= f.button :submit %>
   <div class='task_buttons'>
     <%= link_to 'Delete', task_path(@task), method: :delete, data: { confirm: 'Are you sure?' } %>
