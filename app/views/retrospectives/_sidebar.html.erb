@@ -10,6 +10,7 @@
         <%= render 'goals/form' %>
       </div>
     </div>
+  <h6><i><%= @contact.goals.current.achieved.count %> out of <%= @contact.goals.current.count %> goals completed</i></h6>
   <% end %>
 
   <div class='top-right-pane'>

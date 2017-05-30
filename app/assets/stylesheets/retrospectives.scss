@@ -32,6 +32,8 @@
 
   .top-right-pane {
     padding-bottom: 10px;
+    max-height: 30vh;
+    overflow-y: auto;
 
     ul {
       margin: 5px;
