@@ -1,5 +1,6 @@
 <div class='right-sidebar'>
   <h1><u>Current Goals</u></h1>
+  <h6><i><%= @contact.goals.current.achieved.count %> out of <%= @contact.goals.current.count %> goals completed</i></h6>
   <% if signed_in? %>
     <div class="expander">
       <a href="javascript:void(0)" class="expander-trigger expander-hidden">
@@ -10,7 +11,6 @@
         <%= render 'goals/form' %>
       </div>
     </div>
-  <h6><i><%= @contact.goals.current.achieved.count %> out of <%= @contact.goals.current.count %> goals completed</i></h6>
   <% end %>
 
   <div class='top-right-pane'>
