@@ -9,6 +9,8 @@ class Task < ActiveRecord::Base
 
   scope :working, -> { where(state: 'working') }
   scope :inbox, -> { where(state: 'inbox') }
+  scope :completed, -> { where(state: 'completed') }
+  scope :archived, -> { where(state: 'archived') }
 
   validates :name, presence: true, length: { maximum: 50 }
   # validate :due_date_cannot_be_in_the_past

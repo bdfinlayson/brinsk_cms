@@ -12,6 +12,7 @@ class ContactsController < ApplicationController
     end
     @working_tasks = current_user.tasks.working
     @inbox_tasks = current_user.tasks.inbox
+    @completed_tasks = current_user.tasks.completed + Task.unscoped.where(user: current_user).archived.last(10)
     @retros_for_week = Retrospective.where(contact_id: @contacts.lead_team.ids, created_at: Time.now.beginning_of_week..Time.now.end_of_week)
     @task = Task.new
   end
@@ -21,6 +22,7 @@ class ContactsController < ApplicationController
     @task = Task.new(contact: @contact)
     @working_tasks = @contact.tasks.working
     @inbox_tasks = @contact.tasks.inbox
+    @completed_tasks = @contact.tasks.completed + Task.unscoped.where(contact: @contact).archived
     @notes = Note.where(contact_id: @contact.id)
   end
 

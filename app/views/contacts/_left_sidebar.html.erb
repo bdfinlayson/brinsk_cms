@@ -1,5 +1,5 @@
 <div class='left-sidebar'>
-  <h1><u>Current Tasks</u></h1>
+  <h1><u>Current Tasks</u> (<%= @working_tasks.count %>)</h1>
 
   <div class="expander">
     <a href="javascript:void(0)" class="expander-trigger expander-hidden">
@@ -20,6 +20,7 @@
               <%= task.name %>
             </div>
           <div class="expander-content">
+            <i>Last updated at: <%= task.updated_at.strftime('%m-%d-%y') %></i>
             <p><%= task.description %><p>
           </div>
         </div>
@@ -28,7 +29,7 @@
       <i>No current tasks</i>
     <% end %>
   </div>
-  <h1><u>To Do</u></h1>
+  <h1><u>To Do</u> (<%= @inbox_tasks.count %>)</h1>
   <div class='bottom-left-pane'>
     <% if @inbox_tasks.any? %>
       <% @inbox_tasks.each do |task| %>
@@ -38,6 +39,7 @@
             <%= task.name %>
           </div>
           <div class="expander-content">
+            <i>Last updated at: <%= task.updated_at.strftime('%m-%d-%y') %></i>
             <p><%= task.description %><p>
           </div>
         </div>
@@ -46,5 +48,26 @@
       <i>No pending tasks</i>
     <% end %>
   </div>
+
+  <h1><u>Recently Completed</u> (<%= @completed_tasks.count %>)</h1>
+  <div class='bottom-left-pane'>
+    <% if @completed_tasks.any? %>
+      <% @completed_tasks.each do |task| %>
+        <div class="expander">
+          <div class="expander-trigger expander-hidden">
+            <%= render(partial: 'tags/tag_indicator', locals: { contact: task.contact }) if task.contact  %>
+            <%= task.name %>
+          </div>
+          <div class="expander-content">
+            <i>Last updated at: <%= task.updated_at.strftime('%m-%d-%y') %></i>
+            <p><%= task.description %><p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <i>No completed tasks</i>
+    <% end %>
+  </div>
+
 
 </div>
