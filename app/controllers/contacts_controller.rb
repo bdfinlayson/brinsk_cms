@@ -26,6 +26,14 @@ class ContactsController < ApplicationController
     @notes = Note.where(contact_id: @contact.id)
   end
 
+  def export
+    @contact = Contact.find(params[:id])
+    @tasks = @contact.tasks
+    @notes = @contact.notes
+    @status_updates = @contact.retrospectives
+    @goals = @contact.goals
+  end
+
   def send_status_update_request
     @contact = Contact.find(params[:id])
     if @contact.send_status_update_request

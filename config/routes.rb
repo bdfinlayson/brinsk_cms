@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :contacts do
     member do
       post :send_status_update_request
+      get :export
     end
     resources :notes
   end

@@ -4,4 +4,5 @@ class Goal < ApplicationRecord
 
   scope :current, -> { where(current: true) }
   scope :achieved, -> { where(achieved: true) }
+  scope :unachieved, -> { where.not(achieved: true) }
 end

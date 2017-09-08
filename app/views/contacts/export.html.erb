@@ -1,0 +1,60 @@
+<h1>Goals</h1>
+<h2>Accomplished</h2>
+<ul>
+  <% @goals.achieved.each do |goal| %>
+    <li><%= goal.objective %></li>
+  <% end %>
+</ul>
+
+<h2>Not Accomplished</h2>
+<ul>
+  <% @goals.unachieved.each do |goal| %>
+    <li><%= goal.objective %></li>
+  <% end %>
+</ul>
+
+<hr>
+<h1>Status Updates</h1>
+<ul>
+  <% @status_updates.each do |status| %>
+    <li><%= status.created_at.strftime('%m-%d-%y') %> -- <%= status.full_content %></li>
+  <% end %>
+</ul>
+
+<hr>
+<h1>Tasks</h1>
+<h2>Completed</h2>
+<ul>
+  <% @tasks.completed.each do |task| %>
+    <li><%= task.name %>: <%= task.description %></li>
+  <% end %>
+  <% @tasks.archived.each do |task| %>
+    <li><%= task.name %>: <%= task.description %></li>
+  <% end %>
+</ul>
+<h2>Working</h2>
+<ul>
+  <% @tasks.working.each do |task| %>
+    <li><%= task.name %>: <%= task.description %></li>
+  <% end %>
+</ul>
+<h2>Inbox</h2>
+<ul>
+  <% @tasks.inbox.each do |task| %>
+    <li><%= task.name %>: <%= task.description %></li>
+  <% end %>
+</ul>
+
+<hr>
+<h1>Notes</h1>
+<ul>
+  <% @notes.each do |note| %>
+    <br>
+    <li><%= note.created_at.strftime('%m-%d-%y') %>:
+      <br>
+      <%= note.subject.html_safe %>:
+      <br>
+      <%= note.content.html_safe %>
+    </li>
+  <% end %>
+</ul>

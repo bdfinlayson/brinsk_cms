@@ -8,6 +8,10 @@
         <%= @contact.title %>
       </div>
       <div>
+        <%= link_to export_contact_path(@contact), data: { turbolinks: false } do %>
+          <i class="fa fa-arrow-down" aria-hidden="true"> Export</i>
+        <% end %>
+        |
         <%= link_to edit_contact_path(@contact), data: { turbolinks: false } do %>
           <i class="fa fa-pencil" aria-hidden="true"> Edit</i>
         <% end %>
