@@ -33,6 +33,7 @@ gem 'neat'
 gem 'refills'
 gem 'rack-cors'
 gem 'devise_token_auth'
+gem 'devise'
 
 group :production do
   gem 'rails_12factor'

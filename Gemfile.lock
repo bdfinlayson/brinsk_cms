@@ -370,6 +370,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   database_cleaner
+  devise
   devise_token_auth
   draper!
   factory_girl_rails

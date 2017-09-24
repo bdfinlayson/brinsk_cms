@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
-  validates :first_name, length: { maximum: 15 }, presence: true
-  validates :last_name, length: { maximum: 25 }, presence: true
+  # validates :first_name, length: { maximum: 15 }, presence: true
+  # validates :last_name, length: { maximum: 25 }, presence: true
   before_save { email.downcase! }
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
