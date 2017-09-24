@@ -103,6 +103,9 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (0.1.42)
+      devise (> 3.5.2, <= 4.3)
+      rails (< 6)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -206,6 +209,7 @@ GEM
     rack (2.0.1)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.1)
@@ -366,7 +370,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   database_cleaner
-  devise
+  devise_token_auth
   draper!
   factory_girl_rails
   faker
@@ -384,6 +388,7 @@ DEPENDENCIES
   neat
   pg
   pry-rails
+  rack-cors
   rails (= 5.0.0.1)
   rails-controller-testing
   rails_12factor

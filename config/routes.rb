@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-
   namespace :api do
     namespace :v1 do
-      devise_for :users
+      mount_devise_token_auth_for 'User', at: 'auth'
     end
   end
 
-  devise_for :users
   resources :contacts do
     member do
       post :send_status_update_request

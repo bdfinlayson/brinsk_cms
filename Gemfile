@@ -7,7 +7,6 @@ gem 'pg'
 gem 'figaro'
 gem 'tinymce-rails'
 
-gem 'devise'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -32,6 +31,8 @@ gem 'bourbon'
 gem 'bitters'
 gem 'neat'
 gem 'refills'
+gem 'rack-cors'
+gem 'devise_token_auth'
 
 group :production do
   gem 'rails_12factor'

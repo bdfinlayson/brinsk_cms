@@ -1,9 +1,5 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  validates :password, length: { minimum: 8 }
+  include DeviseTokenAuth::Concerns::User
   validates :first_name, length: { maximum: 15 }, presence: true
   validates :last_name, length: { maximum: 25 }, presence: true
   before_save { email.downcase! }
