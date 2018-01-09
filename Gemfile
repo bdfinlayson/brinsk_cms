@@ -52,10 +52,13 @@ group :development do
   gem 'web-console', '~> 2.0'
 end
 
+gem 'capybara'
+gem 'capybara-webkit'
+gem 'poltergeist'
+
 group :test do
   gem 'selenium-webdriver'
   gem 'factory_girl_rails'
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
 end

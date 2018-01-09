@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :facebook, only: [:index, :show]
+
   devise_for :users
   resources :contacts do
     member do
